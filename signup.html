@@ -1,0 +1,323 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stackly Travel - Sign Up</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .serif-font { font-family: 'Playfair Display', serif; }
+        body { font-family: 'Inter', sans-serif; background-color: #ffffff; color: #111827; overflow-x: hidden; }
+        
+        /* Floating Labels */
+        .input-group { position: relative; }
+        .input-group input { padding: 1.25rem 1rem 0.5rem; background: transparent; border: 1px solid #e5e7eb; border-radius: 0.5rem; width: 100%; outline: none; transition: border-color 0.3s, box-shadow 0.3s; }
+        .input-group input:focus { border-color: #f16f5c; box-shadow: 0 0 0 4px rgba(241, 111, 92, 0.1); }
+        .input-group label { position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); color: #9ca3af; transition: all 0.2s ease-out; pointer-events: none; font-size: 0.875rem; }
+        .input-group input:focus ~ label, .input-group input:not(:placeholder-shown) ~ label { top: 0.5rem; font-size: 0.7rem; color: #f16f5c; transform: translateY(0); font-weight: 600; }
+        
+        /* Ken Burns */
+        @keyframes kenburns { 0% { transform: scale(1); } 100% { transform: scale(1.1); } }
+        .ken-burns { animation: kenburns 20s ease-out infinite alternate; }
+
+        /* Smooth Reveal */
+        .reveal-left { opacity: 0; transform: translateX(-30px); animation: slideInLeft 0.8s ease-out forwards; }
+        .reveal-up { opacity: 0; transform: translateY(30px); animation: slideUp 0.8s ease-out forwards; }
+        @keyframes slideInLeft { to { opacity: 1; transform: translateX(0); } }
+        @keyframes slideUp { to { opacity: 1; transform: translateY(0); } }
+        
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+            /* Headings Theme & Animation */
+        h1, h2, h3, h4, h5, h6 { 
+
+            animation: headingReveal 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; 
+        }
+        @keyframes headingReveal {
+            0% { opacity: 0; transform: translateY(30px) scale(0.95); filter: blur(5px); }
+            100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+        }
+    .btn-underline {
+    position: relative;
+    display: inline-block;
+    color: inherit;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding-bottom: 6px;
+    font-size: 0.875rem;
+    transition: color 0.3s ease;
+}
+.btn-underline::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #f16f5c;
+    transition: transform 0.3s ease;
+    transform-origin: left;
+}
+.btn-underline:hover::after {
+    transform: scaleX(0);
+    transform-origin: right;
+}
+</style>
+<style>
+@keyframes btnGradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+button.bg-\[\#f16f5c\], 
+a.bg-\[\#f16f5c\] {
+    background: linear-gradient(90deg, #f16f5c, #ffb3a7, #f16f5c, #e05a48) !important;
+    background-size: 300% 100% !important;
+    animation: btnGradient 4s ease infinite !important;
+}
+button.bg-\[\#f16f5c\]:hover, 
+a.bg-\[\#f16f5c\]:hover {
+    box-shadow: 0 10px 20px -10px rgba(241, 111, 92, 0.7) !important;
+}
+.btn-underline {
+    position: relative;
+    display: inline-block;
+    color: inherit;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding-bottom: 6px;
+    font-size: 0.875rem;
+    transition: color 0.3s ease;
+}
+.btn-underline::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #f16f5c;
+    transition: transform 0.3s ease;
+    transform-origin: left;
+}
+.btn-underline:hover::after {
+    transform: scaleX(0);
+    transform-origin: right;
+}
+</style>
+<style>
+@keyframes btnGradientAnim {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+button.bg-\[\#f16f5c\], 
+a.bg-\[\#f16f5c\] {
+    background: linear-gradient(90deg, #f16f5c, #ff9a8b, #f16f5c, #e05a48) !important;
+    background-size: 300% 100% !important;
+    animation: btnGradientAnim 4s ease infinite !important;
+    border: none !important;
+    color: white !important;
+    transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+}
+button.bg-\[\#f16f5c\]:hover, 
+a.bg-\[\#f16f5c\]:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 10px 20px -10px rgba(241, 111, 92, 0.7) !important;
+}
+.btn-underline {
+    position: relative;
+    display: inline-block;
+    color: inherit;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding-bottom: 6px;
+    font-size: 0.875rem;
+    transition: color 0.3s ease;
+}
+.btn-underline::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #f16f5c;
+    transition: transform 0.3s ease;
+    transform-origin: left;
+}
+.btn-underline:hover::after {
+    transform: scaleX(0);
+    transform-origin: right;
+}
+</style>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll('a[href="#"]').forEach(a => {
+        a.href = "404.html";
+    });
+    document.querySelectorAll('button:not([type="submit"]):not([onclick])').forEach(b => {
+        if (!b.id && !b.classList.contains('mobile-menu-button')) {
+            b.addEventListener('click', (e) => {
+                e.preventDefault();
+                window.location.href = "404.html";
+            });
+        }
+    });
+});
+</script>
+</head>
+<body class="m-0 p-0 text-gray-800 flex min-h-screen flex-row-reverse">
+
+    <!-- Right Side: Visual / Inspiration (Flipped for Signup) -->
+    <div class="hidden lg:flex lg:w-1/2 relative overflow-hidden bg-gray-900 flex-col justify-between p-12">
+        <!-- Animated Background -->
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=1500&q=80" class="w-full h-full object-cover ken-burns opacity-70">
+            <div class="absolute inset-0 bg-gradient-to-t from-gray-950 via-gray-900/40 to-transparent"></div>
+        </div>
+
+        <!-- Spacer for top right -->
+        <div class="relative z-10 flex justify-end">
+            <a href="index.html" class="text-2xl font-bold tracking-widest uppercase text-white hover:text-[#f16f5c] transition-colors"><img src="assets/logo_0050.webp" alt="Stackly Logo" class="h-8 inline-block"></a>
+        </div>
+
+        <!-- Content -->
+        <div class="relative z-10 mb-12 flex justify-end text-right">
+            <div class="bg-white/10 backdrop-blur-md border border-white/20 p-8 rounded-2xl max-w-md reveal-up text-left">
+                <i class="fas fa-globe-americas text-[#f16f5c] text-2xl mb-4"></i>
+                <h3 class="text-white text-xl font-bold mb-2">Join Our Community</h3>
+                <p class="text-gray-300 text-sm leading-relaxed mb-6">Unlock exclusive travel deals, personalized itineraries, and insider guides. Start your journey with us today.</p>
+                <div class="flex items-center">
+                    <div class="flex -space-x-3 mr-4">
+                        <img class="w-8 h-8 rounded-full border-2 border-gray-900" src="https://i.pravatar.cc/100?img=1" alt="User">
+                        <img class="w-8 h-8 rounded-full border-2 border-gray-900" src="https://i.pravatar.cc/100?img=2" alt="User">
+                        <img class="w-8 h-8 rounded-full border-2 border-gray-900" src="https://i.pravatar.cc/100?img=3" alt="User">
+                    </div>
+                    <span class="text-white text-xs font-bold uppercase tracking-widest">+10k Travelers</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Left Side: Signup Form -->
+    <div class="w-full lg:w-1/2 flex items-center justify-center p-8 lg:p-16 bg-white relative">
+        <!-- Mobile Logo -->
+        <a href="index.html" class="lg:hidden absolute top-8 left-8 text-xl font-bold tracking-widest uppercase text-gray-900 hover:text-[#f16f5c]"><img src="assets/logo_0050.webp" alt="Stackly Logo" class="h-8 inline-block"></a>
+        
+                <!-- Back to Home Button -->
+        <a href="index.html" class="absolute top-8 right-8 text-sm font-bold uppercase tracking-wider text-gray-500 hover:text-[#f16f5c] transition-colors flex items-center">
+            <i class="fas fa-arrow-left mr-2"></i> Home
+        </a>
+
+        <div class="w-full max-w-md">
+            <div class="reveal-left">
+                <h1 class="serif-font text-4xl font-bold mb-2 text-gray-900">Create an Account</h1>
+                <p class="text-gray-500 mb-6">Select your role and create your account.</p>
+            </div>
+
+            <!-- Role Selection Slot (Unique & Excellent) -->
+            <div class="grid grid-cols-2 gap-4 mb-6 reveal-left delay-1">
+                <label class="cursor-pointer group relative">
+                    <input type="radio" name="role" value="traveller" class="peer sr-only" checked onchange="document.getElementById('signupForm').action='traveller-dashboard.html'">
+                    <div class="border-2 border-gray-100 rounded-xl p-4 flex flex-col items-center justify-center transition-all duration-300 peer-checked:border-[#f16f5c] peer-checked:bg-[#f16f5c]/5 peer-checked:shadow-md hover:border-gray-200">
+                        <div class="w-10 h-10 rounded-full bg-gray-50 flex items-center justify-center mb-2 group-hover:scale-110 transition-transform duration-300 peer-checked:bg-[#f16f5c] peer-checked:text-white text-gray-400">
+                            <i class="fas fa-compass text-lg"></i>
+                        </div>
+                        <span class="font-bold text-sm text-gray-700 peer-checked:text-[#f16f5c]">Traveller</span>
+                    </div>
+                    <div class="absolute top-2 right-2 opacity-0 peer-checked:opacity-100 transition-opacity text-[#f16f5c]">
+                        <i class="fas fa-check-circle text-sm"></i>
+                    </div>
+                </label>
+
+                <label class="cursor-pointer group relative">
+                    <input type="radio" name="role" value="admin" class="peer sr-only" onchange="document.getElementById('signupForm').action='admin-dashboard.html'">
+                    <div class="border-2 border-gray-100 rounded-xl p-4 flex flex-col items-center justify-center transition-all duration-300 peer-checked:border-[#f16f5c] peer-checked:bg-[#f16f5c]/5 peer-checked:shadow-md hover:border-gray-200">
+                        <div class="w-10 h-10 rounded-full bg-gray-50 flex items-center justify-center mb-2 group-hover:scale-110 transition-transform duration-300 peer-checked:bg-[#f16f5c] peer-checked:text-white text-gray-400">
+                            <i class="fas fa-shield-alt text-lg"></i>
+                        </div>
+                        <span class="font-bold text-sm text-gray-700 peer-checked:text-[#f16f5c]">Admin</span>
+                    </div>
+                    <div class="absolute top-2 right-2 opacity-0 peer-checked:opacity-100 transition-opacity text-[#f16f5c]">
+                        <i class="fas fa-check-circle text-sm"></i>
+                    </div>
+                </label>
+            </div>
+
+            <!-- Form -->
+            <form id="signupForm" action="traveller-dashboard.html" method="GET" class="space-y-4 reveal-left delay-3">
+                <div class="mb-4">
+                    <input type="text" id="fullname" placeholder="Full Name" required class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:border-[#f16f5c] focus:ring-4 focus:ring-[#f16f5c]/10 text-sm text-gray-700 transition-all">
+                </div>
+                
+                <div class="mb-4">
+                    <input type="email" id="email" placeholder="Email Address" required pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" title="Please enter a valid dynamic email ID." class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:border-[#f16f5c] focus:ring-4 focus:ring-[#f16f5c]/10 text-sm text-gray-700 transition-all">
+                </div>
+                
+                <div class="mb-4">
+                    <input type="password" id="password" placeholder="Password" required minlength="8" title="Password must be at least 8 characters." class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:border-[#f16f5c] focus:ring-4 focus:ring-[#f16f5c]/10 text-sm text-gray-700 transition-all">
+                </div>
+                
+                <div class="mb-4">
+                    <input type="password" id="confirm_password" placeholder="Confirm Password" required minlength="8" title="Password must be at least 8 characters." class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:border-[#f16f5c] focus:ring-4 focus:ring-[#f16f5c]/10 text-sm text-gray-700 transition-all">
+                </div>
+
+                <div class="flex items-start py-2">
+                    <label class="flex items-start cursor-pointer">
+                        <input type="checkbox" class="mt-1 w-4 h-4 text-[#f16f5c] border-gray-300 rounded focus:ring-[#f16f5c] accent-[#f16f5c]" required>
+                        <span class="ml-3 text-xs text-gray-500 leading-relaxed">I agree to the <a href="#" class="font-bold text-[#f16f5c] hover:underline">Terms of Service</a> and <a href="#" class="font-bold text-[#f16f5c] hover:underline">Privacy Policy</a>.</span>
+                    </label>
+                </div>
+
+                <button type="submit" class="w-full bg-[#f16f5c] text-white font-bold tracking-widest uppercase text-sm py-4 rounded-lg hover:bg-[#d95c4a] transition-all transform hover:-translate-y-0.5 shadow-lg shadow-[#f16f5c]/30 mt-4">
+                    Create Account
+                </button>
+            </form>
+
+            <div class="flex items-center my-6 reveal-left delay-3">
+                <hr class="flex-grow border-gray-200">
+                <span class="px-4 text-xs text-gray-400 font-medium uppercase tracking-widest">Or sign up with</span>
+                <hr class="flex-grow border-gray-200">
+            </div>
+
+            <!-- Social Signup -->
+            <div class="grid grid-cols-2 gap-4 mb-6 reveal-left delay-3">
+                <button class="flex items-center justify-center py-2.5 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors font-medium text-sm text-gray-700 shadow-sm">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" class="w-4 h-4 mr-2"> Google
+                </button>
+                <button class="flex items-center justify-center py-2.5 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors font-medium text-sm text-gray-700 shadow-sm">
+                    <i class="fab fa-apple text-lg mr-2"></i> Apple
+                </button>
+            </div>
+
+            <p class="mt-8 text-center text-sm text-gray-500 reveal-left delay-3">
+                Already have an account? <a href="login.html" class="font-bold text-gray-900 hover:text-[#f16f5c] transition-colors">Sign in here</a>
+            </p>
+        </div>
+    </div>
+
+<script>
+    document.getElementById('signupForm').addEventListener('submit', function(e) {
+        const name = document.getElementById('fullname').value;
+        const email = document.getElementById('email').value;
+        localStorage.setItem('stacklyUserName', name);
+        localStorage.setItem('stacklyUserEmail', email);
+    });
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+

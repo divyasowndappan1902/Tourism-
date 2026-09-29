@@ -1,0 +1,1475 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Stackly Travel</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8f9fa; }
+        
+        /* Custom Scrollbar for sidebar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+            /* Headings Theme & Animation */
+        h1, h2, h3, h4, h5, h6 { 
+
+            animation: headingReveal 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; 
+        }
+        @keyframes headingReveal {
+            0% { opacity: 0; transform: translateY(30px) scale(0.95); filter: blur(5px); }
+            100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+        }
+    .btn-underline {
+    position: relative;
+    display: inline-block;
+    color: inherit;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding-bottom: 6px;
+    font-size: 0.875rem;
+    transition: color 0.3s ease;
+}
+.btn-underline::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #f16f5c;
+    transition: transform 0.3s ease;
+    transform-origin: left;
+}
+.btn-underline:hover::after {
+    transform: scaleX(0);
+    transform-origin: right;
+}
+</style>
+<style>
+@keyframes btnGradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+button.bg-\[\#f16f5c\], 
+a.bg-\[\#f16f5c\] {
+    background: linear-gradient(90deg, #f16f5c, #ffb3a7, #f16f5c, #e05a48) !important;
+    background-size: 300% 100% !important;
+    animation: btnGradient 4s ease infinite !important;
+}
+button.bg-\[\#f16f5c\]:hover, 
+a.bg-\[\#f16f5c\]:hover {
+    box-shadow: 0 10px 20px -10px rgba(241, 111, 92, 0.7) !important;
+}
+.btn-underline {
+    position: relative;
+    display: inline-block;
+    color: inherit;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding-bottom: 6px;
+    font-size: 0.875rem;
+    transition: color 0.3s ease;
+}
+.btn-underline::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #f16f5c;
+    transition: transform 0.3s ease;
+    transform-origin: left;
+}
+.btn-underline:hover::after {
+    transform: scaleX(0);
+    transform-origin: right;
+}
+</style>
+<style>
+@keyframes btnGradientAnim {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+button.bg-\[\#f16f5c\], 
+a.bg-\[\#f16f5c\] {
+    background: linear-gradient(90deg, #f16f5c, #ff9a8b, #f16f5c, #e05a48) !important;
+    background-size: 300% 100% !important;
+    animation: btnGradientAnim 4s ease infinite !important;
+    border: none !important;
+    color: white !important;
+    transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+}
+button.bg-\[\#f16f5c\]:hover, 
+a.bg-\[\#f16f5c\]:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 10px 20px -10px rgba(241, 111, 92, 0.7) !important;
+}
+.btn-underline {
+    position: relative;
+    display: inline-block;
+    color: inherit;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding-bottom: 6px;
+    font-size: 0.875rem;
+    transition: color 0.3s ease;
+}
+.btn-underline::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #f16f5c;
+    transition: transform 0.3s ease;
+    transform-origin: left;
+}
+.btn-underline:hover::after {
+    transform: scaleX(0);
+    transform-origin: right;
+}
+</style>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll('a[href="#"]').forEach(a => {
+        a.href = "404.html";
+    });
+    document.querySelectorAll('button:not([type="submit"]):not([onclick])').forEach(b => {
+        if (!b.id && !b.classList.contains('mobile-menu-button')) {
+            b.addEventListener('click', (e) => {
+                e.preventDefault();
+                window.location.href = "404.html";
+            });
+        }
+    });
+});
+</script>
+</head>
+<body class="flex h-screen overflow-hidden text-gray-800">
+
+    <!-- Sidebar -->
+    <aside class="w-64 bg-[#1e2329] text-gray-400 flex flex-col hidden md:flex h-full shrink-0">
+        <!-- Logo -->
+        <div class="h-20 flex items-center px-8 text-white">
+            <span class="text-xl font-bold tracking-wide"><img src="assets/logo_0050.webp" alt="Stackly Logo" class="h-8 inline-block"></span>
+        </div>
+        
+        <!-- Navigation -->
+        <nav class="flex-1 py-4 space-y-1">
+            <a href="#" data-target="view-dashboard" class="flex items-center px-8 py-3 text-white border-l-4 border-[#0ea5e9] bg-[#2a3038]">
+                <!--dashboard--> <i class="fas fa-th-large w-6 text-sm"></i>
+                <span class="font-medium text-sm">Dashboard</span>
+            </a>
+            <a href="#" data-target="view-bookings" class="flex items-center px-8 py-3 hover:text-white hover:bg-[#2a3038] border-l-4 border-transparent transition-colors"> <i class="fas fa-calendar-check w-6 text-sm"></i>
+                <span class="font-medium text-sm">Bookings</span>
+            </a>
+            <a href="#" data-target="view-users" class="flex items-center px-8 py-3 hover:text-white hover:bg-[#2a3038] border-l-4 border-transparent transition-colors"> <i class="fas fa-users w-6 text-sm"></i>
+                <span class="font-medium text-sm">Customers</span>
+            </a>
+            <a href="#" data-target="view-tours" class="flex items-center px-8 py-3 hover:text-white hover:bg-[#2a3038] border-l-4 border-transparent transition-colors"> <i class="fas fa-map-marked-alt w-6 text-sm"></i>
+                <span class="font-medium text-sm">Packages</span>
+            </a>
+            <a href="#" data-target="view-payments" class="flex items-center px-8 py-3 hover:text-white hover:bg-[#2a3038] border-l-4 border-transparent transition-colors"> <i class="fas fa-credit-card w-6 text-sm"></i>
+                <span class="font-medium text-sm">Payments</span>
+            </a>
+            <a href="#" data-target="view-analytics" class="flex items-center px-8 py-3 hover:text-white hover:bg-[#2a3038] border-l-4 border-transparent transition-colors"> <i class="fas fa-chart-line w-6 text-sm"></i>
+                <span class="font-medium text-sm">Analytics</span>
+            </a>
+            <a href="#" data-target="view-settings" class="flex items-center px-8 py-3 hover:text-white hover:bg-[#2a3038] border-l-4 border-transparent transition-colors"> <i class="fas fa-cog w-6 text-sm"></i>
+                <span class="font-medium text-sm">Settings</span>
+            </a>
+        </nav>
+        
+        <!-- Logout -->
+        <div class="p-4 mb-4">
+            <a href="login.html" class="flex items-center px-4 py-2 hover:text-white transition-colors">
+                <i class="fas fa-sign-out-alt w-6 text-sm"></i>
+                <span class="font-medium text-sm">Logout</span>
+            </a>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <div class="flex-1 flex flex-col h-full overflow-hidden">
+        
+        <!-- Top Header -->
+        <header class="h-20 bg-white border-b border-gray-100 flex items-center justify-between px-8 z-10 shrink-0">
+            <!-- Search -->
+            <div class="flex items-center bg-gray-100 rounded-full px-4 py-2 w-96">
+                <i class="fas fa-search text-gray-400 text-sm"></i>
+                <input type="text" placeholder="Search bookings, customers, packages" class="bg-transparent border-none outline-none ml-3 text-sm w-full text-gray-700 placeholder-gray-400">
+            </div>
+            
+            <!-- Right Actions -->
+            <div class="flex items-center space-x-6">
+                <button class="text-gray-400 hover:text-gray-600">
+                    <i class="far fa-bell text-lg"></i>
+                </button>
+                <button class="text-gray-400 hover:text-gray-600">
+                    <i class="far fa-comment-alt text-lg"></i>
+                </button>
+                
+                <div class="flex items-center space-x-3 cursor-pointer pl-4 border-l border-gray-200">
+                    <img src="https://i.pravatar.cc/150?img=11" alt="Admin" class="w-10 h-10 rounded-full">
+                    <div class="hidden md:block">
+                        <p class="text-sm font-bold text-gray-900 leading-tight" id="adminName">divya</p>
+                          <p class="text-[11px] text-gray-500" id="adminEmail">Sowndappan.Amrithalingam@gmail.com</p>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Scrollable Dashboard Content -->
+        <main class="flex-1 overflow-y-auto p-8"><div id="view-dashboard" class="view-section">
+            
+            <!-- Page Header -->
+            <div class="flex items-center justify-between mb-8">
+                <h1 class="text-2xl font-bold text-gray-900">Dashboard Overview</h1>
+                <button class="bg-[#38b2ac] hover:bg-[#319795] text-white px-5 py-2.5 rounded-lg text-sm font-semibold transition-colors flex items-center shadow-sm">
+                    <i class="fas fa-plus mr-2"></i> Add New Package
+                </button>
+            </div>
+
+            <!-- Stats Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                <!-- Stat 1 -->
+                <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-50 flex items-start justify-between">
+                    <div>
+                        <p class="text-sm text-gray-500 font-medium mb-2">Total Revenue</p>
+                        <h3 class="text-2xl font-bold text-gray-900">$124,500</h3>
+                    </div>
+                    <div class="w-10 h-10 rounded-lg bg-blue-100 flex items-center justify-center text-blue-500 text-lg">
+                        <i class="fas fa-dollar-sign"></i>
+                    </div>
+                </div>
+                
+                <!-- Stat 2 -->
+                <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-50 flex items-start justify-between">
+                    <div>
+                        <p class="text-sm text-gray-500 font-medium mb-2">Total Bookings</p>
+                        <h3 class="text-2xl font-bold text-gray-900">1,245</h3>
+                    </div>
+                    <div class="w-10 h-10 rounded-lg bg-green-100 flex items-center justify-center text-green-500 text-lg">
+                        <i class="far fa-calendar-check"></i>
+                    </div>
+                </div>
+
+                <!-- Stat 3 -->
+                <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-50 flex items-start justify-between">
+                    <div>
+                        <p class="text-sm text-gray-500 font-medium mb-2">New Customers</p>
+                        <h3 class="text-2xl font-bold text-gray-900">382</h3>
+                    </div>
+                    <div class="w-10 h-10 rounded-lg bg-purple-100 flex items-center justify-center text-purple-500 text-lg">
+                        <i class="fas fa-user-friends"></i>
+                    </div>
+                </div>
+
+                <!-- Stat 4 -->
+                <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-50 flex items-start justify-between">
+                    <div>
+                        <p class="text-sm text-gray-500 font-medium mb-2">Active Packages</p>
+                        <h3 class="text-2xl font-bold text-gray-900">45</h3>
+                    </div>
+                    <div class="w-10 h-10 rounded-lg bg-orange-100 flex items-center justify-center text-orange-500 text-lg">
+                        <i class="fas fa-map"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Two Column Layout -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                
+                <!-- Recent Bookings Table (Takes up 2 columns) -->
+                <div class="bg-white rounded-xl shadow-sm border border-gray-50 p-6 lg:col-span-2">
+                    <div class="flex items-center justify-between mb-6">
+                        <h3 class="text-lg font-bold text-gray-900">Recent Bookings</h3>
+                        <a href="#" class="text-sm font-semibold text-[#0ea5e9] hover:underline">View All</a>
+                    </div>
+                    
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left">
+                            <thead>
+                                <tr class="text-xs text-gray-400 uppercase tracking-wider border-b border-gray-100">
+                                    <th class="pb-4 font-medium">Customer</th>
+                                    <th class="pb-4 font-medium">Destination</th>
+                                    <th class="pb-4 font-medium">Date</th>
+                                    <th class="pb-4 font-medium">Amount</th>
+                                    <th class="pb-4 font-medium text-center">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-sm">
+                                <tr class="border-b border-gray-50">
+                                    <td class="py-4 flex items-center">
+                                        <img src="https://i.pravatar.cc/150?img=32" class="w-8 h-8 rounded-full mr-3">
+                                        <span class="font-medium text-gray-800">Sarah Jenkins</span>
+                                    </td>
+                                    <td class="py-4 text-gray-600">Maldives Escape</td>
+                                    <td class="py-4 text-gray-600">Oct 15, 2024</td>
+                                    <td class="py-4 text-gray-800 font-medium">$2,499</td>
+                                    <td class="py-4 text-center">
+                                        <span class="inline-block px-3 py-1 bg-green-50 text-green-500 rounded-full text-xs font-semibold">Confirmed</span>
+                                    </td>
+                                </tr>
+                                <tr class="border-b border-gray-50">
+                                    <td class="py-4 flex items-center">
+                                        <img src="https://i.pravatar.cc/150?img=12" class="w-8 h-8 rounded-full mr-3">
+                                        <span class="font-medium text-gray-800">Michael Chen</span>
+                                    </td>
+                                    <td class="py-4 text-gray-600">Swiss Alps Tour</td>
+                                    <td class="py-4 text-gray-600">Nov 02, 2024</td>
+                                    <td class="py-4 text-gray-800 font-medium">$1,850</td>
+                                    <td class="py-4 text-center">
+                                        <span class="inline-block px-3 py-1 bg-yellow-50 text-yellow-500 rounded-full text-xs font-semibold">Pending</span>
+                                    </td>
+                                </tr>
+                                <tr class="border-b border-gray-50">
+                                    <td class="py-4 flex items-center">
+                                        <img src="https://i.pravatar.cc/150?img=5" class="w-8 h-8 rounded-full mr-3">
+                                        <span class="font-medium text-gray-800">Emily Roberts</span>
+                                    </td>
+                                    <td class="py-4 text-gray-600">Paris Honeymoon</td>
+                                    <td class="py-4 text-gray-600">Dec 10, 2024</td>
+                                    <td class="py-4 text-gray-800 font-medium">$3,200</td>
+                                    <td class="py-4 text-center">
+                                        <span class="inline-block px-3 py-1 bg-green-50 text-green-500 rounded-full text-xs font-semibold">Confirmed</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="py-4 flex items-center">
+                                        <img src="https://i.pravatar.cc/150?img=68" class="w-8 h-8 rounded-full mr-3">
+                                        <span class="font-medium text-gray-800">David Smith</span>
+                                    </td>
+                                    <td class="py-4 text-gray-600">Bali Stackly</td>
+                                    <td class="py-4 text-gray-600">Sep 28, 2024</td>
+                                    <td class="py-4 text-gray-800 font-medium">$1,450</td>
+                                    <td class="py-4 text-center">
+                                        <span class="inline-block px-3 py-1 bg-red-50 text-red-500 rounded-full text-xs font-semibold">Cancelled</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Top Packages List (Takes up 1 column) -->
+                <div class="bg-white rounded-xl shadow-sm border border-gray-50 p-6">
+                    <div class="flex items-center justify-between mb-6">
+                        <h3 class="text-lg font-bold text-gray-900">Top Packages</h3>
+                        <a href="#" class="text-sm font-semibold text-[#0ea5e9] hover:underline">View All</a>
+                    </div>
+
+                    <div class="space-y-4">
+                        <!-- Package 1 -->
+                        <div class="flex items-center justify-between p-3 border border-gray-100 rounded-xl hover:shadow-md transition-shadow cursor-pointer">
+                            <div class="flex items-center space-x-3">
+                                <img src="https://images.unsplash.com/photo-1514282401047-d79a71a590e8?auto=format&fit=crop&w=150&q=80" class="w-12 h-12 rounded-lg object-cover">
+                                <div>
+                                    <h4 class="text-sm font-bold text-gray-800">Maldives Paradise</h4>
+                                    <p class="text-xs text-gray-500 mt-0.5">245 Bookings</p>
+                                </div>
+                            </div>
+                            <span class="text-sm font-bold text-[#0ea5e9]">$2,499</span>
+                        </div>
+
+                        <!-- Package 2 -->
+                        <div class="flex items-center justify-between p-3 border border-gray-100 rounded-xl hover:shadow-md transition-shadow cursor-pointer">
+                            <div class="flex items-center space-x-3">
+                                <img src="https://images.unsplash.com/photo-1499856871958-5b9627545d1a?auto=format&fit=crop&w=150&q=80" class="w-12 h-12 rounded-lg object-cover">
+                                <div>
+                                    <h4 class="text-sm font-bold text-gray-800">Paris Getaway</h4>
+                                    <p class="text-xs text-gray-500 mt-0.5">180 Bookings</p>
+                                </div>
+                            </div>
+                            <span class="text-sm font-bold text-[#0ea5e9]">$1,899</span>
+                        </div>
+
+                        <!-- Package 3 -->
+                        <div class="flex items-center justify-between p-3 border border-gray-100 rounded-xl hover:shadow-md transition-shadow cursor-pointer">
+                            <div class="flex items-center space-x-3">
+                                <img src="https://images.unsplash.com/photo-1493246507139-91e8fad9978e?auto=format&fit=crop&w=150&q=80" class="w-12 h-12 rounded-lg object-cover">
+                                <div>
+                                    <h4 class="text-sm font-bold text-gray-800">Swiss Alps Ski</h4>
+                                    <p class="text-xs text-gray-500 mt-0.5">132 Bookings</p>
+                                </div>
+                            </div>
+                            <span class="text-sm font-bold text-[#0ea5e9]">$2,100</span>
+                        </div>
+
+                        <!-- Package 4 -->
+                        <div class="flex items-center justify-between p-3 border border-gray-100 rounded-xl hover:shadow-md transition-shadow cursor-pointer">
+                            <div class="flex items-center space-x-3">
+                                <img src="https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?auto=format&fit=crop&w=150&q=80" class="w-12 h-12 rounded-lg object-cover">
+                                <div>
+                                    <h4 class="text-sm font-bold text-gray-800">Venice Romance</h4>
+                                    <p class="text-xs text-gray-500 mt-0.5">98 Bookings</p>
+                                </div>
+                            </div>
+                            <span class="text-sm font-bold text-[#0ea5e9]">$1,650</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            </div>
+    
+        <div id="view-users" class="view-section" style="display:none;">
+        <div class="flex justify-between items-center mb-8">
+            <h1 class="text-2xl font-bold text-gray-900">Customers</h1>
+            <button class="bg-[#0ea5e9] text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-[#0284c7] transition-colors shadow-sm">
+                <i class="fas fa-user-plus mr-2"></i>Add Customer
+            </button>
+        </div>
+
+        <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+            <div class="p-5 border-b border-gray-100 flex flex-wrap gap-4 justify-between items-center bg-gray-50/50">
+                <h2 class="text-lg font-bold text-gray-900">Customer Directory</h2>
+                <div class="flex gap-3">
+                    <div class="relative">
+                        <i class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 text-sm"></i>
+                        <input type="text" placeholder="Search customers..." class="pl-9 pr-4 py-2 border border-gray-200 rounded-lg text-sm outline-none focus:border-[#0ea5e9] transition-colors w-64">
+                    </div>
+                    <button class="bg-white border border-gray-200 text-gray-700 px-4 py-2 rounded-lg text-sm font-semibold hover:bg-gray-50 transition-colors"><i class="fas fa-file-export mr-2"></i>Export</button>
+                </div>
+            </div>
+            
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse whitespace-nowrap">
+                    <thead>
+                        <tr class="bg-gray-50/80 border-b border-gray-100 text-xs uppercase tracking-wider text-gray-500">
+                            <th class="px-6 py-4 font-bold">Customer Details</th>
+                            <th class="px-6 py-4 font-bold">Phone Number</th>
+                            <th class="px-6 py-4 font-bold">Bookings</th>
+                            <th class="px-6 py-4 font-bold">Total Spent</th>
+                            <th class="px-6 py-4 font-bold">Status</th>
+                            <th class="px-6 py-4 font-bold text-right">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-100">
+                        
+                        <!-- Customer 1 -->
+                        <tr class="hover:bg-gray-50 transition-colors">
+                            <td class="px-6 py-4">
+                                <div class="flex items-center">
+                                    <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" class="w-10 h-10 rounded-full object-cover mr-3 border border-gray-200">
+                                    <div>
+                                        <p class="font-bold text-gray-900 text-sm">Jessica Smith</p>
+                                        <p class="text-xs text-gray-500">jessica.smith@example.com</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4">
+                                <p class="text-sm text-gray-600">+1 (555) 019-8231</p>
+                            </td>
+                            <td class="px-6 py-4">
+                                <p class="text-sm font-semibold text-gray-900">4 Tours</p>
+                            </td>
+                            <td class="px-6 py-4">
+                                <p class="text-sm font-bold text-gray-900">,450.00</p>
+                            </td>
+                            <td class="px-6 py-4">
+                                <span class="px-2.5 py-1 bg-green-100 text-green-700 text-xs font-bold rounded-full">Active</span>
+                            </td>
+                            <td class="px-6 py-4 text-right">
+                                <button class="text-gray-400 hover:text-[#0ea5e9] transition-colors p-1" title="Send Message"><i class="far fa-envelope"></i></button>
+                                <button class="text-gray-400 hover:text-gray-900 transition-colors p-1 ml-2" title="Edit Profile"><i class="fas fa-edit"></i></button>
+                            </td>
+                        </tr>
+
+                        <!-- Customer 2 -->
+                        <tr class="hover:bg-gray-50 transition-colors">
+                            <td class="px-6 py-4">
+                                <div class="flex items-center">
+                                    <img src="https://images.unsplash.com/photo-1599566150163-29194dcaad36?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" class="w-10 h-10 rounded-full object-cover mr-3 border border-gray-200">
+                                    <div>
+                                        <p class="font-bold text-gray-900 text-sm">Michael Chen</p>
+                                        <p class="text-xs text-gray-500">m.chen99@example.com</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4">
+                                <p class="text-sm text-gray-600">+1 (555) 843-2210</p>
+                            </td>
+                            <td class="px-6 py-4">
+                                <p class="text-sm font-semibold text-gray-900">1 Tour</p>
+                            </td>
+                            <td class="px-6 py-4">
+                                <p class="text-sm font-bold text-gray-900">,299.00</p>
+                            </td>
+                            <td class="px-6 py-4">
+                                <span class="px-2.5 py-1 bg-green-100 text-green-700 text-xs font-bold rounded-full">Active</span>
+                            </td>
+                            <td class="px-6 py-4 text-right">
+                                <button class="text-gray-400 hover:text-[#0ea5e9] transition-colors p-1" title="Send Message"><i class="far fa-envelope"></i></button>
+                                <button class="text-gray-400 hover:text-gray-900 transition-colors p-1 ml-2" title="Edit Profile"><i class="fas fa-edit"></i></button>
+                            </td>
+                        </tr>
+
+                        <!-- Customer 3 -->
+                        <tr class="hover:bg-gray-50 transition-colors">
+                            <td class="px-6 py-4">
+                                <div class="flex items-center">
+                                    <div class="w-10 h-10 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center font-bold text-sm mr-3">AT</div>
+                                    <div>
+                                        <p class="font-bold text-gray-900 text-sm">Amanda Taylor</p>
+                                        <p class="text-xs text-gray-500">amanda.taylor@example.com</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4">
+                                <p class="text-sm text-gray-600">+44 7700 900077</p>
+                            </td>
+                            <td class="px-6 py-4">
+                                <p class="text-sm font-semibold text-gray-900">6 Tours</p>
+                            </td>
+                            <td class="px-6 py-4">
+                                <p class="text-sm font-bold text-gray-900">,800.00</p>
+                            </td>
+                            <td class="px-6 py-4">
+                                <span class="px-2.5 py-1 bg-blue-100 text-blue-700 text-xs font-bold rounded-full flex items-center inline-flex"><i class="fas fa-crown text-[10px] mr-1"></i> VIP</span>
+                            </td>
+                            <td class="px-6 py-4 text-right">
+                                <button class="text-gray-400 hover:text-[#0ea5e9] transition-colors p-1" title="Send Message"><i class="far fa-envelope"></i></button>
+                                <button class="text-gray-400 hover:text-gray-900 transition-colors p-1 ml-2" title="Edit Profile"><i class="fas fa-edit"></i></button>
+                            </td>
+                        </tr>
+
+                        <!-- Customer 4 -->
+                        <tr class="hover:bg-gray-50 transition-colors">
+                            <td class="px-6 py-4">
+                                <div class="flex items-center">
+                                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" class="w-10 h-10 rounded-full object-cover mr-3 border border-gray-200">
+                                    <div>
+                                        <p class="font-bold text-gray-900 text-sm">David Wilson</p>
+                                        <p class="text-xs text-gray-500">d.wilson@example.com</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4">
+                                <p class="text-sm text-gray-600">+1 (555) 321-9988</p>
+                            </td>
+                            <td class="px-6 py-4">
+                                <p class="text-sm font-semibold text-gray-900">0 Tours</p>
+                            </td>
+                            <td class="px-6 py-4">
+                                <p class="text-sm font-bold text-gray-900">.00</p>
+                            </td>
+                            <td class="px-6 py-4">
+                                <span class="px-2.5 py-1 bg-gray-100 text-gray-600 text-xs font-bold rounded-full">Inactive</span>
+                            </td>
+                            <td class="px-6 py-4 text-right">
+                                <button class="text-gray-400 hover:text-[#0ea5e9] transition-colors p-1" title="Send Message"><i class="far fa-envelope"></i></button>
+                                <button class="text-gray-400 hover:text-gray-900 transition-colors p-1 ml-2" title="Edit Profile"><i class="fas fa-edit"></i></button>
+                            </td>
+                        </tr>
+
+                        <!-- Customer 5 -->
+                        <tr class="hover:bg-gray-50 transition-colors">
+                            <td class="px-6 py-4">
+                                <div class="flex items-center">
+                                    <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" class="w-10 h-10 rounded-full object-cover mr-3 border border-gray-200">
+                                    <div>
+                                        <p class="font-bold text-gray-900 text-sm">Sarah Connor</p>
+                                        <p class="text-xs text-gray-500">sarah.c@example.com</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4">
+                                <p class="text-sm text-gray-600">+1 (555) 765-4321</p>
+                            </td>
+                            <td class="px-6 py-4">
+                                <p class="text-sm font-semibold text-gray-900">2 Tours</p>
+                            </td>
+                            <td class="px-6 py-4">
+                                <p class="text-sm font-bold text-gray-900">,500.00</p>
+                            </td>
+                            <td class="px-6 py-4">
+                                <span class="px-2.5 py-1 bg-green-100 text-green-700 text-xs font-bold rounded-full">Active</span>
+                            </td>
+                            <td class="px-6 py-4 text-right">
+                                <button class="text-gray-400 hover:text-[#0ea5e9] transition-colors p-1" title="Send Message"><i class="far fa-envelope"></i></button>
+                                <button class="text-gray-400 hover:text-gray-900 transition-colors p-1 ml-2" title="Edit Profile"><i class="fas fa-edit"></i></button>
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="p-4 border-t border-gray-100 flex items-center justify-between text-sm text-gray-500 bg-white">
+                <p>Showing 1 to 5 of 142 customers</p>
+                <div class="flex gap-1">
+                    <button class="px-3 py-1 border border-gray-200 rounded hover:bg-gray-50 transition-colors disabled:opacity-50">Prev</button>
+                    <button class="px-3 py-1 border border-[#0ea5e9] bg-[#0ea5e9] text-white rounded transition-colors">1</button>
+                    <button class="px-3 py-1 border border-gray-200 rounded hover:bg-gray-50 transition-colors">2</button>
+                    <button class="px-3 py-1 border border-gray-200 rounded hover:bg-gray-50 transition-colors">3</button>
+                    <button class="px-3 py-1 border border-gray-200 rounded hover:bg-gray-50 transition-colors">Next</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+        <div id="view-tours" class="view-section" style="display:none;">
+        <div class="flex justify-between items-center mb-8">
+            <h1 class="text-2xl font-bold text-gray-900">Tour Packages</h1>
+            <button class="bg-[#0ea5e9] text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-[#0284c7] transition-colors shadow-sm">
+                <i class="fas fa-plus mr-2"></i>Add New Package
+            </button>
+        </div>
+
+        <!-- Filter tabs -->
+        <div class="flex space-x-1 border-b border-gray-200 mb-6">
+            <button class="px-4 py-2 text-sm font-bold text-[#0ea5e9] border-b-2 border-[#0ea5e9]">All Packages</button>
+            <button class="px-4 py-2 text-sm font-medium text-gray-500 hover:text-gray-700">Active</button>
+            <button class="px-4 py-2 text-sm font-medium text-gray-500 hover:text-gray-700">Drafts</button>
+            <button class="px-4 py-2 text-sm font-medium text-gray-500 hover:text-gray-700">Archived</button>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            
+            <!-- Package 1 -->
+            <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-shadow flex flex-col">
+                <div class="relative h-48 overflow-hidden group">
+                    <img src="https://images.unsplash.com/photo-1530122037265-a5f1f91d3b99?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover">
+                    <div class="absolute top-3 left-3 px-2.5 py-1 bg-green-500 text-white text-xs font-bold rounded-full shadow-sm">Active</div>
+                    <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                        <button class="bg-white text-gray-900 px-4 py-2 rounded-lg text-sm font-semibold hover:bg-gray-100 shadow-sm"><i class="fas fa-edit mr-2"></i>Edit Package</button>
+                    </div>
+                </div>
+                <div class="p-5 flex-1 flex flex-col">
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="text-lg font-bold text-gray-900 line-clamp-1">Swiss Alps Stackly</h3>
+                        <span class="font-bold text-[#0ea5e9] shrink-0 ml-2">,499</span>
+                    </div>
+                    <div class="flex items-center text-xs text-gray-500 mb-4 font-medium">
+                        <i class="far fa-clock mr-1.5"></i> 7 Days &bull; <i class="fas fa-map-marker-alt ml-2 mr-1.5 text-gray-400"></i> Switzerland
+                    </div>
+                    <div class="mt-auto pt-4 border-t border-gray-50 flex justify-between items-center text-sm">
+                        <span class="text-gray-600"><strong>142</strong> Bookings</span>
+                        <span class="text-gray-600 text-right"><strong></strong> Revenue</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Package 2 -->
+            <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-shadow flex flex-col">
+                <div class="relative h-48 overflow-hidden group">
+                    <img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover">
+                    <div class="absolute top-3 left-3 px-2.5 py-1 bg-green-500 text-white text-xs font-bold rounded-full shadow-sm">Active</div>
+                    <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                        <button class="bg-white text-gray-900 px-4 py-2 rounded-lg text-sm font-semibold hover:bg-gray-100 shadow-sm"><i class="fas fa-edit mr-2"></i>Edit Package</button>
+                    </div>
+                </div>
+                <div class="p-5 flex-1 flex flex-col">
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="text-lg font-bold text-gray-900 line-clamp-1">Bali Beach Retreat</h3>
+                        <span class="font-bold text-[#0ea5e9] shrink-0 ml-2">,299</span>
+                    </div>
+                    <div class="flex items-center text-xs text-gray-500 mb-4 font-medium">
+                        <i class="far fa-clock mr-1.5"></i> 10 Days &bull; <i class="fas fa-map-marker-alt ml-2 mr-1.5 text-gray-400"></i> Indonesia
+                    </div>
+                    <div class="mt-auto pt-4 border-t border-gray-50 flex justify-between items-center text-sm">
+                        <span class="text-gray-600"><strong>86</strong> Bookings</span>
+                        <span class="text-gray-600 text-right"><strong></strong> Revenue</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Package 3 -->
+            <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-shadow flex flex-col">
+                <div class="relative h-48 overflow-hidden group">
+                    <img src="https://images.unsplash.com/photo-1503899036084-c55cdd92da26?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover">
+                    <div class="absolute top-3 left-3 px-2.5 py-1 bg-green-500 text-white text-xs font-bold rounded-full shadow-sm">Active</div>
+                    <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                        <button class="bg-white text-gray-900 px-4 py-2 rounded-lg text-sm font-semibold hover:bg-gray-100 shadow-sm"><i class="fas fa-edit mr-2"></i>Edit Package</button>
+                    </div>
+                </div>
+                <div class="p-5 flex-1 flex flex-col">
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="text-lg font-bold text-gray-900 line-clamp-1">Tokyo City Explorer</h3>
+                        <span class="font-bold text-[#0ea5e9] shrink-0 ml-2">,850</span>
+                    </div>
+                    <div class="flex items-center text-xs text-gray-500 mb-4 font-medium">
+                        <i class="far fa-clock mr-1.5"></i> 8 Days &bull; <i class="fas fa-map-marker-alt ml-2 mr-1.5 text-gray-400"></i> Japan
+                    </div>
+                    <div class="mt-auto pt-4 border-t border-gray-50 flex justify-between items-center text-sm">
+                        <span class="text-gray-600"><strong>112</strong> Bookings</span>
+                        <span class="text-gray-600 text-right"><strong></strong> Revenue</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Package 4 -->
+            <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-shadow flex flex-col">
+                <div class="relative h-48 overflow-hidden group">
+                    <img src="https://images.unsplash.com/photo-1476610182048-b716b8518aae?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover grayscale-[20%]">
+                    <div class="absolute top-3 left-3 px-2.5 py-1 bg-yellow-500 text-white text-xs font-bold rounded-full shadow-sm">Draft</div>
+                    <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                        <button class="bg-white text-gray-900 px-4 py-2 rounded-lg text-sm font-semibold hover:bg-gray-100 shadow-sm"><i class="fas fa-edit mr-2"></i>Continue Editing</button>
+                    </div>
+                </div>
+                <div class="p-5 flex-1 flex flex-col">
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="text-lg font-bold text-gray-900 line-clamp-1">Northern Lights Safari</h3>
+                        <span class="font-bold text-gray-400 shrink-0 ml-2">,599</span>
+                    </div>
+                    <div class="flex items-center text-xs text-gray-500 mb-4 font-medium">
+                        <i class="far fa-clock mr-1.5"></i> 6 Days &bull; <i class="fas fa-map-marker-alt ml-2 mr-1.5 text-gray-400"></i> Iceland
+                    </div>
+                    <div class="mt-auto pt-4 border-t border-gray-50 flex justify-between items-center text-sm">
+                        <span class="text-gray-400 italic">Not published yet</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Package 5 -->
+            <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-shadow flex flex-col opacity-75">
+                <div class="relative h-48 overflow-hidden group">
+                    <img src="https://images.unsplash.com/photo-1516426122078-c23e76319801?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover grayscale">
+                    <div class="absolute top-3 left-3 px-2.5 py-1 bg-gray-500 text-white text-xs font-bold rounded-full shadow-sm">Archived</div>
+                    <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                        <button class="bg-white text-gray-900 px-4 py-2 rounded-lg text-sm font-semibold hover:bg-gray-100 shadow-sm"><i class="fas fa-redo mr-2"></i>Restore</button>
+                    </div>
+                </div>
+                <div class="p-5 flex-1 flex flex-col">
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="text-lg font-bold text-gray-900 line-clamp-1">Safari in Kenya</h3>
+                        <span class="font-bold text-gray-500 shrink-0 ml-2">,200</span>
+                    </div>
+                    <div class="flex items-center text-xs text-gray-500 mb-4 font-medium">
+                        <i class="far fa-clock mr-1.5"></i> 7 Days &bull; <i class="fas fa-map-marker-alt ml-2 mr-1.5 text-gray-400"></i> Kenya
+                    </div>
+                    <div class="mt-auto pt-4 border-t border-gray-50 flex justify-between items-center text-sm">
+                        <span class="text-gray-500"><strong>45</strong> Bookings</span>
+                        <span class="text-gray-500 text-right"><strong></strong> Revenue</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    
+        <div id="view-bookings" class="view-section" style="display:none;">
+        <div class="flex justify-between items-center mb-8">
+            <h1 class="text-2xl font-bold text-gray-900">Bookings Management</h1>
+            <button class="bg-[#0ea5e9] text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-[#0284c7] transition-colors shadow-sm">
+                <i class="fas fa-plus mr-2"></i>Create Booking
+            </button>
+        </div>
+
+        <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+            <div class="p-5 border-b border-gray-100 flex flex-wrap gap-4 justify-between items-center bg-gray-50/50">
+                <h2 class="text-lg font-bold text-gray-900">Recent Bookings</h2>
+                <div class="flex gap-3">
+                    <div class="relative">
+                        <i class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 text-sm"></i>
+                        <input type="text" placeholder="Search by ID or Name..." class="pl-9 pr-4 py-2 border border-gray-200 rounded-lg text-sm outline-none focus:border-[#0ea5e9] transition-colors w-64">
+                    </div>
+                    <button class="bg-white border border-gray-200 text-gray-700 px-4 py-2 rounded-lg text-sm font-semibold hover:bg-gray-50 transition-colors"><i class="fas fa-filter mr-2"></i>Filter</button>
+                </div>
+            </div>
+            
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse whitespace-nowrap">
+                    <thead>
+                        <tr class="bg-gray-50/80 border-b border-gray-100 text-xs uppercase tracking-wider text-gray-500">
+                            <th class="px-6 py-4 font-bold">Booking ID</th>
+                            <th class="px-6 py-4 font-bold">Customer</th>
+                            <th class="px-6 py-4 font-bold">Tour Package</th>
+                            <th class="px-6 py-4 font-bold">Travel Date</th>
+                            <th class="px-6 py-4 font-bold">Status</th>
+                            <th class="px-6 py-4 font-bold text-right">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-100">
+                        
+                        <!-- Row 1 -->
+                        <tr class="hover:bg-gray-50 transition-colors">
+                            <td class="px-6 py-4">
+                                <span class="font-semibold text-gray-900">#BKG-90214</span>
+                            </td>
+                            <td class="px-6 py-4">
+                                <div class="flex items-center">
+                                    <div class="w-8 h-8 rounded-full bg-[#0ea5e9]/10 text-[#0ea5e9] flex items-center justify-center font-bold text-xs mr-3">AJ</div>
+                                    <div>
+                                        <p class="font-semibold text-gray-900 text-sm">Alex Johnson</p>
+                                        <p class="text-xs text-gray-500">alex.j@example.com</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4">
+                                <p class="font-medium text-gray-900 text-sm">Swiss Alps Stackly</p>
+                                <p class="text-xs text-gray-500">2 Guests &bull; 7 Days</p>
+                            </td>
+                            <td class="px-6 py-4">
+                                <p class="text-sm text-gray-900">Oct 12, 2026</p>
+                            </td>
+                            <td class="px-6 py-4">
+                                <span class="px-2.5 py-1 bg-green-100 text-green-700 text-xs font-bold rounded-full">Confirmed</span>
+                            </td>
+                            <td class="px-6 py-4 text-right">
+                                <button class="text-gray-400 hover:text-[#0ea5e9] transition-colors p-1" title="View Details"><i class="fas fa-eye"></i></button>
+                                <button class="text-gray-400 hover:text-gray-900 transition-colors p-1 ml-2" title="Edit Booking"><i class="fas fa-edit"></i></button>
+                            </td>
+                        </tr>
+
+                        <!-- Row 2 -->
+                        <tr class="hover:bg-gray-50 transition-colors">
+                            <td class="px-6 py-4">
+                                <span class="font-semibold text-gray-900">#BKG-88321</span>
+                            </td>
+                            <td class="px-6 py-4">
+                                <div class="flex items-center">
+                                    <div class="w-8 h-8 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center font-bold text-xs mr-3">SM</div>
+                                    <div>
+                                        <p class="font-semibold text-gray-900 text-sm">Sarah Miller</p>
+                                        <p class="text-xs text-gray-500">s.miller@example.com</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4">
+                                <p class="font-medium text-gray-900 text-sm">Bali Beach Retreat</p>
+                                <p class="text-xs text-gray-500">1 Guest &bull; 10 Days</p>
+                            </td>
+                            <td class="px-6 py-4">
+                                <p class="text-sm text-gray-900">Dec 05, 2026</p>
+                            </td>
+                            <td class="px-6 py-4">
+                                <span class="px-2.5 py-1 bg-yellow-100 text-yellow-700 text-xs font-bold rounded-full">Pending</span>
+                            </td>
+                            <td class="px-6 py-4 text-right">
+                                <button class="text-gray-400 hover:text-[#0ea5e9] transition-colors p-1" title="View Details"><i class="fas fa-eye"></i></button>
+                                <button class="text-gray-400 hover:text-gray-900 transition-colors p-1 ml-2" title="Edit Booking"><i class="fas fa-edit"></i></button>
+                            </td>
+                        </tr>
+
+                        <!-- Row 3 -->
+                        <tr class="hover:bg-gray-50 transition-colors">
+                            <td class="px-6 py-4">
+                                <span class="font-semibold text-gray-900">#BKG-77492</span>
+                            </td>
+                            <td class="px-6 py-4">
+                                <div class="flex items-center">
+                                    <div class="w-8 h-8 rounded-full bg-orange-100 text-orange-600 flex items-center justify-center font-bold text-xs mr-3">MD</div>
+                                    <div>
+                                        <p class="font-semibold text-gray-900 text-sm">Michael Davis</p>
+                                        <p class="text-xs text-gray-500">mike.d@example.com</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4">
+                                <p class="font-medium text-gray-900 text-sm">Kyoto Cultural Tour</p>
+                                <p class="text-xs text-gray-500">4 Guests &bull; 8 Days</p>
+                            </td>
+                            <td class="px-6 py-4">
+                                <p class="text-sm text-gray-900">Mar 10, 2026</p>
+                            </td>
+                            <td class="px-6 py-4">
+                                <span class="px-2.5 py-1 bg-green-100 text-green-700 text-xs font-bold rounded-full">Confirmed</span>
+                            </td>
+                            <td class="px-6 py-4 text-right">
+                                <button class="text-gray-400 hover:text-[#0ea5e9] transition-colors p-1" title="View Details"><i class="fas fa-eye"></i></button>
+                                <button class="text-gray-400 hover:text-gray-900 transition-colors p-1 ml-2" title="Edit Booking"><i class="fas fa-edit"></i></button>
+                            </td>
+                        </tr>
+
+                        <!-- Row 4 -->
+                        <tr class="hover:bg-gray-50 transition-colors">
+                            <td class="px-6 py-4">
+                                <span class="font-semibold text-gray-900">#BKG-65103</span>
+                            </td>
+                            <td class="px-6 py-4">
+                                <div class="flex items-center">
+                                    <div class="w-8 h-8 rounded-full bg-pink-100 text-pink-600 flex items-center justify-center font-bold text-xs mr-3">EW</div>
+                                    <div>
+                                        <p class="font-semibold text-gray-900 text-sm">Emma Wilson</p>
+                                        <p class="text-xs text-gray-500">emma.w@example.com</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4">
+                                <p class="font-medium text-gray-900 text-sm">Safari in Kenya</p>
+                                <p class="text-xs text-gray-500">2 Guests &bull; 7 Days</p>
+                            </td>
+                            <td class="px-6 py-4">
+                                <p class="text-sm text-gray-900">Nov 02, 2025</p>
+                            </td>
+                            <td class="px-6 py-4">
+                                <span class="px-2.5 py-1 bg-gray-100 text-gray-600 text-xs font-bold rounded-full">Completed</span>
+                            </td>
+                            <td class="px-6 py-4 text-right">
+                                <button class="text-gray-400 hover:text-[#0ea5e9] transition-colors p-1" title="View Details"><i class="fas fa-eye"></i></button>
+                                <button class="text-gray-400 hover:text-gray-900 transition-colors p-1 ml-2" title="Edit Booking"><i class="fas fa-edit"></i></button>
+                            </td>
+                        </tr>
+
+                        <!-- Row 5 -->
+                        <tr class="hover:bg-gray-50 transition-colors">
+                            <td class="px-6 py-4">
+                                <span class="font-semibold text-gray-900">#BKG-51002</span>
+                            </td>
+                            <td class="px-6 py-4">
+                                <div class="flex items-center">
+                                    <div class="w-8 h-8 rounded-full bg-red-100 text-red-600 flex items-center justify-center font-bold text-xs mr-3">RB</div>
+                                    <div>
+                                        <p class="font-semibold text-gray-900 text-sm">Robert Brown</p>
+                                        <p class="text-xs text-gray-500">rob.brown@example.com</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4">
+                                <p class="font-medium text-gray-900 text-sm">Paris Romance Tour</p>
+                                <p class="text-xs text-gray-500">2 Guests &bull; 5 Days</p>
+                            </td>
+                            <td class="px-6 py-4">
+                                <p class="text-sm text-gray-900">Feb 18, 2025</p>
+                            </td>
+                            <td class="px-6 py-4">
+                                <span class="px-2.5 py-1 bg-red-100 text-red-700 text-xs font-bold rounded-full">Cancelled</span>
+                            </td>
+                            <td class="px-6 py-4 text-right">
+                                <button class="text-gray-400 hover:text-[#0ea5e9] transition-colors p-1" title="View Details"><i class="fas fa-eye"></i></button>
+                                <button class="text-gray-400 hover:text-gray-900 transition-colors p-1 ml-2" title="Edit Booking"><i class="fas fa-edit"></i></button>
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="p-4 border-t border-gray-100 flex items-center justify-between text-sm text-gray-500 bg-white">
+                <p>Showing 1 to 5 of 24 entries</p>
+                <div class="flex gap-1">
+                    <button class="px-3 py-1 border border-gray-200 rounded hover:bg-gray-50 transition-colors disabled:opacity-50">Prev</button>
+                    <button class="px-3 py-1 border border-[#0ea5e9] bg-[#0ea5e9] text-white rounded transition-colors">1</button>
+                    <button class="px-3 py-1 border border-gray-200 rounded hover:bg-gray-50 transition-colors">2</button>
+                    <button class="px-3 py-1 border border-gray-200 rounded hover:bg-gray-50 transition-colors">3</button>
+                    <button class="px-3 py-1 border border-gray-200 rounded hover:bg-gray-50 transition-colors">Next</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+        <div id="view-analytics" class="view-section" style="display:none;">
+        <div class="flex justify-between items-center mb-8">
+            <h1 class="text-2xl font-bold text-gray-900">Analytics & Reports</h1>
+            <div class="flex gap-3">
+                <select class="bg-white border border-gray-200 text-gray-700 px-4 py-2 rounded-lg text-sm font-medium outline-none focus:border-[#0ea5e9]">
+                    <option>Last 30 Days</option>
+                    <option>This Quarter</option>
+                    <option>This Year</option>
+                </select>
+                <button class="bg-[#0ea5e9] text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-[#0284c7] transition-colors shadow-sm">
+                    <i class="fas fa-download mr-2"></i>Download Report
+                </button>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            
+            <!-- Section 1: Key Metrics Cards -->
+            <div class="lg:col-span-3 grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+                    <div class="flex justify-between items-start mb-2">
+                        <p class="text-gray-500 font-medium text-sm">Total Visitors</p>
+                        <div class="p-2 bg-blue-50 text-blue-500 rounded-lg"><i class="fas fa-users"></i></div>
+                    </div>
+                    <h3 class="text-3xl font-bold text-gray-900">124,500</h3>
+                    <p class="text-green-500 font-bold text-xs mt-2 flex items-center"><i class="fas fa-arrow-up mr-1"></i> +12.5% vs last month</p>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+                    <div class="flex justify-between items-start mb-2">
+                        <p class="text-gray-500 font-medium text-sm">Conversion Rate</p>
+                        <div class="p-2 bg-purple-50 text-purple-500 rounded-lg"><i class="fas fa-chart-pie"></i></div>
+                    </div>
+                    <h3 class="text-3xl font-bold text-gray-900">4.2%</h3>
+                    <p class="text-green-500 font-bold text-xs mt-2 flex items-center"><i class="fas fa-arrow-up mr-1"></i> +0.8% vs last month</p>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+                    <div class="flex justify-between items-start mb-2">
+                        <p class="text-gray-500 font-medium text-sm">Avg. Booking Value</p>
+                        <div class="p-2 bg-green-50 text-green-500 rounded-lg"><i class="fas fa-ticket-alt"></i></div>
+                    </div>
+                    <h3 class="text-3xl font-bold text-gray-900">,850</h3>
+                    <p class="text-red-500 font-bold text-xs mt-2 flex items-center"><i class="fas fa-arrow-down mr-1"></i> -2.1% vs last month</p>
+                </div>
+            </div>
+
+            <!-- Section 2: Revenue Bar Chart (Simulated) -->
+            <div class="lg:col-span-2 bg-white rounded-xl shadow-sm border border-gray-100 p-6 flex flex-col">
+                <h3 class="font-bold text-gray-900 mb-6">Revenue Over Time</h3>
+                <div class="flex-1 flex items-end gap-2 h-48 border-b border-gray-100 pb-2">
+                    <div class="w-full bg-[#0ea5e9]/20 hover:bg-[#0ea5e9] transition-colors rounded-t-sm h-[30%] cursor-pointer" title=",000"></div>
+                    <div class="w-full bg-[#0ea5e9]/20 hover:bg-[#0ea5e9] transition-colors rounded-t-sm h-[45%] cursor-pointer" title=",000"></div>
+                    <div class="w-full bg-[#0ea5e9]/20 hover:bg-[#0ea5e9] transition-colors rounded-t-sm h-[35%] cursor-pointer" title=",000"></div>
+                    <div class="w-full bg-[#0ea5e9]/20 hover:bg-[#0ea5e9] transition-colors rounded-t-sm h-[60%] cursor-pointer" title=",000"></div>
+                    <div class="w-full bg-[#0ea5e9]/20 hover:bg-[#0ea5e9] transition-colors rounded-t-sm h-[80%] cursor-pointer" title=",000"></div>
+                    <div class="w-full bg-[#0ea5e9]/20 hover:bg-[#0ea5e9] transition-colors rounded-t-sm h-[55%] cursor-pointer" title=",000"></div>
+                    <div class="w-full bg-[#0ea5e9] transition-colors rounded-t-sm h-[95%] cursor-pointer" title=",000"></div>
+                </div>
+                <div class="flex justify-between text-xs text-gray-400 font-medium mt-3 px-2">
+                    <span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span>
+                </div>
+            </div>
+
+            <!-- Section 3: Top Packages -->
+            <div class="lg:col-span-1 bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+                <h3 class="font-bold text-gray-900 mb-6">Top Packages</h3>
+                <div class="space-y-5">
+                    <div>
+                        <div class="flex justify-between text-sm mb-1.5">
+                            <span class="font-medium text-gray-700">Swiss Alps</span>
+                            <span class="font-bold text-gray-900">45%</span>
+                        </div>
+                        <div class="w-full bg-gray-100 rounded-full h-2">
+                            <div class="bg-[#0ea5e9] h-2 rounded-full" style="width: 45%"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between text-sm mb-1.5">
+                            <span class="font-medium text-gray-700">Bali Retreat</span>
+                            <span class="font-bold text-gray-900">30%</span>
+                        </div>
+                        <div class="w-full bg-gray-100 rounded-full h-2">
+                            <div class="bg-[#0ea5e9] h-2 rounded-full opacity-80" style="width: 30%"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between text-sm mb-1.5">
+                            <span class="font-medium text-gray-700">Tokyo Explorer</span>
+                            <span class="font-bold text-gray-900">15%</span>
+                        </div>
+                        <div class="w-full bg-gray-100 rounded-full h-2">
+                            <div class="bg-[#0ea5e9] h-2 rounded-full opacity-60" style="width: 15%"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between text-sm mb-1.5">
+                            <span class="font-medium text-gray-700">Kenya Safari</span>
+                            <span class="font-bold text-gray-900">10%</span>
+                        </div>
+                        <div class="w-full bg-gray-100 rounded-full h-2">
+                            <div class="bg-[#0ea5e9] h-2 rounded-full opacity-40" style="width: 10%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 4: Traffic Sources -->
+            <div class="lg:col-span-2 bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+                <h3 class="font-bold text-gray-900 mb-5">Traffic Sources</h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left">
+                        <tbody class="divide-y divide-gray-50">
+                            <tr>
+                                <td class="py-3"><i class="fab fa-google text-red-500 mr-3"></i><span class="font-medium text-sm text-gray-700">Organic Search</span></td>
+                                <td class="py-3 text-sm text-gray-500">42,500 visits</td>
+                                <td class="py-3 text-right"><span class="text-green-500 text-xs font-bold"><i class="fas fa-arrow-up mr-1"></i>4.2%</span></td>
+                            </tr>
+                            <tr>
+                                <td class="py-3"><i class="fas fa-link text-gray-400 mr-3"></i><span class="font-medium text-sm text-gray-700">Direct</span></td>
+                                <td class="py-3 text-sm text-gray-500">28,200 visits</td>
+                                <td class="py-3 text-right"><span class="text-red-500 text-xs font-bold"><i class="fas fa-arrow-down mr-1"></i>1.1%</span></td>
+                            </tr>
+                            <tr>
+                                <td class="py-3"><i class="fab fa-facebook text-blue-600 mr-3"></i><span class="font-medium text-sm text-gray-700">Social Media</span></td>
+                                <td class="py-3 text-sm text-gray-500">18,900 visits</td>
+                                <td class="py-3 text-right"><span class="text-green-500 text-xs font-bold"><i class="fas fa-arrow-up mr-1"></i>12.4%</span></td>
+                            </tr>
+                            <tr>
+                                <td class="py-3"><i class="far fa-envelope text-yellow-500 mr-3"></i><span class="font-medium text-sm text-gray-700">Email Campaigns</span></td>
+                                <td class="py-3 text-sm text-gray-500">9,400 visits</td>
+                                <td class="py-3 text-right"><span class="text-green-500 text-xs font-bold"><i class="fas fa-arrow-up mr-1"></i>8.9%</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Section 5: Demographics (Simulated Donut) -->
+            <div class="lg:col-span-1 bg-white rounded-xl shadow-sm border border-gray-100 p-6 flex flex-col items-center justify-center">
+                <h3 class="font-bold text-gray-900 mb-6 w-full text-left">Device Usage</h3>
+                <div class="relative w-32 h-32 rounded-full border-[12px] border-[#0ea5e9] border-r-gray-100 border-b-gray-100 flex items-center justify-center transform -rotate-45 mb-4 shadow-sm">
+                    <div class="transform rotate-45 text-center">
+                        <p class="text-xl font-bold text-gray-900">65%</p>
+                    </div>
+                </div>
+                <div class="w-full space-y-2 mt-2">
+                    <div class="flex justify-between text-sm">
+                        <span class="flex items-center text-gray-600"><span class="w-3 h-3 rounded-full bg-[#0ea5e9] mr-2"></span> Mobile</span>
+                        <span class="font-bold">65%</span>
+                    </div>
+                    <div class="flex justify-between text-sm">
+                        <span class="flex items-center text-gray-600"><span class="w-3 h-3 rounded-full bg-gray-200 mr-2"></span> Desktop</span>
+                        <span class="font-bold">35%</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    
+        <div id="view-settings" class="view-section" style="display:none;">
+        <div class="flex justify-between items-center mb-8">
+            <h1 class="text-2xl font-bold text-gray-900">System Settings</h1>
+            <button class="bg-[#0ea5e9] text-white px-5 py-2.5 rounded-lg text-sm font-semibold hover:bg-[#0284c7] transition-colors shadow-sm">
+                Save All Changes
+            </button>
+        </div>
+
+        <div class="space-y-6 max-w-5xl">
+            
+            <!-- Section 1: Global Platform Settings -->
+            <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+                <h3 class="text-lg font-bold text-gray-900 mb-5 border-b border-gray-50 pb-3">1. Global Platform Settings</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="text-sm font-bold text-gray-700 block mb-2">Platform Name</label>
+                        <input type="text" value="TravelPortal Admin" class="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-lg text-sm text-gray-800 focus:outline-none focus:border-[#0ea5e9]">
+                    </div>
+                    <div>
+                        <label class="text-sm font-bold text-gray-700 block mb-2">Support Email Address</label>
+                        <input type="email" value="support@travelportal.com" class="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-lg text-sm text-gray-800 focus:outline-none focus:border-[#0ea5e9]">
+                    </div>
+                    <div class="md:col-span-2">
+                        <label class="text-sm font-bold text-gray-700 block mb-2">Default Currency</label>
+                        <select class="w-full md:w-1/2 px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-lg text-sm text-gray-800 focus:outline-none focus:border-[#0ea5e9]">
+                            <option>USD - US Dollar</option>
+                            <option>EUR - Euro</option>
+                            <option>GBP - British Pound</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 2: Payment Gateways -->
+            <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+                <h3 class="text-lg font-bold text-gray-900 mb-5 border-b border-gray-50 pb-3">2. Payment Gateways</h3>
+                <div class="space-y-4">
+                    <div class="flex items-center justify-between p-4 border border-gray-100 rounded-lg bg-gray-50/50">
+                        <div class="flex items-center gap-4">
+                            <i class="fab fa-stripe text-3xl text-[#635BFF]"></i>
+                            <div>
+                                <p class="font-bold text-gray-900">Stripe Integration</p>
+                                <p class="text-sm text-gray-500">Credit card processing (Active)</p>
+                            </div>
+                        </div>
+                        <button class="text-gray-600 bg-white border border-gray-200 px-4 py-2 rounded-lg text-sm font-semibold hover:bg-gray-50 transition-colors">Configure API</button>
+                    </div>
+                    <div class="flex items-center justify-between p-4 border border-gray-100 rounded-lg bg-gray-50/50">
+                        <div class="flex items-center gap-4">
+                            <i class="fab fa-paypal text-3xl text-[#00457C]"></i>
+                            <div>
+                                <p class="font-bold text-gray-900">PayPal Express</p>
+                                <p class="text-sm text-gray-500">Wallet payments (Inactive)</p>
+                            </div>
+                        </div>
+                        <button class="text-[#0ea5e9] bg-white border border-[#0ea5e9] px-4 py-2 rounded-lg text-sm font-semibold hover:bg-blue-50 transition-colors">Enable Integration</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 3: Email Templates -->
+            <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+                <h3 class="text-lg font-bold text-gray-900 mb-5 border-b border-gray-50 pb-3">3. Automated Email Templates</h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left">
+                        <tbody class="divide-y divide-gray-100">
+                            <tr>
+                                <td class="py-3"><span class="font-medium text-gray-900">Welcome Email</span></td>
+                                <td class="py-3 text-sm text-gray-500">Sent when a customer registers</td>
+                                <td class="py-3 text-right"><button class="text-[#0ea5e9] text-sm font-semibold hover:underline">Edit Template</button></td>
+                            </tr>
+                            <tr>
+                                <td class="py-3"><span class="font-medium text-gray-900">Booking Confirmation</span></td>
+                                <td class="py-3 text-sm text-gray-500">Sent after successful payment</td>
+                                <td class="py-3 text-right"><button class="text-[#0ea5e9] text-sm font-semibold hover:underline">Edit Template</button></td>
+                            </tr>
+                            <tr>
+                                <td class="py-3"><span class="font-medium text-gray-900">Itinerary Reminder</span></td>
+                                <td class="py-3 text-sm text-gray-500">Sent 48h before departure</td>
+                                <td class="py-3 text-right"><button class="text-[#0ea5e9] text-sm font-semibold hover:underline">Edit Template</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Section 4: Staff & Permissions -->
+            <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+                <div class="flex justify-between items-center mb-5 border-b border-gray-50 pb-3">
+                    <h3 class="text-lg font-bold text-gray-900">4. Staff Roles & Permissions</h3>
+                    <button class="text-[#0ea5e9] text-sm font-semibold hover:underline"><i class="fas fa-plus mr-1"></i> Add User</button>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="p-4 border border-blue-100 bg-blue-50/30 rounded-lg">
+                        <div class="flex justify-between items-start mb-2">
+                            <h4 class="font-bold text-gray-900">Super Admin</h4>
+                            <span class="px-2 py-0.5 bg-blue-100 text-blue-700 text-xs font-bold rounded">2 Users</span>
+                        </div>
+                        <p class="text-sm text-gray-500">Full access to all modules, settings, and billing.</p>
+                    </div>
+                    <div class="p-4 border border-gray-100 bg-gray-50/50 rounded-lg">
+                        <div class="flex justify-between items-start mb-2">
+                            <h4 class="font-bold text-gray-900">Support Agent</h4>
+                            <span class="px-2 py-0.5 bg-gray-200 text-gray-700 text-xs font-bold rounded">5 Users</span>
+                        </div>
+                        <p class="text-sm text-gray-500">Can view bookings and message customers.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 5: Maintenance Mode -->
+            <div class="bg-white rounded-xl shadow-sm border border-red-100 p-6 relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-red-50 rounded-bl-full -mr-16 -mt-16 z-0"></div>
+                <h3 class="text-lg font-bold text-red-600 mb-2 relative z-10">5. System Maintenance</h3>
+                <p class="text-sm text-gray-600 mb-5 relative z-10">Enable maintenance mode to temporarily disable the frontend for all travellers during updates. Only admins will be able to log in.</p>
+                <div class="relative z-10 flex items-center justify-between bg-red-50/50 p-4 rounded-lg border border-red-100">
+                    <div>
+                        <p class="font-bold text-gray-900">Maintenance Mode</p>
+                        <p class="text-xs text-gray-500">Currently Disabled</p>
+                    </div>
+                    <label class="relative inline-flex items-center cursor-pointer">
+                        <input type="checkbox" value="" class="sr-only peer">
+                        <div class="w-11 h-6 bg-gray-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-red-500"></div>
+                    </label>
+                </div>
+            </div>
+
+        </div>
+    </div>
+        <div id="view-payments" class="view-section" style="display:none;">
+        <div class="flex justify-between items-center mb-8">
+            <h1 class="text-2xl font-bold text-gray-900">Payments & Refunds</h1>
+            <div class="flex gap-3">
+                <button class="bg-white border border-gray-200 text-gray-700 px-4 py-2 rounded-lg text-sm font-semibold hover:bg-gray-50 transition-colors shadow-sm">
+                    Issue Refund
+                </button>
+                <button class="bg-[#0ea5e9] text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-[#0284c7] transition-colors shadow-sm">
+                    Create Invoice
+                </button>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-5">
+                <p class="text-gray-500 text-sm font-medium mb-1">Total Revenue</p>
+                <h3 class="text-2xl font-bold text-gray-900">,500</h3>
+                <p class="text-xs text-green-500 font-bold mt-2"><i class="fas fa-arrow-up mr-1"></i> +14.5% this month</p>
+            </div>
+            <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-5">
+                <p class="text-gray-500 text-sm font-medium mb-1">Pending Payments</p>
+                <h3 class="text-2xl font-bold text-gray-900">,400</h3>
+                <p class="text-xs text-gray-500 font-medium mt-2">14 invoices awaiting payment</p>
+            </div>
+            <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-5">
+                <p class="text-gray-500 text-sm font-medium mb-1">Refunds</p>
+                <h3 class="text-2xl font-bold text-gray-900">,200</h3>
+                <p class="text-xs text-red-500 font-bold mt-2"><i class="fas fa-arrow-down mr-1"></i> 3 refunds processed</p>
+            </div>
+        </div>
+
+        <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+            <div class="p-5 border-b border-gray-100 flex flex-wrap gap-4 justify-between items-center bg-gray-50/50">
+                <h2 class="text-lg font-bold text-gray-900">Recent Transactions</h2>
+                <div class="flex gap-3">
+                    <div class="relative">
+                        <i class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 text-sm"></i>
+                        <input type="text" placeholder="Search transactions..." class="pl-9 pr-4 py-2 border border-gray-200 rounded-lg text-sm outline-none focus:border-[#0ea5e9] transition-colors w-64">
+                    </div>
+                    <button class="bg-white border border-gray-200 text-gray-700 px-4 py-2 rounded-lg text-sm font-semibold hover:bg-gray-50 transition-colors"><i class="fas fa-file-export mr-2"></i>Export</button>
+                </div>
+            </div>
+            
+            <div class="divide-y divide-gray-100">
+                
+                <!-- Transaction 1 -->
+                <div class="p-5 flex flex-col sm:flex-row sm:items-center justify-between hover:bg-gray-50 transition-colors gap-4">
+                    <div class="flex items-center gap-4">
+                        <div class="w-10 h-10 shrink-0 rounded-full bg-green-50 flex items-center justify-center text-green-600">
+                            <i class="fas fa-arrow-down"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-gray-900">Payment from Alex Johnson</h3>
+                            <p class="text-sm text-gray-500 mt-0.5">Ref: #TXN-90214 &bull; Visa **** 4242 &bull; Oct 10</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between sm:justify-end gap-6 sm:w-auto w-full border-t sm:border-0 pt-4 sm:pt-0 border-gray-100">
+                        <div class="text-left sm:text-right">
+                            <p class="font-bold text-green-600">+,499.00</p>
+                            <p class="text-xs font-bold text-gray-500 mt-1 uppercase tracking-wider">Succeeded</p>
+                        </div>
+                        <button class="text-gray-400 hover:text-gray-900 transition-colors p-2" title="View Details">
+                            <i class="fas fa-ellipsis-v"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Transaction 2 -->
+                <div class="p-5 flex flex-col sm:flex-row sm:items-center justify-between hover:bg-gray-50 transition-colors gap-4">
+                    <div class="flex items-center gap-4">
+                        <div class="w-10 h-10 shrink-0 rounded-full bg-green-50 flex items-center justify-center text-green-600">
+                            <i class="fas fa-arrow-down"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-gray-900">Payment from Michael Chen</h3>
+                            <p class="text-sm text-gray-500 mt-0.5">Ref: #TXN-88120 &bull; Mastercard **** 5512 &bull; Oct 09</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between sm:justify-end gap-6 sm:w-auto w-full border-t sm:border-0 pt-4 sm:pt-0 border-gray-100">
+                        <div class="text-left sm:text-right">
+                            <p class="font-bold text-green-600">+,299.00</p>
+                            <p class="text-xs font-bold text-gray-500 mt-1 uppercase tracking-wider">Succeeded</p>
+                        </div>
+                        <button class="text-gray-400 hover:text-gray-900 transition-colors p-2" title="View Details">
+                            <i class="fas fa-ellipsis-v"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Transaction 3 -->
+                <div class="p-5 flex flex-col sm:flex-row sm:items-center justify-between hover:bg-gray-50 transition-colors gap-4">
+                    <div class="flex items-center gap-4">
+                        <div class="w-10 h-10 shrink-0 rounded-full bg-red-50 flex items-center justify-center text-red-600">
+                            <i class="fas fa-arrow-up"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-gray-900">Refund to Sarah Miller</h3>
+                            <p class="text-sm text-gray-500 mt-0.5">Ref: #REF-44219 &bull; Amex **** 3009 &bull; Oct 07</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between sm:justify-end gap-6 sm:w-auto w-full border-t sm:border-0 pt-4 sm:pt-0 border-gray-100">
+                        <div class="text-left sm:text-right">
+                            <p class="font-bold text-gray-900">-.00</p>
+                            <p class="text-xs font-bold text-red-500 mt-1 uppercase tracking-wider">Refunded</p>
+                        </div>
+                        <button class="text-gray-400 hover:text-gray-900 transition-colors p-2" title="View Details">
+                            <i class="fas fa-ellipsis-v"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Transaction 4 -->
+                <div class="p-5 flex flex-col sm:flex-row sm:items-center justify-between hover:bg-gray-50 transition-colors gap-4">
+                    <div class="flex items-center gap-4">
+                        <div class="w-10 h-10 shrink-0 rounded-full bg-green-50 flex items-center justify-center text-green-600">
+                            <i class="fas fa-arrow-down"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-gray-900">Payment from Amanda Taylor</h3>
+                            <p class="text-sm text-gray-500 mt-0.5">Ref: #TXN-71002 &bull; Bank Transfer &bull; Oct 05</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between sm:justify-end gap-6 sm:w-auto w-full border-t sm:border-0 pt-4 sm:pt-0 border-gray-100">
+                        <div class="text-left sm:text-right">
+                            <p class="font-bold text-green-600">+,800.00</p>
+                            <p class="text-xs font-bold text-gray-500 mt-1 uppercase tracking-wider">Succeeded</p>
+                        </div>
+                        <button class="text-gray-400 hover:text-gray-900 transition-colors p-2" title="View Details">
+                            <i class="fas fa-ellipsis-v"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Transaction 5 -->
+                <div class="p-5 flex flex-col sm:flex-row sm:items-center justify-between hover:bg-gray-50 transition-colors gap-4">
+                    <div class="flex items-center gap-4">
+                        <div class="w-10 h-10 shrink-0 rounded-full bg-yellow-50 flex items-center justify-center text-yellow-600">
+                            <i class="far fa-clock"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-gray-900">Payment from Robert Brown</h3>
+                            <p class="text-sm text-gray-500 mt-0.5">Ref: #TXN-65991 &bull; PayPal &bull; Oct 04</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between sm:justify-end gap-6 sm:w-auto w-full border-t sm:border-0 pt-4 sm:pt-0 border-gray-100">
+                        <div class="text-left sm:text-right">
+                            <p class="font-bold text-gray-900">+,200.00</p>
+                            <p class="text-xs font-bold text-yellow-600 mt-1 uppercase tracking-wider">Pending</p>
+                        </div>
+                        <button class="text-gray-400 hover:text-gray-900 transition-colors p-2" title="View Details">
+                            <i class="fas fa-ellipsis-v"></i>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+            
+            <div class="p-4 border-t border-gray-100 text-center bg-gray-50 hover:bg-gray-100 transition-colors cursor-pointer">
+                <p class="text-sm font-bold text-[#0ea5e9]">View All Transactions</p>
+            </div>
+        </div>
+    </div>
+</main>
+    </div>
+
+    <script>
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Active menu state
+                document.querySelectorAll('nav a').forEach(el => {
+                    el.className = 'flex items-center px-8 py-3 hover:text-white hover:bg-[#2a3038] border-l-4 border-transparent transition-colors';
+                });
+                this.className = 'flex items-center px-8 py-3 text-white border-l-4 border-[#0ea5e9] bg-[#2a3038]';
+                
+                // View switching
+                const targetId = this.getAttribute('data-target');
+                if(targetId) {
+                    document.querySelectorAll('.view-section').forEach(view => {
+                        view.style.display = 'none';
+                    });
+                    const targetView = document.getElementById(targetId);
+                    if(targetView) {
+                        targetView.style.display = 'block';
+                    }
+                }
+            });
+        });
+    </script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        const name = localStorage.getItem('stacklyUserName');
+        const email = localStorage.getItem('stacklyUserEmail');
+        if(name) {
+            const nameEl = document.getElementById('userName') || document.getElementById('adminName');
+            if(nameEl) nameEl.textContent = name;
+        }
+        if(email) {
+            const emailEl = document.getElementById('userEmail') || document.getElementById('adminEmail');
+            if(emailEl) emailEl.textContent = email;
+        }
+    });
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,403 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stackly Travel - Home</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .serif-font { font-family: 'Playfair Display', serif; }
+        body { font-family: 'Inter', sans-serif; background-color: #ffffff; color: #111827; overflow-x: hidden; }
+        
+        /* Nav */
+        .nav-link { position: relative; transition: color 0.3s ease; } .nav-link:hover, .nav-link.active { color: #f16f5c; }
+        .nav-link::after { content: ''; position: absolute; width: 0; height: 2px; bottom: -4px; left: 0; background-color: #f16f5c; transition: width 0.3s ease; }
+        .nav-link:hover::after, .nav-link.active::after { width: 100%; }
+
+        /* Hero */
+        .hero-bg { background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('https://images.unsplash.com/photo-1596436889106-be35e843f974?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80'); background-size: cover; background-position: center; }
+
+        /* General Utilities */
+        .img-zoom { transition: transform 0.6s ease; }
+        .group:hover .img-zoom { transform: scale(1.1); }
+        .clip-path-reveal { clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0 100%); transition: clip-path 1s cubic-bezier(0.77, 0, 0.175, 1); }
+        .clip-path-reveal.visible { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
+
+        /* Expandable Cards */
+        .expand-container { display: flex; height: 400px; gap: 1rem; }
+        .expand-card { flex: 1; transition: flex 0.5s ease-out; position: relative; overflow: hidden; border-radius: 0.75rem; cursor: pointer; }
+        .expand-card:hover { flex: 3; }
+        .expand-card .content { position: absolute; bottom: 0; left: 0; right: 0; padding: 1.5rem; background: linear-gradient(to top, rgba(0,0,0,0.8), transparent); color: white; opacity: 0; transition: opacity 0.5s; }
+        .expand-card:hover .content { opacity: 1; }
+        .expand-card .title-overlay { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: white; font-weight: bold; font-size: 1.25rem; transition: opacity 0.5s; text-shadow: 0 2px 4px rgba(0,0,0,0.8); text-align: center; }
+        .expand-card:hover .title-overlay { opacity: 0; }
+        
+        /* Floating Cards */
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+        .float-card { animation: float 4s ease-in-out infinite; }
+        .float-delay-1 { animation-delay: 1s; }
+        .float-delay-2 { animation-delay: 2s; }
+        .float-delay-3 { animation-delay: 3s; }
+        
+        /* Tilt Fallback */
+        .tilt-card { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .tilt-card:hover { transform: translateY(-10px) rotateX(2deg) rotateY(2deg); box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25); }
+
+        /* Connecting Line */
+        .step-item { flex: 1; }
+        @media (min-width: 768px) {
+            .step-line::after { content: ''; position: absolute; top: 2.5rem; left: 50%; width: 100%; height: 2px; background: #e5e7eb; z-index: -1; }
+            .step-item:last-child .step-line::after { display: none; }
+        }
+
+        /* Testimonial Carousel */
+        .carousel { scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scroll-behavior: smooth; overflow-x: auto; padding-bottom: 2rem; }
+        .carousel::-webkit-scrollbar { display: none; }
+        .carousel { -ms-overflow-style: none; scrollbar-width: none; }
+        .carousel-item { scroll-snap-align: center; flex: 0 0 85%; max-width: 85%; transition: transform 0.5s ease, opacity 0.5s ease; opacity: 0.4; transform: scale(0.9); }
+        @media (min-width: 768px) { .carousel-item { flex: 0 0 50%; max-width: 50%; } }
+        @media (min-width: 1024px) { .carousel-item { flex: 0 0 33.333%; max-width: 33.333%; } }
+        .carousel-item.active { opacity: 1; transform: scale(1.05); z-index: 10; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1); }
+
+        /* Masonry */
+        .masonry { column-count: 1; column-gap: 1rem; }
+        @media (min-width: 640px) { .masonry { column-count: 2; } }
+        @media (min-width: 1024px) { .masonry { column-count: 3; } }
+        .masonry-item { break-inside: avoid; margin-bottom: 1rem; }
+
+        /* Ken Burns */
+        @keyframes kenburns { 0% { transform: scale(1) translate(0, 0); } 100% { transform: scale(1.15) translate(-1%, -1%); } }
+        .ken-burns { animation: kenburns 20s ease-out infinite alternate; }
+
+        /* Staggered Reveal */
+        .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+            /* Headings Theme & Animation */
+        h1, h2, h3, h4, h5, h6 { 
+
+            animation: headingReveal 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; 
+        }
+        @keyframes headingReveal {
+            0% { opacity: 0; transform: translateY(30px) scale(0.95); filter: blur(5px); }
+            100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+        }
+              /* Marquee Animation */
+          @keyframes marquee {
+              0% { transform: translateX(0); }
+              100% { transform: translateX(-50%); }
+          }
+          .marquee-wrapper {
+              overflow: hidden;
+              width: 100%;
+              position: relative;
+              padding: 1rem 0;
+              -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+              mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+          }
+          .marquee-content {
+              display: flex;
+              width: max-content;
+              animation: marquee 40s linear infinite;
+              gap: 2rem;
+          }
+          .marquee-content:hover {
+              animation-play-state: paused;
+          }
+          .testimonial-card {
+              width: 380px;
+              flex-shrink: 0;
+          }
+            @keyframes revealUp {
+            0% { transform: translateY(120%); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+        .animate-reveal {
+            opacity: 0;
+            animation: revealUp 1s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+        }
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
+        .delay-3 { animation-delay: 0.6s; }
+            @keyframes gradientText {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .gradient-text-anim {
+            background: linear-gradient(to right, #ffffff, #f16f5c, #ffffff, #f16f5c);
+            background-size: 300% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradientText 5s linear infinite;
+        }
+    .btn-underline {
+    position: relative;
+    display: inline-block;
+    color: inherit;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding-bottom: 6px;
+    font-size: 0.875rem;
+    transition: color 0.3s ease;
+}
+.btn-underline::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #f16f5c;
+    transition: transform 0.3s ease;
+    transform-origin: left;
+}
+.btn-underline:hover::after {
+    transform: scaleX(0);
+    transform-origin: right;
+}
+</style>
+<style>
+@keyframes btnGradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+button.bg-\[\#f16f5c\], 
+a.bg-\[\#f16f5c\] {
+    background: linear-gradient(90deg, #f16f5c, #ffb3a7, #f16f5c, #e05a48) !important;
+    background-size: 300% 100% !important;
+    animation: btnGradient 4s ease infinite !important;
+}
+button.bg-\[\#f16f5c\]:hover, 
+a.bg-\[\#f16f5c\]:hover {
+    box-shadow: 0 10px 20px -10px rgba(241, 111, 92, 0.7) !important;
+}
+.btn-underline {
+    position: relative;
+    display: inline-block;
+    color: inherit;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding-bottom: 6px;
+    font-size: 0.875rem;
+    transition: color 0.3s ease;
+}
+.btn-underline::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #f16f5c;
+    transition: transform 0.3s ease;
+    transform-origin: left;
+}
+.btn-underline:hover::after {
+    transform: scaleX(0);
+    transform-origin: right;
+}
+</style>
+<style>
+@keyframes btnGradientAnim {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+button.bg-\[\#f16f5c\], 
+a.bg-\[\#f16f5c\] {
+    background: linear-gradient(90deg, #f16f5c, #ff9a8b, #f16f5c, #e05a48) !important;
+    background-size: 300% 100% !important;
+    animation: btnGradientAnim 4s ease infinite !important;
+    border: none !important;
+    color: white !important;
+    transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+}
+button.bg-\[\#f16f5c\]:hover, 
+a.bg-\[\#f16f5c\]:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 10px 20px -10px rgba(241, 111, 92, 0.7) !important;
+}
+.btn-underline {
+    position: relative;
+    display: inline-block;
+    color: inherit;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding-bottom: 6px;
+    font-size: 0.875rem;
+    transition: color 0.3s ease;
+}
+.btn-underline::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #f16f5c;
+    transition: transform 0.3s ease;
+    transform-origin: left;
+}
+.btn-underline:hover::after {
+    transform: scaleX(0);
+    transform-origin: right;
+}
+</style>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll('a[href="#"]').forEach(a => {
+        a.href = "404.html";
+    });
+    document.querySelectorAll('button:not([type="submit"]):not([onclick])').forEach(b => {
+        if (!b.id && !b.classList.contains('mobile-menu-button')) {
+            b.addEventListener('click', (e) => {
+                e.preventDefault();
+                window.location.href = "404.html";
+            });
+        }
+    });
+});
+</script>
+</head>
+<body class="m-0 p-0 text-gray-800">
+
+    <!-- Hero Section -->
+    <div class="h-screen w-full relative flex flex-col text-white overflow-hidden" id="hero-container">
+    <!-- Slider Backgrounds -->
+    <div id="slider-bg-0" class="absolute inset-0 z-[-1] bg-cover bg-center transition-opacity duration-1000 opacity-100" style="background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('https://images.unsplash.com/photo-1596436889106-be35e843f974?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80')"></div>
+    <div id="slider-bg-1" class="absolute inset-0 z-[-1] bg-cover bg-center transition-opacity duration-1000 opacity-0" style="background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80')"></div>
+    <div id="slider-bg-2" class="absolute inset-0 z-[-1] bg-cover bg-center transition-opacity duration-1000 opacity-0" style="background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('https://images.unsplash.com/photo-1499856871958-5b9627545d1a?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80')"></div>
+    <div id="slider-bg-3" class="absolute inset-0 z-[-1] bg-cover bg-center transition-opacity duration-1000 opacity-0" style="background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80')"></div>
+        <!-- Navigation Bar -->
+        
+    <!-- 404 Content -->
+    <div class="min-h-screen flex items-center justify-center pt-20 pb-20 relative overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <img src="assets/images/banner_0007.webp" alt="404 Background" class="w-full h-full object-cover opacity-20">
+            <div class="absolute inset-0 bg-gradient-to-t from-[#0f172a] via-[#0f172a]/80 to-transparent"></div>
+        </div>
+        
+        <div class="relative z-10 text-center px-4">
+            <h1 class="text-9xl md:text-[12rem] font-black text-transparent bg-clip-text bg-gradient-to-b from-[#f16f5c] to-[#e05a48] drop-shadow-lg mb-4" style="line-height: 1;">404</h1>
+            <h2 class="text-3xl md:text-5xl font-bold text-white mb-6 uppercase tracking-widest">Page Not Found</h2>
+            <p class="text-gray-400 text-lg mb-10 max-w-lg mx-auto">It looks like the destination you're looking for doesn't exist or has been moved. Let's get you back on track.</p>
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+    <button onclick="window.history.back()" class="inline-flex items-center justify-center bg-transparent border-2 border-white hover:bg-white hover:text-gray-900 text-white px-8 py-4 rounded-lg font-bold uppercase tracking-widest transition-all hover:-translate-y-1 shadow-lg backdrop-blur-sm"><i class="fas fa-arrow-left mr-3"></i> Go Back</button>
+    <a href="index.html" class="inline-flex items-center justify-center bg-[#f16f5c] hover:bg-[#e05a48] text-white px-8 py-4 rounded-lg font-bold uppercase tracking-widest transition-all hover:-translate-y-1 shadow-lg shadow-[#f16f5c]/20"><i class="fas fa-home mr-3"></i> Homepage</a>
+</div>
+        </div>
+    </div>
+<footer class="bg-gray-950 text-white pt-20 pb-10 mt-auto">
+        <div class="px-8 lg:px-24 mx-auto max-w-7xl">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+                <!-- Brand -->
+                <div class="lg:col-span-1 text-left">
+                    <div class="text-2xl font-bold tracking-widest uppercase mb-6 text-white flex items-start justify-start"><a href="index.html"><img src="assets/logo_0050.webp" alt="Stackly Logo" class="h-10 object-contain object-left inline-block"></a></div>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-6 text-left">We create unforgettable travel experiences tailored to your dreams. Explore the world with premium luxury and comfort.</p>
+                    <div class="flex space-x-3 justify-start">
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-gray-400 hover:text-white hover:bg-[#f16f5c] transition-colors"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-gray-400 hover:text-white hover:bg-[#f16f5c] transition-colors"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-gray-400 hover:text-white hover:bg-[#f16f5c] transition-colors"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-gray-400 hover:text-white hover:bg-[#f16f5c] transition-colors"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                
+                <!-- Links -->
+                <div>
+                    <h4 class="font-bold text-white tracking-wide text-base mb-6">Quick Links</h4>
+                    <ul class="space-y-4 text-gray-400 text-sm">
+                        <li><a href="index.html" class="hover:text-[#f16f5c] transition-colors">Home</a></li>
+                        <li><a href="about.html" class="hover:text-[#f16f5c] transition-colors">About</a></li>
+                        <li><a href="blog.html" class="hover:text-[#f16f5c] transition-colors">Blog</a></li>
+                        <li><a href="service.html" class="hover:text-[#f16f5c] transition-colors">Service</a></li>
+                        <li><a href="contact.html" class="hover:text-[#f16f5c] transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Explore -->
+                <div>
+                    <h4 class="font-bold text-white tracking-wide text-base mb-6">Top Destinations</h4>
+                    <ul class="space-y-4 text-gray-400 text-sm">
+                        <li><a href="#" class="hover:text-[#f16f5c] transition-colors">Maldives Islands</a></li>
+                        <li><a href="#" class="hover:text-[#f16f5c] transition-colors">Paris, France</a></li>
+                        <li><a href="#" class="hover:text-[#f16f5c] transition-colors">Swiss Alps</a></li>
+                        <li><a href="#" class="hover:text-[#f16f5c] transition-colors">Dubai, UAE</a></li>
+                        <li><a href="#" class="hover:text-[#f16f5c] transition-colors">Bali, Indonesia</a></li>
+                    </ul>
+                </div>
+
+                <!-- Newsletter -->
+                <div>
+                    <h4 class="font-bold text-white tracking-wide text-base mb-6">Newsletter</h4>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-6">Subscribe to our newsletter for exclusive offers and travel inspiration.</p>
+                    <form class="flex mb-8" onsubmit="event.preventDefault(); window.location.href='404.html';">
+                        <input type="email" required placeholder="Email Address" class="bg-white/5 border border-white/10 rounded-l-md px-4 py-3 w-full text-sm focus:outline-none focus:border-[#f16f5c] text-white" oninvalid="this.setCustomValidity('Please enter a valid email address')" oninput="this.setCustomValidity('')">
+                        <button type="submit" class="bg-[#f16f5c] px-5 py-3 rounded-r-md hover:bg-[#d95c4a] transition-colors"><i class="fas fa-paper-plane text-white"></i></button>
+                    </form>
+                    
+                    <div class="space-y-3 text-sm text-gray-400">
+                        <div class="flex items-center space-x-3 hover:text-white transition-colors cursor-pointer">
+                            <i class="fas fa-phone-alt text-[#f16f5c]"></i>
+                            <span>(980) 123-4567</span>
+                        </div>
+                        <div class="flex items-center space-x-3 hover:text-white transition-colors cursor-pointer">
+                            <i class="fas fa-envelope text-[#f16f5c]"></i>
+                            <span>hello@stackly.com</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-gray-500 font-medium">
+                <p>&copy; 2026 Stackly Tourism. All Rights Reserved.</p>
+                <div class="flex space-x-6 mt-4 md:mt-0">
+                    <a href="#" class="hover:text-white transition-colors">Privacy Policy</a>
+                    <a href="#" class="hover:text-white transition-colors">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        let idx = 0;
+        const total = 4;
+        setInterval(() => {
+            document.getElementById('slider-bg-' + idx).classList.remove('opacity-100');
+            document.getElementById('slider-bg-' + idx).classList.add('opacity-0');
+            idx = (idx + 1) % total;
+            document.getElementById('slider-bg-' + idx).classList.remove('opacity-0');
+            document.getElementById('slider-bg-' + idx).classList.add('opacity-100');
+        }, 2000);
+    });
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

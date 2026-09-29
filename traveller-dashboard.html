@@ -1,0 +1,1245 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Traveller Dashboard - Stackly Travel</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8f9fa; }
+        
+        /* Custom Scrollbar for sidebar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+            /* Headings Theme & Animation */
+        h1, h2, h3, h4, h5, h6 { 
+
+            animation: headingReveal 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; 
+        }
+        @keyframes headingReveal {
+            0% { opacity: 0; transform: translateY(30px) scale(0.95); filter: blur(5px); }
+            100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+        }
+    .btn-underline {
+    position: relative;
+    display: inline-block;
+    color: inherit;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding-bottom: 6px;
+    font-size: 0.875rem;
+    transition: color 0.3s ease;
+}
+.btn-underline::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #f16f5c;
+    transition: transform 0.3s ease;
+    transform-origin: left;
+}
+.btn-underline:hover::after {
+    transform: scaleX(0);
+    transform-origin: right;
+}
+</style>
+<style>
+@keyframes btnGradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+button.bg-\[\#f16f5c\], 
+a.bg-\[\#f16f5c\] {
+    background: linear-gradient(90deg, #f16f5c, #ffb3a7, #f16f5c, #e05a48) !important;
+    background-size: 300% 100% !important;
+    animation: btnGradient 4s ease infinite !important;
+}
+button.bg-\[\#f16f5c\]:hover, 
+a.bg-\[\#f16f5c\]:hover {
+    box-shadow: 0 10px 20px -10px rgba(241, 111, 92, 0.7) !important;
+}
+.btn-underline {
+    position: relative;
+    display: inline-block;
+    color: inherit;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding-bottom: 6px;
+    font-size: 0.875rem;
+    transition: color 0.3s ease;
+}
+.btn-underline::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #f16f5c;
+    transition: transform 0.3s ease;
+    transform-origin: left;
+}
+.btn-underline:hover::after {
+    transform: scaleX(0);
+    transform-origin: right;
+}
+</style>
+<style>
+@keyframes btnGradientAnim {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+button.bg-\[\#f16f5c\], 
+a.bg-\[\#f16f5c\] {
+    background: linear-gradient(90deg, #f16f5c, #ff9a8b, #f16f5c, #e05a48) !important;
+    background-size: 300% 100% !important;
+    animation: btnGradientAnim 4s ease infinite !important;
+    border: none !important;
+    color: white !important;
+    transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+}
+button.bg-\[\#f16f5c\]:hover, 
+a.bg-\[\#f16f5c\]:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 10px 20px -10px rgba(241, 111, 92, 0.7) !important;
+}
+.btn-underline {
+    position: relative;
+    display: inline-block;
+    color: inherit;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding-bottom: 6px;
+    font-size: 0.875rem;
+    transition: color 0.3s ease;
+}
+.btn-underline::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #f16f5c;
+    transition: transform 0.3s ease;
+    transform-origin: left;
+}
+.btn-underline:hover::after {
+    transform: scaleX(0);
+    transform-origin: right;
+}
+</style>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll('a[href="#"]').forEach(a => {
+        a.href = "404.html";
+    });
+    document.querySelectorAll('button:not([type="submit"]):not([onclick])').forEach(b => {
+        if (!b.id && !b.classList.contains('mobile-menu-button')) {
+            b.addEventListener('click', (e) => {
+                e.preventDefault();
+                window.location.href = "404.html";
+            });
+        }
+    });
+});
+</script>
+</head>
+<body class="flex h-screen overflow-hidden text-gray-800">
+
+    <!-- Sidebar -->
+    <aside class="w-64 bg-[#1e2329] text-gray-400 flex flex-col hidden md:flex h-full shrink-0">
+        <!-- Logo -->
+        <div class="h-20 flex items-center px-8 text-white">
+            <span class="text-xl font-bold tracking-wide"><img src="assets/logo_0050.webp" alt="Stackly Logo" class="h-8 inline-block"></span>
+        </div>
+        
+        <!-- Navigation -->
+        <nav class="flex-1 py-4 space-y-1">
+            <a href="#" data-target="view-dashboard" class="flex items-center px-8 py-3 text-white border-l-4 border-[#f16f5c] bg-[#2a3038]">
+                <i class="fas fa-th-large w-6 text-sm"></i>
+                <span class="font-medium text-sm">Dashboard</span>
+            </a>
+            <a href="#" data-target="view-mytrips" class="flex items-center px-8 py-3 hover:text-white hover:bg-[#2a3038] border-l-4 border-transparent transition-colors"> <i class="fas fa-plane-departure w-6 text-sm"></i>
+                <span class="font-medium text-sm">My Trips</span>
+            </a>
+            <a href="#" data-target="view-saved" class="flex items-center px-8 py-3 hover:text-white hover:bg-[#2a3038] border-l-4 border-transparent transition-colors"> <i class="fas fa-heart w-6 text-sm"></i>
+                <span class="font-medium text-sm">Saved Tours</span>
+            </a>
+            <a href="#" data-target="view-reviews" class="flex items-center px-8 py-3 hover:text-white hover:bg-[#2a3038] border-l-4 border-transparent transition-colors"> <i class="fas fa-star w-6 text-sm"></i>
+                <span class="font-medium text-sm">My Reviews</span>
+            </a>
+            <a href="#" data-target="view-payments" class="flex items-center px-8 py-3 hover:text-white hover:bg-[#2a3038] border-l-4 border-transparent transition-colors"> <i class="fas fa-credit-card w-6 text-sm"></i>
+                <span class="font-medium text-sm">Payments</span>
+            </a>
+            <a href="#" data-target="view-profile" class="flex items-center px-8 py-3 hover:text-white hover:bg-[#2a3038] border-l-4 border-transparent transition-colors"> <i class="fas fa-user-circle w-6 text-sm"></i>
+                <span class="font-medium text-sm">Profile</span>
+            </a>
+            <a href="#" data-target="view-settings" class="flex items-center px-8 py-3 hover:text-white hover:bg-[#2a3038] border-l-4 border-transparent transition-colors"> <i class="fas fa-cog w-6 text-sm"></i>
+                <span class="font-medium text-sm">Settings</span>
+            </a>
+        </nav>
+        
+        <!-- Logout -->
+        <div class="p-4 mb-4">
+            <a href="login.html" class="flex items-center px-4 py-2 hover:text-white transition-colors">
+                <i class="fas fa-sign-out-alt w-6 text-sm"></i>
+                <span class="font-medium text-sm">Logout</span>
+            </a>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <div class="flex-1 flex flex-col h-full overflow-hidden">
+        
+        <!-- Top Header -->
+        <header class="h-20 bg-white border-b border-gray-100 flex items-center justify-between px-8 z-10 shrink-0">
+            <!-- Search -->
+            <div class="flex items-center bg-gray-100 rounded-full px-4 py-2 w-96">
+                <i class="fas fa-search text-gray-400 text-sm"></i>
+                <input type="text" placeholder="Search destinations, tours, guides" class="bg-transparent border-none outline-none ml-3 text-sm w-full text-gray-700 placeholder-gray-400">
+            </div>
+            
+            <!-- Right Actions -->
+            <div class="flex items-center space-x-6">
+                <button class="text-gray-400 hover:text-gray-600 relative">
+                    <i class="far fa-bell text-lg"></i>
+                    <span class="absolute top-0 right-0 w-2 h-2 bg-[#f16f5c] rounded-full"></span>
+                </button>
+                <button class="text-gray-400 hover:text-gray-600">
+                    <i class="far fa-comment-alt text-lg"></i>
+                </button>
+                
+                <div class="flex items-center space-x-3 cursor-pointer pl-4 border-l border-gray-200">
+                    <img src="https://i.pravatar.cc/150?img=32" alt="Traveller" class="w-10 h-10 rounded-full">
+                    <div class="hidden md:block">
+                        <p class="text-sm font-bold text-gray-900 leading-tight" id="userName">Sarah Jenkins</p>
+                          <p class="text-[11px] text-gray-500" id="userLevel">Explorer Level</p>
+                          <p class="text-[11px] text-gray-400 font-medium" id="userEmail">sarah.jenkins@example.com</p>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Scrollable Dashboard Content -->
+        <main class="flex-1 overflow-y-auto p-8"><div id="view-dashboard" class="view-section">
+            
+            <!-- Page Header -->
+            <div class="flex items-center justify-between mb-8">
+                <h1 class="text-2xl font-bold text-gray-900">Traveller Overview</h1>
+                <button class="bg-[#f16f5c] hover:bg-[#d95c4a] text-white px-5 py-2.5 rounded-lg text-sm font-semibold transition-colors flex items-center shadow-sm">
+                    <i class="fas fa-compass mr-2"></i> Book New Trip
+                </button>
+            </div>
+
+            <!-- Stats Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                <!-- Stat 1 -->
+                <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-50 flex items-start justify-between">
+                    <div>
+                        <p class="text-sm text-gray-500 font-medium mb-2">Total Trips Taken</p>
+                        <h3 class="text-2xl font-bold text-gray-900">12</h3>
+                    </div>
+                    <div class="w-10 h-10 rounded-lg bg-green-100 flex items-center justify-center text-green-500 text-lg">
+                        <i class="fas fa-globe-americas"></i>
+                    </div>
+                </div>
+                
+                <!-- Stat 2 -->
+                <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-50 flex items-start justify-between">
+                    <div>
+                        <p class="text-sm text-gray-500 font-medium mb-2">Upcoming Trips</p>
+                        <h3 class="text-2xl font-bold text-gray-900">2</h3>
+                    </div>
+                    <div class="w-10 h-10 rounded-lg bg-orange-100 flex items-center justify-center text-orange-500 text-lg">
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                </div>
+
+                <!-- Stat 3 -->
+                <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-50 flex items-start justify-between">
+                    <div>
+                        <p class="text-sm text-gray-500 font-medium mb-2">Loyalty Miles</p>
+                        <h3 class="text-2xl font-bold text-gray-900">45,200</h3>
+                    </div>
+                    <div class="w-10 h-10 rounded-lg bg-purple-100 flex items-center justify-center text-purple-500 text-lg">
+                        <i class="fas fa-award"></i>
+                    </div>
+                </div>
+
+                <!-- Stat 4 -->
+                <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-50 flex items-start justify-between">
+                    <div>
+                        <p class="text-sm text-gray-500 font-medium mb-2">Total Spent</p>
+                        <h3 class="text-2xl font-bold text-gray-900">$18,450</h3>
+                    </div>
+                    <div class="w-10 h-10 rounded-lg bg-blue-100 flex items-center justify-center text-blue-500 text-lg">
+                        <i class="fas fa-wallet"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Two Column Layout -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                
+                <!-- Recent Bookings Table (Takes up 2 columns) -->
+                <div class="bg-white rounded-xl shadow-sm border border-gray-50 p-6 lg:col-span-2">
+                    <div class="flex items-center justify-between mb-6">
+                        <h3 class="text-lg font-bold text-gray-900">My Trip History</h3>
+                        <a href="#" class="text-sm font-semibold text-[#f16f5c] hover:underline">View All</a>
+                    </div>
+                    
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left">
+                            <thead>
+                                <tr class="text-xs text-gray-400 uppercase tracking-wider border-b border-gray-100">
+                                    <th class="pb-4 font-medium">Trip Name</th>
+                                    <th class="pb-4 font-medium">Destination</th>
+                                    <th class="pb-4 font-medium">Date</th>
+                                    <th class="pb-4 font-medium">Amount</th>
+                                    <th class="pb-4 font-medium text-center">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-sm">
+                                <tr class="border-b border-gray-50">
+                                    <td class="py-4 flex items-center">
+                                        <div class="w-10 h-10 rounded-lg overflow-hidden mr-3">
+                                            <img src="https://images.unsplash.com/photo-1514282401047-d79a71a590e8?auto=format&fit=crop&w=150&q=80" class="w-full h-full object-cover">
+                                        </div>
+                                        <span class="font-medium text-gray-800">Maldives Escape</span>
+                                    </td>
+                                    <td class="py-4 text-gray-600">Maldives</td>
+                                    <td class="py-4 text-gray-600">Upcoming (Oct 15)</td>
+                                    <td class="py-4 text-gray-800 font-medium">$2,499</td>
+                                    <td class="py-4 text-center">
+                                        <span class="inline-block px-3 py-1 bg-green-50 text-green-500 rounded-full text-xs font-semibold">Confirmed</span>
+                                    </td>
+                                </tr>
+                                <tr class="border-b border-gray-50">
+                                    <td class="py-4 flex items-center">
+                                        <div class="w-10 h-10 rounded-lg overflow-hidden mr-3">
+                                            <img src="https://images.unsplash.com/photo-1493246507139-91e8fad9978e?auto=format&fit=crop&w=150&q=80" class="w-full h-full object-cover">
+                                        </div>
+                                        <span class="font-medium text-gray-800">Swiss Alps Tour</span>
+                                    </td>
+                                    <td class="py-4 text-gray-600">Switzerland</td>
+                                    <td class="py-4 text-gray-600">Upcoming (Nov 02)</td>
+                                    <td class="py-4 text-gray-800 font-medium">$1,850</td>
+                                    <td class="py-4 text-center">
+                                        <span class="inline-block px-3 py-1 bg-yellow-50 text-yellow-500 rounded-full text-xs font-semibold">Pending</span>
+                                    </td>
+                                </tr>
+                                <tr class="border-b border-gray-50">
+                                    <td class="py-4 flex items-center">
+                                        <div class="w-10 h-10 rounded-lg overflow-hidden mr-3">
+                                            <img src="https://images.unsplash.com/photo-1499856871958-5b9627545d1a?auto=format&fit=crop&w=150&q=80" class="w-full h-full object-cover">
+                                        </div>
+                                        <span class="font-medium text-gray-800">Paris Honeymoon</span>
+                                    </td>
+                                    <td class="py-4 text-gray-600">France</td>
+                                    <td class="py-4 text-gray-600">Mar 10, 2024</td>
+                                    <td class="py-4 text-gray-800 font-medium">$3,200</td>
+                                    <td class="py-4 text-center">
+                                        <span class="inline-block px-3 py-1 bg-gray-100 text-gray-500 rounded-full text-xs font-semibold">Completed</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="py-4 flex items-center">
+                                        <div class="w-10 h-10 rounded-lg overflow-hidden mr-3">
+                                            <img src="https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?auto=format&fit=crop&w=150&q=80" class="w-full h-full object-cover">
+                                        </div>
+                                        <span class="font-medium text-gray-800">Venice Romance</span>
+                                    </td>
+                                    <td class="py-4 text-gray-600">Italy</td>
+                                    <td class="py-4 text-gray-600">Jan 28, 2024</td>
+                                    <td class="py-4 text-gray-800 font-medium">$1,650</td>
+                                    <td class="py-4 text-center">
+                                        <span class="inline-block px-3 py-1 bg-gray-100 text-gray-500 rounded-full text-xs font-semibold">Completed</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Top Packages List (Takes up 1 column) -->
+                <div class="bg-white rounded-xl shadow-sm border border-gray-50 p-6">
+                    <div class="flex items-center justify-between mb-6">
+                        <h3 class="text-lg font-bold text-gray-900">Recommended Deals</h3>
+                        <a href="#" class="text-sm font-semibold text-[#f16f5c] hover:underline">Explore All</a>
+                    </div>
+
+                    <div class="space-y-4">
+                        <!-- Package 1 -->
+                        <div class="flex items-center justify-between p-3 border border-gray-100 rounded-xl hover:shadow-md transition-shadow cursor-pointer group">
+                            <div class="flex items-center space-x-3">
+                                <img src="https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=150&q=80" class="w-12 h-12 rounded-lg object-cover">
+                                <div>
+                                    <h4 class="text-sm font-bold text-gray-800 group-hover:text-[#f16f5c] transition-colors">Taj Mahal, India</h4>
+                                    <p class="text-xs text-gray-500 mt-0.5"><!--reviews--> <i class="fas fa-star text-yellow-400 mr-1"></i> 4.9</p>
+                                </div>
+                            </div>
+                            <span class="text-sm font-bold text-gray-900">$1$1,299</span>
+                        </div>
+
+                        <!-- Package 2 -->
+                        <div class="flex items-center justify-between p-3 border border-gray-100 rounded-xl hover:shadow-md transition-shadow cursor-pointer group">
+                            <div class="flex items-center space-x-3">
+                                <img src="https://images.unsplash.com/photo-1520645607373-c64a85da5de5?auto=format&fit=crop&w=150&q=80" class="w-12 h-12 rounded-lg object-cover">
+                                <div>
+                                    <h4 class="text-sm font-bold text-gray-800 group-hover:text-[#f16f5c] transition-colors">Bali Wellness</h4>
+                                    <p class="text-xs text-gray-500 mt-0.5"><!--reviews--> <i class="fas fa-star text-yellow-400 mr-1"></i> 4.8</p>
+                                </div>
+                            </div>
+                            <span class="text-sm font-bold text-gray-900">$899</span>
+                        </div>
+
+                        <!-- Package 3 -->
+                        <div class="flex items-center justify-between p-3 border border-gray-100 rounded-xl hover:shadow-md transition-shadow cursor-pointer group">
+                            <div class="flex items-center space-x-3">
+                                <img src="https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=150&q=80" class="w-12 h-12 rounded-lg object-cover">
+                                <div>
+                                    <h4 class="text-sm font-bold text-gray-800 group-hover:text-[#f16f5c] transition-colors">London Highlights</h4>
+                                    <p class="text-xs text-gray-500 mt-0.5"><!--reviews--> <i class="fas fa-star text-yellow-400 mr-1"></i> 4.7</p>
+                                </div>
+                            </div>
+                            <span class="text-sm font-bold text-gray-900">$1,450</span>
+                        </div>
+
+                        <!-- Package 4 -->
+                        <div class="flex items-center justify-between p-3 border border-gray-100 rounded-xl hover:shadow-md transition-shadow cursor-pointer group">
+                            <div class="flex items-center space-x-3">
+                                <img src="https://images.unsplash.com/photo-1502602898657-3e907a5ea82c?auto=format&fit=crop&w=150&q=80" class="w-12 h-12 rounded-lg object-cover">
+                                <div>
+                                    <h4 class="text-sm font-bold text-gray-800 group-hover:text-[#f16f5c] transition-colors">Paris City Tour</h4>
+                                    <p class="text-xs text-gray-500 mt-0.5"><!--reviews--> <i class="fas fa-star text-yellow-400 mr-1"></i> 4.9</p>
+                                </div>
+                            </div>
+                            <span class="text-sm font-bold text-gray-900">$1,100</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            </div>
+    
+        <div id="view-mytrips" class="view-section" style="display:none;">
+        <div class="flex justify-between items-center mb-8">
+            <h1 class="text-2xl font-bold text-gray-900">My Trips</h1>
+            <button class="bg-[#f16f5c] text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-[#d95c4a] transition-colors">
+                <i class="fas fa-plus mr-2"></i>Book New Trip
+            </button>
+        </div>
+
+        <div class="space-y-6">
+            <!-- Trip 1 -->
+            <div class="bg-white rounded-xl shadow-sm border border-gray-100 flex flex-col md:flex-row overflow-hidden hover:shadow-md transition-shadow">
+                <img src="https://images.unsplash.com/photo-1530122037265-a5f1f91d3b99?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" class="w-full md:w-56 h-48 md:h-auto object-cover">
+                <div class="p-6 flex-1 flex flex-col justify-center">
+                    <div class="flex flex-wrap justify-between items-start gap-4">
+                        <div>
+                            <h3 class="text-lg font-bold text-gray-900">Swiss Alps Stackly</h3>
+                            <p class="text-sm text-gray-500 mt-1"><i class="fas fa-calendar-alt mr-2"></i>Oct 12 - Oct 18, 2026</p>
+                        </div>
+                        <span class="px-3 py-1 bg-green-100 text-green-700 text-xs font-bold rounded-full">Upcoming</span>
+                    </div>
+                    <p class="text-gray-600 text-sm mt-4">Experience the breathtaking views of the Swiss Alps, including guided hikes, luxury lodge stays, and a scenic train ride through the mountains.</p>
+                    <div class="mt-4 flex space-x-4">
+                        <button class="text-[#f16f5c] text-sm font-semibold hover:underline">View Itinerary</button>
+                        <button class="text-gray-500 text-sm font-semibold hover:text-gray-700">Manage Booking</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Trip 2 -->
+            <div class="bg-white rounded-xl shadow-sm border border-gray-100 flex flex-col md:flex-row overflow-hidden hover:shadow-md transition-shadow">
+                <img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" class="w-full md:w-56 h-48 md:h-auto object-cover">
+                <div class="p-6 flex-1 flex flex-col justify-center">
+                    <div class="flex flex-wrap justify-between items-start gap-4">
+                        <div>
+                            <h3 class="text-lg font-bold text-gray-900">Bali Beach Retreat</h3>
+                            <p class="text-sm text-gray-500 mt-1"><i class="fas fa-calendar-alt mr-2"></i>Dec 05 - Dec 14, 2026</p>
+                        </div>
+                        <span class="px-3 py-1 bg-green-100 text-green-700 text-xs font-bold rounded-full">Upcoming</span>
+                    </div>
+                    <p class="text-gray-600 text-sm mt-4">Relax on the pristine beaches of Bali. This package includes beachfront villa accommodation, daily yoga sessions, and island hopping tours.</p>
+                    <div class="mt-4 flex space-x-4">
+                        <button class="text-[#f16f5c] text-sm font-semibold hover:underline">View Itinerary</button>
+                        <button class="text-gray-500 text-sm font-semibold hover:text-gray-700">Manage Booking</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Trip 3 -->
+            <div class="bg-white rounded-xl shadow-sm border border-gray-100 flex flex-col md:flex-row overflow-hidden hover:shadow-md transition-shadow opacity-75">
+                <img src="https://images.unsplash.com/photo-1503899036084-c55cdd92da26?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" class="w-full md:w-56 h-48 md:h-auto object-cover grayscale-[30%]">
+                <div class="p-6 flex-1 flex flex-col justify-center">
+                    <div class="flex flex-wrap justify-between items-start gap-4">
+                        <div>
+                            <h3 class="text-lg font-bold text-gray-900">Tokyo City Explorer</h3>
+                            <p class="text-sm text-gray-500 mt-1"><i class="fas fa-calendar-alt mr-2"></i>Mar 10 - Mar 20, 2026</p>
+                        </div>
+                        <span class="px-3 py-1 bg-gray-100 text-gray-600 text-xs font-bold rounded-full">Completed</span>
+                    </div>
+                    <p class="text-gray-600 text-sm mt-4">A fast-paced exploration of Tokyo's historic temples, neon-lit streets, and world-class culinary scene.</p>
+                    <div class="mt-4 flex space-x-4">
+                        <button class="text-[#f16f5c] text-sm font-semibold hover:underline">Write a Review</button>
+                        <button class="text-gray-500 text-sm font-semibold hover:text-gray-700">View Receipt</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Trip 4 -->
+            <div class="bg-white rounded-xl shadow-sm border border-gray-100 flex flex-col md:flex-row overflow-hidden hover:shadow-md transition-shadow opacity-75">
+                <img src="https://images.unsplash.com/photo-1516426122078-c23e76319801?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" class="w-full md:w-56 h-48 md:h-auto object-cover grayscale-[30%]">
+                <div class="p-6 flex-1 flex flex-col justify-center">
+                    <div class="flex flex-wrap justify-between items-start gap-4">
+                        <div>
+                            <h3 class="text-lg font-bold text-gray-900">Safari in Kenya</h3>
+                            <p class="text-sm text-gray-500 mt-1"><i class="fas fa-calendar-alt mr-2"></i>Nov 02 - Nov 09, 2025</p>
+                        </div>
+                        <span class="px-3 py-1 bg-gray-100 text-gray-600 text-xs font-bold rounded-full">Completed</span>
+                    </div>
+                    <p class="text-gray-600 text-sm mt-4">An unforgettable journey through the Maasai Mara, featuring luxury tented camps and daily game drives.</p>
+                    <div class="mt-4 flex space-x-4">
+                        <button class="text-[#f16f5c] text-sm font-semibold hover:underline">Write a Review</button>
+                        <button class="text-gray-500 text-sm font-semibold hover:text-gray-700">View Receipt</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Trip 5 -->
+            <div class="bg-white rounded-xl shadow-sm border border-gray-100 flex flex-col md:flex-row overflow-hidden hover:shadow-md transition-shadow opacity-75">
+                <img src="https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" class="w-full md:w-56 h-48 md:h-auto object-cover grayscale-[30%]">
+                <div class="p-6 flex-1 flex flex-col justify-center">
+                    <div class="flex flex-wrap justify-between items-start gap-4">
+                        <div>
+                            <h3 class="text-lg font-bold text-gray-900">New York Weekend Getaway</h3>
+                            <p class="text-sm text-gray-500 mt-1"><i class="fas fa-calendar-alt mr-2"></i>Jul 15 - Jul 18, 2025</p>
+                        </div>
+                        <span class="px-3 py-1 bg-gray-100 text-gray-600 text-xs font-bold rounded-full">Completed</span>
+                    </div>
+                    <p class="text-gray-600 text-sm mt-4">A short but sweet trip to the Big Apple, catching a Broadway show and dining at top-rated restaurants.</p>
+                    <div class="mt-4 flex space-x-4">
+                        <button class="text-[#f16f5c] text-sm font-semibold hover:underline">Write a Review</button>
+                        <button class="text-gray-500 text-sm font-semibold hover:text-gray-700">View Receipt</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+        <div id="view-saved" class="view-section" style="display:none;">
+        <div class="flex justify-between items-center mb-8">
+            <h1 class="text-2xl font-bold text-gray-900">Saved Tours</h1>
+            <span class="text-gray-500 font-medium">5 Tours Saved</span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            
+            <!-- Tour 1 -->
+            <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-lg transition-all relative group">
+                <div class="absolute top-4 right-4 z-10 bg-white w-8 h-8 flex items-center justify-center rounded-full shadow-md text-[#f16f5c] hover:bg-gray-50 cursor-pointer transition-colors">
+                    <i class="fas fa-heart"></i>
+                </div>
+                <div class="relative h-48 overflow-hidden">
+                    <img src="assets/santorini.webp" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                    <div class="absolute bottom-4 left-4 bg-white/90 backdrop-blur px-3 py-1 rounded-lg text-sm font-bold text-gray-900 shadow-sm">$1,299</div>
+                </div>
+                <div class="p-5">
+                    <div class="flex items-center text-xs text-gray-500 mb-2 font-medium">
+                        <i class="fas fa-map-marker-alt text-[#f16f5c] mr-1.5"></i> Santorini, Greece
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-2 line-clamp-1">Santorini Island Explorer</h3>
+                    <div class="flex items-center justify-between mt-4 border-t border-gray-100 pt-4">
+                        <div class="flex items-center text-sm text-gray-500 font-medium">
+                            <i class="far fa-clock mr-1.5"></i> 7 Days
+                        </div>
+                        <button class="text-[#f16f5c] font-bold text-sm hover:underline">View Details</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tour 2 -->
+            <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-lg transition-all relative group">
+                <div class="absolute top-4 right-4 z-10 bg-white w-8 h-8 flex items-center justify-center rounded-full shadow-md text-[#f16f5c] hover:bg-gray-50 cursor-pointer transition-colors">
+                    <i class="fas fa-heart"></i>
+                </div>
+                <div class="relative h-48 overflow-hidden">
+                    <img src="assets/petra.webp" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                    <div class="absolute bottom-4 left-4 bg-white/90 backdrop-blur px-3 py-1 rounded-lg text-sm font-bold text-gray-900 shadow-sm"></div>
+                </div>
+                <div class="p-5">
+                    <div class="flex items-center text-xs text-gray-500 mb-2 font-medium">
+                        <i class="fas fa-map-marker-alt text-[#f16f5c] mr-1.5"></i> Cusco, Peru
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-2 line-clamp-1">Machu Picchu Trek</h3>
+                    <div class="flex items-center justify-between mt-4 border-t border-gray-100 pt-4">
+                        <div class="flex items-center text-sm text-gray-500 font-medium">
+                            <i class="far fa-clock mr-1.5"></i> 5 Days
+                        </div>
+                        <button class="text-[#f16f5c] font-bold text-sm hover:underline">View Details</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tour 3 -->
+            <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-lg transition-all relative group">
+                <div class="absolute top-4 right-4 z-10 bg-white w-8 h-8 flex items-center justify-center rounded-full shadow-md text-[#f16f5c] hover:bg-gray-50 cursor-pointer transition-colors">
+                    <i class="fas fa-heart"></i>
+                </div>
+                <div class="relative h-48 overflow-hidden">
+                    <img src="assets/hidden-gems.webp" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                    <div class="absolute bottom-4 left-4 bg-white/90 backdrop-blur px-3 py-1 rounded-lg text-sm font-bold text-gray-900 shadow-sm">,599</div>
+                </div>
+                <div class="p-5">
+                    <div class="flex items-center text-xs text-gray-500 mb-2 font-medium">
+                        <i class="fas fa-map-marker-alt text-[#f16f5c] mr-1.5"></i> Reykjavik, Iceland
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-2 line-clamp-1">Northern Lights Safari</h3>
+                    <div class="flex items-center justify-between mt-4 border-t border-gray-100 pt-4">
+                        <div class="flex items-center text-sm text-gray-500 font-medium">
+                            <i class="far fa-clock mr-1.5"></i> 6 Days
+                        </div>
+                        <button class="text-[#f16f5c] font-bold text-sm hover:underline">View Details</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tour 4 -->
+            <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-lg transition-all relative group">
+                <div class="absolute top-4 right-4 z-10 bg-white w-8 h-8 flex items-center justify-center rounded-full shadow-md text-[#f16f5c] hover:bg-gray-50 cursor-pointer transition-colors">
+                    <i class="fas fa-heart"></i>
+                </div>
+                <div class="relative h-48 overflow-hidden">
+                    <img src="assets/kyoto.webp" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                    <div class="absolute bottom-4 left-4 bg-white/90 backdrop-blur px-3 py-1 rounded-lg text-sm font-bold text-gray-900 shadow-sm">,499</div>
+                </div>
+                <div class="p-5">
+                    <div class="flex items-center text-xs text-gray-500 mb-2 font-medium">
+                        <i class="fas fa-map-marker-alt text-[#f16f5c] mr-1.5"></i> Mal?, Maldives
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-2 line-clamp-1">Maldives Overwater Villa</h3>
+                    <div class="flex items-center justify-between mt-4 border-t border-gray-100 pt-4">
+                        <div class="flex items-center text-sm text-gray-500 font-medium">
+                            <i class="far fa-clock mr-1.5"></i> 5 Days
+                        </div>
+                        <button class="text-[#f16f5c] font-bold text-sm hover:underline">View Details</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tour 5 -->
+            <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-lg transition-all relative group">
+                <div class="absolute top-4 right-4 z-10 bg-white w-8 h-8 flex items-center justify-center rounded-full shadow-md text-[#f16f5c] hover:bg-gray-50 cursor-pointer transition-colors">
+                    <i class="fas fa-heart"></i>
+                </div>
+                <div class="relative h-48 overflow-hidden">
+                    <img src="assets/new-york.webp" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                    <div class="absolute bottom-4 left-4 bg-white/90 backdrop-blur px-3 py-1 rounded-lg text-sm font-bold text-gray-900 shadow-sm">,150</div>
+                </div>
+                <div class="p-5">
+                    <div class="flex items-center text-xs text-gray-500 mb-2 font-medium">
+                        <i class="fas fa-map-marker-alt text-[#f16f5c] mr-1.5"></i> Kyoto, Japan
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-2 line-clamp-1">Kyoto Cultural Tour</h3>
+                    <div class="flex items-center justify-between mt-4 border-t border-gray-100 pt-4">
+                        <div class="flex items-center text-sm text-gray-500 font-medium">
+                            <i class="far fa-clock mr-1.5"></i> 8 Days
+                        </div>
+                        <button class="text-[#f16f5c] font-bold text-sm hover:underline">View Details</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    
+        <div id="view-reviews" class="view-section" style="display:none;">
+        <div class="flex justify-between items-center mb-8">
+            <h1 class="text-2xl font-bold text-gray-900">My Reviews</h1>
+            <span class="text-gray-500 font-medium">5 Reviews Written</span>
+        </div>
+
+        <div class="space-y-6">
+            
+            <!-- Review 1 -->
+            <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 flex gap-6 hover:shadow-md transition-shadow">
+                <div class="hidden sm:block">
+                    <img src="https://images.unsplash.com/photo-1503899036084-c55cdd92da26?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" class="w-20 h-20 rounded-lg object-cover">
+                </div>
+                <div class="flex-1">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <h3 class="text-lg font-bold text-gray-900">Tokyo City Explorer</h3>
+                            <p class="text-xs text-gray-500 mt-1">Reviewed on March 22, 2026</p>
+                        </div>
+                        <div class="flex text-yellow-400 text-sm">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 text-sm mt-3 leading-relaxed">
+                        "An incredible experience! The guides were extremely knowledgeable and took us to hidden gems we would have never found on our own. The neon lights and bustling streets were mesmerizing. Highly recommend the sushi making class included in the itinerary."
+                    </p>
+                    <div class="mt-4 flex space-x-4">
+                        <button class="text-gray-500 text-sm font-semibold hover:text-[#f16f5c] transition-colors"><i class="far fa-edit mr-1.5"></i> Edit</button>
+                        <button class="text-gray-500 text-sm font-semibold hover:text-red-500 transition-colors"><i class="far fa-trash-alt mr-1.5"></i> Delete</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Review 2 -->
+            <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 flex gap-6 hover:shadow-md transition-shadow">
+                <div class="hidden sm:block">
+                    <img src="https://images.unsplash.com/photo-1516426122078-c23e76319801?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" class="w-20 h-20 rounded-lg object-cover">
+                </div>
+                <div class="flex-1">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <h3 class="text-lg font-bold text-gray-900">Safari in Kenya</h3>
+                            <p class="text-xs text-gray-500 mt-1">Reviewed on November 15, 2025</p>
+                        </div>
+                        <div class="flex text-yellow-400 text-sm">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 text-sm mt-3 leading-relaxed">
+                        "Absolutely life-changing. Seeing the Big Five in their natural habitat was breathtaking. The luxury tent accommodations exceeded our expectations and the staff made sure we were comfortable every step of the way."
+                    </p>
+                    <div class="mt-4 flex space-x-4">
+                        <button class="text-gray-500 text-sm font-semibold hover:text-[#f16f5c] transition-colors"><i class="far fa-edit mr-1.5"></i> Edit</button>
+                        <button class="text-gray-500 text-sm font-semibold hover:text-red-500 transition-colors"><i class="far fa-trash-alt mr-1.5"></i> Delete</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Review 3 -->
+            <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 flex gap-6 hover:shadow-md transition-shadow">
+                <div class="hidden sm:block">
+                    <img src="https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" class="w-20 h-20 rounded-lg object-cover">
+                </div>
+                <div class="flex-1">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <h3 class="text-lg font-bold text-gray-900">New York Weekend Getaway</h3>
+                            <p class="text-xs text-gray-500 mt-1">Reviewed on July 20, 2025</p>
+                        </div>
+                        <div class="flex text-yellow-400 text-sm">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star text-gray-300"></i>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 text-sm mt-3 leading-relaxed">
+                        "A fantastic fast-paced weekend. The hotel was centrally located near Times Square which made getting around very easy. I knocked off one star because our Broadway show tickets had an obstructed view, but otherwise a great package."
+                    </p>
+                    <div class="mt-4 flex space-x-4">
+                        <button class="text-gray-500 text-sm font-semibold hover:text-[#f16f5c] transition-colors"><i class="far fa-edit mr-1.5"></i> Edit</button>
+                        <button class="text-gray-500 text-sm font-semibold hover:text-red-500 transition-colors"><i class="far fa-trash-alt mr-1.5"></i> Delete</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Review 4 -->
+            <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 flex gap-6 hover:shadow-md transition-shadow">
+                <div class="hidden sm:block">
+                    <img src="https://images.unsplash.com/photo-1499856871958-5b9627545d1a?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" class="w-20 h-20 rounded-lg object-cover">
+                </div>
+                <div class="flex-1">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <h3 class="text-lg font-bold text-gray-900">Paris Romance Tour</h3>
+                            <p class="text-xs text-gray-500 mt-1">Reviewed on February 18, 2025</p>
+                        </div>
+                        <div class="flex text-yellow-400 text-sm">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 text-sm mt-3 leading-relaxed">
+                        "The perfect anniversary trip. The private Seine river cruise at sunset was magical, and the skip-the-line passes to the Louvre saved us hours of waiting. Everything was organized flawlessly."
+                    </p>
+                    <div class="mt-4 flex space-x-4">
+                        <button class="text-gray-500 text-sm font-semibold hover:text-[#f16f5c] transition-colors"><i class="far fa-edit mr-1.5"></i> Edit</button>
+                        <button class="text-gray-500 text-sm font-semibold hover:text-red-500 transition-colors"><i class="far fa-trash-alt mr-1.5"></i> Delete</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Review 5 -->
+            <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 flex gap-6 hover:shadow-md transition-shadow">
+                <div class="hidden sm:block">
+                    <img src="https://images.unsplash.com/photo-1552832230-c0197dd311b5?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" class="w-20 h-20 rounded-lg object-cover">
+                </div>
+                <div class="flex-1">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <h3 class="text-lg font-bold text-gray-900">Rome Historical Walk</h3>
+                            <p class="text-xs text-gray-500 mt-1">Reviewed on September 05, 2024</p>
+                        </div>
+                        <div class="flex text-yellow-400 text-sm">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star text-gray-300"></i>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 text-sm mt-3 leading-relaxed">
+                        "A deep dive into history. Our guide was an archaeologist and had fantastic stories about the Colosseum and Forum. It was a lot of walking in the heat, so be prepared, but definitely worth it."
+                    </p>
+                    <div class="mt-4 flex space-x-4">
+                        <button class="text-gray-500 text-sm font-semibold hover:text-[#f16f5c] transition-colors"><i class="far fa-edit mr-1.5"></i> Edit</button>
+                        <button class="text-gray-500 text-sm font-semibold hover:text-red-500 transition-colors"><i class="far fa-trash-alt mr-1.5"></i> Delete</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    
+        <div id="view-payments" class="view-section" style="display:none;">
+        <div class="flex justify-between items-center mb-8">
+            <h1 class="text-2xl font-bold text-gray-900">Payments</h1>
+            <button class="bg-[#f16f5c] text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-[#d95c4a] transition-colors">
+                <i class="fas fa-credit-card mr-2"></i>Add Payment Method
+            </button>
+        </div>
+
+        <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+            <div class="p-6 border-b border-gray-100 flex justify-between items-center bg-gray-50/50">
+                <h2 class="text-lg font-bold text-gray-900">Payment History</h2>
+                <button class="text-sm font-semibold text-[#f16f5c] hover:underline"><i class="fas fa-download mr-1"></i> Download All</button>
+            </div>
+            
+            <div class="divide-y divide-gray-100">
+                
+                <!-- Payment 1 -->
+                <div class="p-6 flex flex-col sm:flex-row sm:items-center justify-between hover:bg-gray-50 transition-colors gap-4">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 shrink-0 rounded-full bg-blue-50 flex items-center justify-center text-blue-600">
+                            <i class="fab fa-cc-visa text-2xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-gray-900">Swiss Alps Stackly - Full Payment</h3>
+                            <p class="text-sm text-gray-500 mt-0.5">Jan 12, 2026 &bull; Ref: #TRX-90214 &bull; **** 4242</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between sm:justify-end gap-6 sm:w-auto w-full border-t sm:border-0 pt-4 sm:pt-0 border-gray-100">
+                        <div class="text-left sm:text-right">
+                            <p class="font-bold text-gray-900">,499.00</p>
+                            <p class="text-xs font-bold text-green-700 bg-green-100 px-2.5 py-0.5 rounded-full inline-block mt-1">Paid</p>
+                        </div>
+                        <button class="w-10 h-10 rounded-full flex items-center justify-center text-gray-400 hover:bg-gray-100 hover:text-[#f16f5c] transition-colors" title="Download Invoice">
+                            <i class="fas fa-file-download text-lg"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Payment 2 -->
+                <div class="p-6 flex flex-col sm:flex-row sm:items-center justify-between hover:bg-gray-50 transition-colors gap-4">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 shrink-0 rounded-full bg-red-50 flex items-center justify-center text-red-500">
+                            <i class="fab fa-cc-mastercard text-2xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-gray-900">Bali Beach Retreat - Deposit</h3>
+                            <p class="text-sm text-gray-500 mt-0.5">Oct 05, 2025 &bull; Ref: #TRX-88321 &bull; **** 5512</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between sm:justify-end gap-6 sm:w-auto w-full border-t sm:border-0 pt-4 sm:pt-0 border-gray-100">
+                        <div class="text-left sm:text-right">
+                            <p class="font-bold text-gray-900">.00</p>
+                            <p class="text-xs font-bold text-green-700 bg-green-100 px-2.5 py-0.5 rounded-full inline-block mt-1">Paid</p>
+                        </div>
+                        <button class="w-10 h-10 rounded-full flex items-center justify-center text-gray-400 hover:bg-gray-100 hover:text-[#f16f5c] transition-colors" title="Download Invoice">
+                            <i class="fas fa-file-download text-lg"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Payment 3 -->
+                <div class="p-6 flex flex-col sm:flex-row sm:items-center justify-between hover:bg-gray-50 transition-colors gap-4">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 shrink-0 rounded-full bg-blue-50 flex items-center justify-center text-blue-800">
+                            <i class="fab fa-cc-paypal text-2xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-gray-900">Tokyo City Explorer - Full Payment</h3>
+                            <p class="text-sm text-gray-500 mt-0.5">Feb 28, 2025 &bull; Ref: #TRX-77492 &bull; user@email.com</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between sm:justify-end gap-6 sm:w-auto w-full border-t sm:border-0 pt-4 sm:pt-0 border-gray-100">
+                        <div class="text-left sm:text-right">
+                            <p class="font-bold text-gray-900">,850.00</p>
+                            <p class="text-xs font-bold text-green-700 bg-green-100 px-2.5 py-0.5 rounded-full inline-block mt-1">Paid</p>
+                        </div>
+                        <button class="w-10 h-10 rounded-full flex items-center justify-center text-gray-400 hover:bg-gray-100 hover:text-[#f16f5c] transition-colors" title="Download Invoice">
+                            <i class="fas fa-file-download text-lg"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Payment 4 -->
+                <div class="p-6 flex flex-col sm:flex-row sm:items-center justify-between hover:bg-gray-50 transition-colors gap-4">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 shrink-0 rounded-full bg-sky-50 flex items-center justify-center text-sky-600">
+                            <i class="fab fa-cc-amex text-2xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-gray-900">Safari in Kenya - Final Installment</h3>
+                            <p class="text-sm text-gray-500 mt-0.5">Sep 15, 2024 &bull; Ref: #TRX-65103 &bull; **** 3009</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between sm:justify-end gap-6 sm:w-auto w-full border-t sm:border-0 pt-4 sm:pt-0 border-gray-100">
+                        <div class="text-left sm:text-right">
+                            <p class="font-bold text-gray-900">,200.00</p>
+                            <p class="text-xs font-bold text-green-700 bg-green-100 px-2.5 py-0.5 rounded-full inline-block mt-1">Paid</p>
+                        </div>
+                        <button class="w-10 h-10 rounded-full flex items-center justify-center text-gray-400 hover:bg-gray-100 hover:text-[#f16f5c] transition-colors" title="Download Invoice">
+                            <i class="fas fa-file-download text-lg"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Payment 5 -->
+                <div class="p-6 flex flex-col sm:flex-row sm:items-center justify-between hover:bg-gray-50 transition-colors gap-4">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 shrink-0 rounded-full bg-blue-50 flex items-center justify-center text-blue-600">
+                            <i class="fab fa-cc-visa text-2xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-gray-900">New York Weekend Getaway</h3>
+                            <p class="text-sm text-gray-500 mt-0.5">May 10, 2024 &bull; Ref: #TRX-51002 &bull; **** 4242</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between sm:justify-end gap-6 sm:w-auto w-full border-t sm:border-0 pt-4 sm:pt-0 border-gray-100">
+                        <div class="text-left sm:text-right">
+                            <p class="font-bold text-gray-900">.00</p>
+                            <p class="text-xs font-bold text-green-700 bg-green-100 px-2.5 py-0.5 rounded-full inline-block mt-1">Paid</p>
+                        </div>
+                        <button class="w-10 h-10 rounded-full flex items-center justify-center text-gray-400 hover:bg-gray-100 hover:text-[#f16f5c] transition-colors" title="Download Invoice">
+                            <i class="fas fa-file-download text-lg"></i>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    
+        <div id="view-profile" class="view-section" style="display:none;">
+        <div class="flex justify-between items-center mb-8">
+            <h1 class="text-2xl font-bold text-gray-900">My Profile</h1>
+            <button class="bg-[#f16f5c] text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-[#d95c4a] transition-colors">
+                Save Changes
+            </button>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <!-- Left Column -->
+            <div class="space-y-6 lg:col-span-1">
+                
+                <!-- Section 1: Profile Avatar -->
+                <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 text-center hover:shadow-md transition-shadow">
+                    <div class="relative inline-block">
+                        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" class="w-32 h-32 rounded-full mx-auto object-cover border-4 border-gray-50 shadow-sm">
+                        <div class="absolute bottom-0 right-0 bg-[#f16f5c] text-white w-8 h-8 rounded-full flex items-center justify-center border-2 border-white cursor-pointer hover:bg-[#d95c4a]">
+                            <i class="fas fa-camera text-xs"></i>
+                        </div>
+                    </div>
+                    <h2 class="text-xl font-bold text-gray-900 mt-4">Alex Johnson</h2>
+                    <p class="text-gray-500 text-sm font-medium">Pro Traveller Member</p>
+                    <p class="text-xs text-gray-400 mt-1">Joined Jan 2024</p>
+                </div>
+                
+                <!-- Section 5: Travel Preferences -->
+                <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 hover:shadow-md transition-shadow">
+                    <h3 class="font-bold text-gray-900 mb-4 border-b border-gray-50 pb-3">Travel Preferences</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="text-xs font-bold uppercase tracking-wider text-gray-400">Seat Preference</label>
+                            <p class="font-medium text-gray-900 text-sm mt-1 flex items-center"><i class="fas fa-chair text-gray-400 mr-2"></i> Aisle Seat</p>
+                        </div>
+                        <div>
+                            <label class="text-xs font-bold uppercase tracking-wider text-gray-400">Dietary Needs</label>
+                            <p class="font-medium text-gray-900 text-sm mt-1 flex items-center"><i class="fas fa-leaf text-green-500 mr-2"></i> Vegetarian</p>
+                        </div>
+                        <div>
+                            <label class="text-xs font-bold uppercase tracking-wider text-gray-400">Home Airport</label>
+                            <p class="font-medium text-gray-900 text-sm mt-1 flex items-center"><i class="fas fa-plane text-blue-400 mr-2"></i> JFK - New York</p>
+                        </div>
+                    </div>
+                    <button class="mt-6 text-[#f16f5c] text-sm font-semibold hover:underline w-full text-left">Edit Preferences &rarr;</button>
+                </div>
+            </div>
+            
+            <!-- Right Column -->
+            <div class="space-y-6 lg:col-span-2">
+                
+                <!-- Section 2: Personal Information -->
+                <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 hover:shadow-md transition-shadow">
+                    <div class="flex justify-between items-center mb-5 border-b border-gray-50 pb-3">
+                        <h3 class="font-bold text-gray-900">Personal Information</h3>
+                        <button class="text-gray-400 hover:text-[#f16f5c] transition-colors"><i class="fas fa-edit"></i></button>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                        <div>
+                            <label class="text-xs font-bold uppercase tracking-wider text-gray-500">First Name</label>
+                            <input type="text" value="Alex" class="w-full mt-1.5 px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-lg text-sm text-gray-800 focus:outline-none focus:border-[#f16f5c] transition-colors">
+                        </div>
+                        <div>
+                            <label class="text-xs font-bold uppercase tracking-wider text-gray-500">Last Name</label>
+                            <input type="text" value="Johnson" class="w-full mt-1.5 px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-lg text-sm text-gray-800 focus:outline-none focus:border-[#f16f5c] transition-colors">
+                        </div>
+                        <div>
+                            <label class="text-xs font-bold uppercase tracking-wider text-gray-500">Email Address</label>
+                            <input type="email" value="alex.johnson@dynamic.email" class="w-full mt-1.5 px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-lg text-sm text-gray-800 focus:outline-none focus:border-[#f16f5c] transition-colors">
+                        </div>
+                        <div>
+                            <label class="text-xs font-bold uppercase tracking-wider text-gray-500">Phone Number</label>
+                            <input type="tel" value="+1 (555) 123-4567" class="w-full mt-1.5 px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-lg text-sm text-gray-800 focus:outline-none focus:border-[#f16f5c] transition-colors">
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Section 3: Address & Contact -->
+                <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 hover:shadow-md transition-shadow">
+                    <div class="flex justify-between items-center mb-5 border-b border-gray-50 pb-3">
+                        <h3 class="font-bold text-gray-900">Address Book</h3>
+                        <button class="text-gray-400 hover:text-[#f16f5c] transition-colors"><i class="fas fa-edit"></i></button>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                        <div class="md:col-span-2">
+                            <label class="text-xs font-bold uppercase tracking-wider text-gray-500">Street Address</label>
+                            <input type="text" value="123 Explorer Blvd, Apartment 4B" class="w-full mt-1.5 px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-lg text-sm text-gray-800 focus:outline-none focus:border-[#f16f5c] transition-colors">
+                        </div>
+                        <div>
+                            <label class="text-xs font-bold uppercase tracking-wider text-gray-500">City</label>
+                            <input type="text" value="New York" class="w-full mt-1.5 px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-lg text-sm text-gray-800 focus:outline-none focus:border-[#f16f5c] transition-colors">
+                        </div>
+                        <div>
+                            <label class="text-xs font-bold uppercase tracking-wider text-gray-500">Postal Code</label>
+                            <input type="text" value="10001" class="w-full mt-1.5 px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-lg text-sm text-gray-800 focus:outline-none focus:border-[#f16f5c] transition-colors">
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Section 4: Passport & ID -->
+                <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 hover:shadow-md transition-shadow">
+                    <div class="flex justify-between items-center mb-5 border-b border-gray-50 pb-3">
+                        <h3 class="font-bold text-gray-900">Passport Information</h3>
+                        <button class="text-[#f16f5c] text-sm font-semibold hover:underline">Add New ID</button>
+                    </div>
+                    <div class="flex items-center gap-4 p-4 bg-sky-50 border border-sky-100 rounded-xl relative overflow-hidden">
+                        <div class="absolute top-0 right-0 w-24 h-24 bg-sky-100 rounded-full -mr-12 -mt-12 opacity-50"></div>
+                        <i class="fas fa-passport text-4xl text-sky-600 relative z-10"></i>
+                        <div class="relative z-10">
+                            <p class="font-bold text-gray-900 text-sm">US Passport Ending in **** 9921</p>
+                            <p class="text-xs text-gray-500 mt-0.5">Expires: Oct 15, 2032 &bull; <span class="text-green-600 font-bold">Valid</span></p>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+        <div id="view-settings" class="view-section" style="display:none;">
+        <div class="flex justify-between items-center mb-8">
+            <h1 class="text-2xl font-bold text-gray-900">Account Settings</h1>
+            <button class="bg-[#f16f5c] text-white px-5 py-2.5 rounded-lg text-sm font-semibold hover:bg-[#d95c4a] transition-colors shadow-sm">
+                Save Changes
+            </button>
+        </div>
+
+        <div class="space-y-6 max-w-4xl">
+            
+            <!-- Section 1: Account Security -->
+            <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+                <h3 class="text-lg font-bold text-gray-900 mb-5 border-b border-gray-50 pb-3">Account Security</h3>
+                <div class="space-y-5">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="font-medium text-gray-900">Password</p>
+                            <p class="text-sm text-gray-500 mt-0.5">Last changed 3 months ago</p>
+                        </div>
+                        <button class="text-gray-600 bg-gray-50 hover:bg-gray-100 border border-gray-200 px-4 py-2 rounded-lg text-sm font-semibold transition-colors">Change Password</button>
+                    </div>
+                    <div class="flex items-center justify-between pt-3">
+                        <div>
+                            <p class="font-medium text-gray-900">Two-Factor Authentication (2FA)</p>
+                            <p class="text-sm text-gray-500 mt-0.5">Protect your account with an extra layer of security.</p>
+                        </div>
+                        <label class="relative inline-flex items-center cursor-pointer">
+                            <input type="checkbox" value="" class="sr-only peer" checked>
+                            <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#f16f5c]"></div>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 2: Notification Preferences -->
+            <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+                <h3 class="text-lg font-bold text-gray-900 mb-5 border-b border-gray-50 pb-3">Notification Preferences</h3>
+                <div class="space-y-5">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="font-medium text-gray-900">Trip Reminders & Itineraries</p>
+                            <p class="text-sm text-gray-500 mt-0.5">Receive emails about upcoming flights and bookings.</p>
+                        </div>
+                        <label class="relative inline-flex items-center cursor-pointer">
+                            <input type="checkbox" value="" class="sr-only peer" checked>
+                            <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#f16f5c]"></div>
+                        </label>
+                    </div>
+                    <div class="flex items-center justify-between pt-1">
+                        <div>
+                            <p class="font-medium text-gray-900">SMS Alerts</p>
+                            <p class="text-sm text-gray-500 mt-0.5">Get text messages for gate changes and delays.</p>
+                        </div>
+                        <label class="relative inline-flex items-center cursor-pointer">
+                            <input type="checkbox" value="" class="sr-only peer" checked>
+                            <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#f16f5c]"></div>
+                        </label>
+                    </div>
+                    <div class="flex items-center justify-between pt-1">
+                        <div>
+                            <p class="font-medium text-gray-900">Promotional Offers</p>
+                            <p class="text-sm text-gray-500 mt-0.5">Exclusive deals and travel inspiration.</p>
+                        </div>
+                        <label class="relative inline-flex items-center cursor-pointer">
+                            <input type="checkbox" value="" class="sr-only peer">
+                            <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#f16f5c]"></div>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 3: Language & Region -->
+            <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+                <h3 class="text-lg font-bold text-gray-900 mb-5 border-b border-gray-50 pb-3">Language & Region</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="text-sm font-bold text-gray-700 block mb-2">Display Language</label>
+                        <select class="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-lg text-sm text-gray-800 focus:outline-none focus:border-[#f16f5c] transition-colors appearance-none">
+                            <option>English (US)</option>
+                            <option>English (UK)</option>
+                            <option>Espa?ol</option>
+                            <option>Fran?ais</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="text-sm font-bold text-gray-700 block mb-2">Preferred Currency</label>
+                        <select class="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-lg text-sm text-gray-800 focus:outline-none focus:border-[#f16f5c] transition-colors appearance-none">
+                            <option>USD ($)</option>
+                            <option>EUR (?)</option>
+                            <option>GBP (?)</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 4: Connected Accounts -->
+            <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+                <h3 class="text-lg font-bold text-gray-900 mb-5 border-b border-gray-50 pb-3">Connected Accounts</h3>
+                <div class="space-y-4">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-3">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" class="w-6 h-6">
+                            <div>
+                                <p class="font-medium text-gray-900">Google</p>
+                                <p class="text-xs text-gray-500">Connected as alex.johnson@example.com</p>
+                            </div>
+                        </div>
+                        <button class="text-gray-500 text-sm font-semibold hover:text-red-500 transition-colors">Disconnect</button>
+                    </div>
+                    <div class="flex items-center justify-between pt-2">
+                        <div class="flex items-center gap-3">
+                            <i class="fab fa-apple text-2xl text-gray-900 ml-0.5"></i>
+                            <div>
+                                <p class="font-medium text-gray-900">Apple</p>
+                                <p class="text-xs text-gray-500">Not connected</p>
+                            </div>
+                        </div>
+                        <button class="text-[#f16f5c] text-sm font-semibold hover:underline">Connect</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 5: Danger Zone -->
+            <div class="bg-white rounded-xl shadow-sm border border-red-100 p-6 relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-red-50 rounded-bl-full -mr-16 -mt-16 z-0"></div>
+                <h3 class="text-lg font-bold text-red-600 mb-2 relative z-10">Danger Zone</h3>
+                <p class="text-sm text-gray-600 mb-5 relative z-10">Permanently delete your account and all associated travel history. This action cannot be undone.</p>
+                <button class="relative z-10 bg-white text-red-600 border border-red-200 px-4 py-2 rounded-lg text-sm font-bold hover:bg-red-50 hover:border-red-300 transition-colors">
+                    Delete Account
+                </button>
+            </div>
+
+        </div>
+    </div>
+</main>
+    </div>
+
+    <script>
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Active menu state
+                document.querySelectorAll('nav a').forEach(el => {
+                    el.className = 'flex items-center px-8 py-3 hover:text-white hover:bg-[#2a3038] border-l-4 border-transparent transition-colors';
+                });
+                this.className = 'flex items-center px-8 py-3 text-white border-l-4 border-[#f16f5c] bg-[#2a3038]';
+                
+                // View switching
+                const targetId = this.getAttribute('data-target');
+                if(targetId) {
+                    document.querySelectorAll('.view-section').forEach(view => {
+                        view.style.display = 'none';
+                    });
+                    const targetView = document.getElementById(targetId);
+                    if(targetView) {
+                        targetView.style.display = 'block';
+                    }
+                }
+            });
+        });
+    </script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        const name = localStorage.getItem('stacklyUserName');
+        const email = localStorage.getItem('stacklyUserEmail');
+        if(name) {
+            const nameEl = document.getElementById('userName') || document.getElementById('adminName');
+            if(nameEl) nameEl.textContent = name;
+        }
+        if(email) {
+            const emailEl = document.getElementById('userEmail') || document.getElementById('adminEmail');
+            if(emailEl) emailEl.textContent = email;
+        }
+    });
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

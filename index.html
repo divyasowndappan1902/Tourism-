@@ -1,0 +1,1154 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stackly Travel - Home</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .serif-font { font-family: 'Playfair Display', serif; }
+        body { font-family: 'Inter', sans-serif; background-color: #ffffff; color: #111827; overflow-x: hidden; }
+        
+        /* Nav */
+        .nav-link { position: relative; transition: color 0.3s ease; } .nav-link:hover, .nav-link.active { color: #f16f5c; }
+        .nav-link::after { content: ''; position: absolute; width: 0; height: 2px; bottom: -4px; left: 0; background-color: #f16f5c; transition: width 0.3s ease; }
+        .nav-link:hover::after, .nav-link.active::after { width: 100%; }
+
+        /* Hero */
+        .hero-bg { background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('https://images.unsplash.com/photo-1596436889106-be35e843f974?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80'); background-size: cover; background-position: center; }
+
+        /* General Utilities */
+        .img-zoom { transition: transform 0.6s ease; }
+        .group:hover .img-zoom { transform: scale(1.1); }
+        .clip-path-reveal { clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0 100%); transition: clip-path 1s cubic-bezier(0.77, 0, 0.175, 1); }
+        .clip-path-reveal.visible { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
+
+        /* Expandable Cards */
+        .expand-container { display: flex; height: 400px; gap: 1rem; }
+        .expand-card { flex: 1; transition: flex 0.5s ease-out; position: relative; overflow: hidden; border-radius: 0.75rem; cursor: pointer; }
+        .expand-card:hover { flex: 3; }
+        .expand-card .content { position: absolute; bottom: 0; left: 0; right: 0; padding: 1.5rem; background: linear-gradient(to top, rgba(0,0,0,0.8), transparent); color: white; opacity: 0; transition: opacity 0.5s; }
+        .expand-card:hover .content { opacity: 1; }
+        .expand-card .title-overlay { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: white; font-weight: bold; font-size: 1.25rem; transition: opacity 0.5s; text-shadow: 0 2px 4px rgba(0,0,0,0.8); text-align: center; }
+        .expand-card:hover .title-overlay { opacity: 0; }
+        
+        /* Floating Cards */
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+        .float-card { animation: float 4s ease-in-out infinite; }
+        .float-delay-1 { animation-delay: 1s; }
+        .float-delay-2 { animation-delay: 2s; }
+        .float-delay-3 { animation-delay: 3s; }
+        
+        /* Tilt Fallback */
+        .tilt-card { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .tilt-card:hover { transform: translateY(-10px) rotateX(2deg) rotateY(2deg); box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25); }
+
+        /* Connecting Line */
+        .step-item { flex: 1; }
+        @media (min-width: 768px) {
+            .step-line::after { content: ''; position: absolute; top: 2.5rem; left: 50%; width: 100%; height: 2px; background: #e5e7eb; z-index: -1; }
+            .step-item:last-child .step-line::after { display: none; }
+        }
+
+        /* Testimonial Carousel */
+        .carousel { scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scroll-behavior: smooth; overflow-x: auto; padding-bottom: 2rem; }
+        .carousel::-webkit-scrollbar { display: none; }
+        .carousel { -ms-overflow-style: none; scrollbar-width: none; }
+        .carousel-item { scroll-snap-align: center; flex: 0 0 85%; max-width: 85%; transition: transform 0.5s ease, opacity 0.5s ease; opacity: 0.4; transform: scale(0.9); }
+        @media (min-width: 768px) { .carousel-item { flex: 0 0 50%; max-width: 50%; } }
+        @media (min-width: 1024px) { .carousel-item { flex: 0 0 33.333%; max-width: 33.333%; } }
+        .carousel-item.active { opacity: 1; transform: scale(1.05); z-index: 10; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1); }
+
+        /* Masonry */
+        .masonry { column-count: 1; column-gap: 1rem; }
+        @media (min-width: 640px) { .masonry { column-count: 2; } }
+        @media (min-width: 1024px) { .masonry { column-count: 3; } }
+        .masonry-item { break-inside: avoid; margin-bottom: 1rem; display: inline-block; width: 100%; }
+
+        /* Ken Burns */
+        @keyframes kenburns { 0% { transform: scale(1) translate(0, 0); } 100% { transform: scale(1.15) translate(-1%, -1%); } }
+        .ken-burns { animation: kenburns 20s ease-out infinite alternate; }
+
+        /* Staggered Reveal */
+        .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+            /* Headings Theme & Animation */
+        h1, h2, h3, h4, h5, h6 { 
+
+            animation: headingReveal 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; 
+        }
+        @keyframes headingReveal {
+            0% { opacity: 0; transform: translateY(30px) scale(0.95); filter: blur(5px); }
+            100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+        }
+              /* Marquee Animation */
+          @keyframes marquee {
+              0% { transform: translateX(0); }
+              100% { transform: translateX(-50%); }
+          }
+          .marquee-wrapper {
+              overflow: hidden;
+              width: 100%;
+              position: relative;
+              padding: 1rem 0;
+              -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+              mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+          }
+          .marquee-content {
+              display: flex;
+              width: max-content;
+              animation: marquee 40s linear infinite;
+              gap: 2rem;
+          }
+          .marquee-content:hover {
+              animation-play-state: paused;
+          }
+          .testimonial-card {
+              width: 380px;
+              flex-shrink: 0;
+          }
+            @keyframes revealUp {
+            0% { transform: translateY(120%); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+        .animate-reveal {
+            opacity: 0;
+            animation: revealUp 1s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+        }
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
+        .delay-3 { animation-delay: 0.6s; }
+            @keyframes gradientText {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .gradient-text-anim {
+            background: linear-gradient(to right, #ffffff, #f16f5c, #ffffff, #f16f5c);
+            background-size: 300% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradientText 5s linear infinite;
+        }
+    .btn-underline {
+    position: relative;
+    display: inline-block;
+    color: inherit;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding-bottom: 6px;
+    font-size: 0.875rem;
+    transition: color 0.3s ease;
+}
+.btn-underline::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #f16f5c;
+    transition: transform 0.3s ease;
+    transform-origin: left;
+}
+.btn-underline:hover::after {
+    transform: scaleX(0);
+    transform-origin: right;
+}
+</style>
+<style>
+@keyframes btnGradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+button.bg-\[\#f16f5c\], 
+a.bg-\[\#f16f5c\] {
+    background: linear-gradient(90deg, #f16f5c, #ffb3a7, #f16f5c, #e05a48) !important;
+    background-size: 300% 100% !important;
+    animation: btnGradient 4s ease infinite !important;
+}
+button.bg-\[\#f16f5c\]:hover, 
+a.bg-\[\#f16f5c\]:hover {
+    box-shadow: 0 10px 20px -10px rgba(241, 111, 92, 0.7) !important;
+}
+.btn-underline {
+    position: relative;
+    display: inline-block;
+    color: inherit;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding-bottom: 6px;
+    font-size: 0.875rem;
+    transition: color 0.3s ease;
+}
+.btn-underline::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #f16f5c;
+    transition: transform 0.3s ease;
+    transform-origin: left;
+}
+.btn-underline:hover::after {
+    transform: scaleX(0);
+    transform-origin: right;
+}
+</style>
+<style>
+@keyframes btnGradientAnim {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+button.bg-\[\#f16f5c\], 
+a.bg-\[\#f16f5c\] {
+    background: linear-gradient(90deg, #f16f5c, #ff9a8b, #f16f5c, #e05a48) !important;
+    background-size: 300% 100% !important;
+    animation: btnGradientAnim 4s ease infinite !important;
+    border: none !important;
+    color: white !important;
+    transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+}
+button.bg-\[\#f16f5c\]:hover, 
+a.bg-\[\#f16f5c\]:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 10px 20px -10px rgba(241, 111, 92, 0.7) !important;
+}
+.btn-underline {
+    position: relative;
+    display: inline-block;
+    color: inherit;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding-bottom: 6px;
+    font-size: 0.875rem;
+    transition: color 0.3s ease;
+}
+.btn-underline::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #f16f5c;
+    transition: transform 0.3s ease;
+    transform-origin: left;
+}
+.btn-underline:hover::after {
+    transform: scaleX(0);
+    transform-origin: right;
+}
+</style>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll('a[href="#"]').forEach(a => {
+        a.href = "404.html";
+    });
+    document.querySelectorAll('button:not([type="submit"]):not([onclick])').forEach(b => {
+        if (!b.id && !b.classList.contains('mobile-menu-button')) {
+            b.addEventListener('click', (e) => {
+                e.preventDefault();
+                window.location.href = "404.html";
+            });
+        }
+    });
+});
+</script>
+</head>
+<body class="m-0 p-0 text-gray-800">
+
+    <!-- Hero Section -->
+    <div class="h-screen w-full relative flex flex-col text-white overflow-hidden" id="hero-container">
+    <!-- Slider Backgrounds -->
+    <div id="slider-bg-0" class="absolute inset-0 z-[-1] bg-cover bg-center transition-opacity duration-1000 opacity-100" style="background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('https://images.unsplash.com/photo-1596436889106-be35e843f974?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80')"></div>
+    <div id="slider-bg-1" class="absolute inset-0 z-[-1] bg-cover bg-center transition-opacity duration-1000 opacity-0" style="background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80')"></div>
+    <div id="slider-bg-2" class="absolute inset-0 z-[-1] bg-cover bg-center transition-opacity duration-1000 opacity-0" style="background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('https://images.unsplash.com/photo-1499856871958-5b9627545d1a?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80')"></div>
+    <div id="slider-bg-3" class="absolute inset-0 z-[-1] bg-cover bg-center transition-opacity duration-1000 opacity-0" style="background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80')"></div>
+        <!-- Navigation Bar -->
+        <nav class="flex justify-between items-center py-5 px-8 md:px-16 w-full fixed top-0 left-0 z-50 bg-black/40 backdrop-blur-md border-b border-white/10 transition-all duration-300">
+            <div class="flex-1 text-2xl font-bold tracking-widest uppercase cursor-pointer text-white"><a href="index.html"><img src="assets/logo_0050.webp" alt="Stackly Logo" class="h-8 inline-block"></a></div>
+            <ul class="hidden md:flex justify-center flex-1 space-x-10 text-sm font-medium">
+                <li><a href="index.html" class="nav-link active">Home</a></li>
+                <li><a href="about.html" class="nav-link">About</a></li>
+                <li><a href="service.html" class="nav-link">Service</a></li>
+                <li><a href="blog.html" class="nav-link">Blog</a></li>
+                <li><a href="contact.html" class="nav-link">Contact</a></li>
+                
+            </ul>
+            <div class="hidden md:flex justify-end flex-1"><a href="login.html" class="bg-[#f16f5c] text-white px-6 py-2.5 rounded hover:bg-[#d95c4a] transition-colors font-bold shadow-md">Login</a></div>
+            <div class="md:hidden flex flex-col space-y-1.5 cursor-pointer">
+                <span class="w-6 h-0.5 bg-white"></span>
+                <span class="w-6 h-0.5 bg-white"></span>
+                <span class="w-6 h-0.5 bg-white"></span>
+            </div>
+        </nav>
+
+        <!-- Hero Content -->
+        <div class="flex-grow flex items-center justify-center relative w-full h-full z-10">
+            <div class="text-center max-w-4xl mx-auto px-4 mt-10">
+                <h1 class="serif-font text-5xl md:text-6xl lg:text-[5.5rem] font-bold mb-6 leading-tight drop-shadow-lg">
+    <div class="overflow-hidden inline-block w-full">
+        <div class="animate-reveal inline-block" style="animation-delay: 0.1s;"><span class="inline-block transition-all duration-300 hover:translate-x-4 cursor-pointer gradient-text-anim">Your Stackly Travel</span></div>
+    </div>
+    <div class="overflow-hidden inline-block w-full mt-2">
+        <div class="animate-reveal inline-block" style="animation-delay: 0.3s;"><span class="inline-block transition-all duration-300 hover:translate-x-4 cursor-pointer gradient-text-anim">Expert in Paris</span></div>
+    </div>
+</h1>
+                <p class="text-base md:text-lg mb-10 text-gray-100 max-w-xl mx-auto font-light drop-shadow-md animate-reveal" style="animation-delay: 0.5s;">Discover the world's most breathtaking destinations with personalized itineraries and premium luxury experiences tailored to your dreams.</p>
+                <div class="flex items-center justify-center gap-8 mt-6">
+    <a href="#" class="inline-block bg-[#f16f5c] hover:bg-[#e05a48] text-white font-semibold py-3.5 px-10 text-sm tracking-widest transition-colors shadow-lg uppercase animate-reveal" style="animation-delay: 0.7s;">Book Now</a>
+    <a href="#" class="inline-flex items-center justify-center bg-white text-gray-900 font-bold py-4 px-12 text-sm tracking-[0.2em] transition-transform hover:-translate-y-1 shadow-2xl uppercase animate-reveal" style="animation-delay: 0.9s;">Discover More</a>
+</div>
+            </div></div>
+    </div>
+
+    <!-- Trending Destinations -->
+    <section class="py-24 px-8 lg:px-24 relative bg-fixed bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&w=2000&q=80');">
+        <div class="absolute inset-0 bg-gray-50/90 backdrop-blur-sm"></div>
+        <div class="text-center mb-16 reveal">
+            <h2 class="serif-font text-4xl font-bold mb-4">Trending Destinations</h2>
+            <p class="text-gray-500">Discover the world's most sought-after locations</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Cards -->
+            <div class="group relative overflow-hidden rounded-xl h-96 reveal shadow-lg" style="transition-delay: 0.1s;">
+                <img src="https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=800&q=80" alt="Rome" class="w-full h-full object-cover img-zoom">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                <div class="absolute bottom-6 left-6 right-6 text-white">
+                    <p class="text-xs uppercase tracking-widest mb-1 opacity-80"><i class="fas fa-map-marker-alt mr-1"></i>Italy</p>
+                    <h3 class="serif-font text-2xl font-semibold mb-2">Rome, Colosseum</h3>
+                    <p class="text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform translate-y-4 group-hover:translate-y-0 line-clamp-2">Explore ancient ruins and rich history.</p>
+                </div>
+            </div>
+            <div class="group relative overflow-hidden rounded-xl h-96 reveal shadow-lg" style="transition-delay: 0.2s;">
+                <img src="https://images.unsplash.com/photo-1499856871958-5b9627545d1a?auto=format&fit=crop&w=800&q=80" alt="Paris" class="w-full h-full object-cover img-zoom">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                <div class="absolute bottom-6 left-6 right-6 text-white">
+                    <p class="text-xs uppercase tracking-widest mb-1 opacity-80"><i class="fas fa-map-marker-alt mr-1"></i>France</p>
+                    <h3 class="serif-font text-2xl font-semibold mb-2">Paris, Eiffel Tower</h3>
+                    <p class="text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform translate-y-4 group-hover:translate-y-0 line-clamp-2">The city of light, love, and endless culture.</p>
+                </div>
+            </div>
+            <div class="group relative overflow-hidden rounded-xl h-96 reveal shadow-lg" style="transition-delay: 0.3s;">
+                <img src="https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?auto=format&fit=crop&w=800&q=80" alt="Bali" class="w-full h-full object-cover img-zoom">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                <div class="absolute bottom-6 left-6 right-6 text-white">
+                    <p class="text-xs uppercase tracking-widest mb-1 opacity-80"><i class="fas fa-map-marker-alt mr-1"></i>Indonesia</p>
+                    <h3 class="serif-font text-2xl font-semibold mb-2">Bali Paradise</h3>
+                    <p class="text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform translate-y-4 group-hover:translate-y-0 line-clamp-2">Lush jungles, ancient temples, and beautiful beaches.</p>
+                </div>
+            </div>
+            <div class="group relative overflow-hidden rounded-xl h-96 reveal shadow-lg" style="transition-delay: 0.4s;">
+                <img src="https://images.unsplash.com/photo-1534008897995-27a23e859048?auto=format&fit=crop&w=800&q=80" alt="Machu Picchu" class="w-full h-full object-cover img-zoom">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                <div class="absolute bottom-6 left-6 right-6 text-white">
+                    <p class="text-xs uppercase tracking-widest mb-1 opacity-80"><i class="fas fa-map-marker-alt mr-1"></i>Peru</p>
+                    <h3 class="serif-font text-2xl font-semibold mb-2">Machu Picchu</h3>
+                    <p class="text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform translate-y-4 group-hover:translate-y-0 line-clamp-2">The lost city of the Incas high in the Andes.</p>
+                </div>
+            </div>
+            <div class="group relative overflow-hidden rounded-xl h-96 reveal shadow-lg" style="transition-delay: 0.5s;">
+                <img src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=800&q=80" alt="Tokyo" class="w-full h-full object-cover img-zoom">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                <div class="absolute bottom-6 left-6 right-6 text-white">
+                    <p class="text-xs uppercase tracking-widest mb-1 opacity-80"><i class="fas fa-map-marker-alt mr-1"></i>Japan</p>
+                    <h3 class="serif-font text-2xl font-semibold mb-2">Tokyo City</h3>
+                    <p class="text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform translate-y-4 group-hover:translate-y-0 line-clamp-2">Neon lights, rich traditions, and endless food.</p>
+                </div>
+            </div>
+            <div class="group relative overflow-hidden rounded-xl h-96 reveal shadow-lg" style="transition-delay: 0.6s;">
+                <img src="https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?auto=format&fit=crop&w=800&q=80" alt="Venice" class="w-full h-full object-cover img-zoom">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                <div class="absolute bottom-6 left-6 right-6 text-white">
+                    <p class="text-xs uppercase tracking-widest mb-1 opacity-80"><i class="fas fa-map-marker-alt mr-1"></i>Italy</p>
+                    <h3 class="serif-font text-2xl font-semibold mb-2">Venice Canals</h3>
+                    <p class="text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform translate-y-4 group-hover:translate-y-0 line-clamp-2">Romantic gondola rides through historic waterways.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Explore by Experience -->
+    <section class="py-24 px-8 lg:px-24">
+        <h2 class="serif-font text-4xl font-bold mb-12 text-center reveal">Explore by Experience</h2>
+        <div class="expand-container hidden md:flex reveal">
+            <div class="expand-card">
+                <img src="https://images.unsplash.com/photo-1533240332313-0db49b459ad6?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover" alt="Stackly">
+                <div class="absolute inset-0 bg-black/40 transition-opacity duration-500 hover:bg-black/20"></div>
+                <div class="title-overlay"><i class="fas fa-mountain mb-3 text-3xl block"></i>Stackly</div>
+                <div class="content"><h3 class="serif-font text-2xl mb-2">Stackly</h3><p class="text-sm">Thrill-seeking experiences in the wild.</p></div>
+            </div>
+            <div class="expand-card">
+                <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover" alt="Beach">
+                <div class="absolute inset-0 bg-black/40 transition-opacity duration-500 hover:bg-black/20"></div>
+                <div class="title-overlay"><i class="fas fa-umbrella-beach mb-3 text-3xl block"></i>Beach</div>
+                <div class="content"><h3 class="serif-font text-2xl mb-2">Beach</h3><p class="text-sm">Relaxation on pristine white sands.</p></div>
+            </div>
+            <div class="expand-card">
+                <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover" alt="Nature">
+                <div class="absolute inset-0 bg-black/40 transition-opacity duration-500 hover:bg-black/20"></div>
+                <div class="title-overlay"><i class="fas fa-leaf mb-3 text-3xl block"></i>Nature</div>
+                <div class="content"><h3 class="serif-font text-2xl mb-2">Nature</h3><p class="text-sm">Immerse yourself in green forests and lakes.</p></div>
+            </div>
+            <div class="expand-card">
+                <img src="https://images.unsplash.com/photo-1599839619722-39751411ea63?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover" alt="Heritage">
+                <div class="absolute inset-0 bg-black/40 transition-opacity duration-500 hover:bg-black/20"></div>
+                <div class="title-overlay"><i class="fas fa-landmark mb-3 text-3xl block"></i>Heritage</div>
+                <div class="content"><h3 class="serif-font text-2xl mb-2">Heritage</h3><p class="text-sm">Discover history and ancient architecture.</p></div>
+            </div>
+            <div class="expand-card">
+                <img src="https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover" alt="Culture">
+                <div class="absolute inset-0 bg-black/40 transition-opacity duration-500 hover:bg-black/20"></div>
+                <div class="title-overlay"><i class="fas fa-masks-theater mb-3 text-3xl block"></i>Culture</div>
+                <div class="content"><h3 class="serif-font text-2xl mb-2">Culture</h3><p class="text-sm">Experience local traditions and arts.</p></div>
+            </div>
+        </div>
+        <!-- Mobile grid fallback -->
+        <div class="grid grid-cols-2 gap-4 md:hidden reveal">
+            <div class="h-40 rounded-xl overflow-hidden relative"><img src="https://images.unsplash.com/photo-1533240332313-0db49b459ad6?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover"><div class="absolute inset-0 bg-black/40 flex items-center justify-center text-white font-bold">Stackly</div></div>
+            <div class="h-40 rounded-xl overflow-hidden relative"><img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover"><div class="absolute inset-0 bg-black/40 flex items-center justify-center text-white font-bold">Beach</div></div>
+            <div class="h-40 rounded-xl overflow-hidden relative"><img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover"><div class="absolute inset-0 bg-black/40 flex items-center justify-center text-white font-bold">Nature</div></div>
+            <div class="h-40 rounded-xl overflow-hidden relative"><img src="https://images.unsplash.com/photo-1599839619722-39751411ea63?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover"><div class="absolute inset-0 bg-black/40 flex items-center justify-center text-white font-bold">Heritage</div></div>
+        </div>
+    </section>
+
+    <!-- Featured Tour Packages -->
+    <section class="py-24 px-8 lg:px-24 relative bg-fixed bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&w=2000&q=80');">
+        <div class="absolute inset-0 bg-gray-50/90 backdrop-blur-sm"></div>
+        <div class="text-center mb-16 reveal">
+            <h2 class="serif-font text-4xl font-bold mb-4">Featured Tour Packages</h2>
+            <p class="text-gray-500">Curated itineraries for the perfect getaway</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Package 1 -->
+            <div class="tilt-card bg-white rounded-xl overflow-hidden shadow-md group reveal" style="transition-delay: 0.1s;">
+                <div class="relative h-64 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1502680390469-be75c86b636f?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover img-zoom">
+                    <div class="absolute top-4 right-4 bg-white/95 px-3 py-1 rounded text-sm font-bold text-gray-900 shadow">
+                        <i class="fas fa-star text-yellow-400 text-xs"></i> 4.9
+                    </div>
+                </div>
+                <div class="p-6">
+                    <div class="flex justify-between items-center mb-3">
+                        <span class="text-sm text-gray-500 font-medium"><i class="far fa-clock mr-1"></i> 7 Days</span>
+                        <span class="text-[#f16f5c] font-bold text-lg">$1,299</span>
+                    </div>
+                    <h3 class="serif-font text-xl font-bold mb-3">Bali Tropical Paradise</h3>
+                    <p class="text-gray-500 text-sm mb-6 line-clamp-2">Experience the lush landscapes, vibrant culture, and pristine beaches of Bali with expert guides.</p>
+                    <button class="w-full py-3 border border-gray-900 rounded hover:bg-[#f16f5c] hover:border-[#f16f5c] hover:text-white transition-colors uppercase text-sm tracking-wide font-semibold">Explore Package</button>
+                </div>
+            </div>
+            <!-- Package 2 -->
+            <div class="tilt-card bg-white rounded-xl overflow-hidden shadow-md group reveal" style="transition-delay: 0.2s;">
+                <div class="relative h-64 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover img-zoom">
+                    <div class="absolute top-4 right-4 bg-white/95 px-3 py-1 rounded text-sm font-bold text-gray-900 shadow">
+                        <i class="fas fa-star text-yellow-400 text-xs"></i> 4.8
+                    </div>
+                </div>
+                <div class="p-6">
+                    <div class="flex justify-between items-center mb-3">
+                        <span class="text-sm text-gray-500 font-medium"><i class="far fa-clock mr-1"></i> 10 Days</span>
+                        <span class="text-[#f16f5c] font-bold text-lg">$2,450</span>
+                    </div>
+                    <h3 class="serif-font text-xl font-bold mb-3">Swiss Alps Stackly</h3>
+                    <p class="text-gray-500 text-sm mb-6 line-clamp-2">A breathtaking journey through the snow-capped peaks, serene lakes, and cozy alpine villages.</p>
+                    <button class="w-full py-3 border border-gray-900 rounded hover:bg-[#f16f5c] hover:border-[#f16f5c] hover:text-white transition-colors uppercase text-sm tracking-wide font-semibold">Explore Package</button>
+                </div>
+            </div>
+            <!-- Package 3 -->
+            <div class="tilt-card bg-white rounded-xl overflow-hidden shadow-md group reveal" style="transition-delay: 0.3s;">
+                <div class="relative h-64 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1527631746610-bca00a040d60?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover img-zoom">
+                    <div class="absolute top-4 right-4 bg-white/95 px-3 py-1 rounded text-sm font-bold text-gray-900 shadow">
+                        <i class="fas fa-star text-yellow-400 text-xs"></i> 5.0
+                    </div>
+                </div>
+                <div class="p-6">
+                    <div class="flex justify-between items-center mb-3">
+                        <span class="text-sm text-gray-500 font-medium"><i class="far fa-clock mr-1"></i> 14 Days</span>
+                        <span class="text-[#f16f5c] font-bold text-lg">$3,800</span>
+                    </div>
+                    <h3 class="serif-font text-xl font-bold mb-3">African Safari Safari</h3>
+                    <p class="text-gray-500 text-sm mb-6 line-clamp-2">Witness the big five in their natural habitat across the magnificent savannas of Kenya and Tanzania.</p>
+                    <button class="w-full py-3 border border-gray-900 rounded hover:bg-[#f16f5c] hover:border-[#f16f5c] hover:text-white transition-colors uppercase text-sm tracking-wide font-semibold">Explore Package</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Travel With Us -->
+    <section class="py-24 px-8 lg:px-24">
+        <h2 class="serif-font text-4xl font-bold mb-20 text-center reveal">Why Travel With Us</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-12 md:gap-8 text-center">
+            <div class="float-card reveal">
+                <div class="w-24 h-24 mx-auto bg-gray-50 rounded-full flex items-center justify-center mb-6 shadow-md text-[#f16f5c] text-4xl">
+                    <i class="fas fa-map-marked-alt"></i>
+                </div>
+                <h3 class="font-bold text-lg mb-2">Verified Destinations</h3>
+                <p class="text-sm text-gray-500 px-4">Hand-picked and thoroughly vetted locations ensuring safety and quality.</p>
+            </div>
+            <div class="float-card float-delay-1 reveal" style="transition-delay: 0.1s;">
+                <div class="w-24 h-24 mx-auto bg-gray-50 rounded-full flex items-center justify-center mb-6 shadow-md text-[#f16f5c] text-4xl">
+                    <i class="fas fa-user-tie"></i>
+                </div>
+                <h3 class="font-bold text-lg mb-2">Local Experts</h3>
+                <p class="text-sm text-gray-500 px-4">Authentic experiences guided by locals who know the hidden secrets.</p>
+            </div>
+            <div class="float-card float-delay-2 reveal" style="transition-delay: 0.2s;">
+                <div class="w-24 h-24 mx-auto bg-gray-50 rounded-full flex items-center justify-center mb-6 shadow-md text-[#f16f5c] text-4xl">
+                    <i class="fas fa-compass"></i>
+                </div>
+                <h3 class="font-bold text-lg mb-2">Personalized Trips</h3>
+                <p class="text-sm text-gray-500 px-4">Custom itineraries designed specifically to match your unique travel style.</p>
+            </div>
+            <div class="float-card float-delay-3 reveal" style="transition-delay: 0.3s;">
+                <div class="w-24 h-24 mx-auto bg-gray-50 rounded-full flex items-center justify-center mb-6 shadow-md text-[#f16f5c] text-4xl">
+                    <i class="fas fa-headset"></i>
+                </div>
+                <h3 class="font-bold text-lg mb-2">24/7 Support</h3>
+                <p class="text-sm text-gray-500 px-4">Round-the-clock assistance anywhere in the world for absolute peace of mind.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hidden Gems -->
+    <section class="py-24 px-8 lg:px-24 bg-gray-900 text-white overflow-hidden">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            <div class="lg:col-span-4 reveal z-10">
+                <h2 class="serif-font text-4xl md:text-5xl font-bold mb-6">Hidden Gems</h2>
+                <p class="text-gray-400 mb-10 text-lg leading-relaxed">Escape the crowds and explore our collection of lesser-known, beautifully preserved destinations that offer truly authentic experiences.</p>
+                <a href="#" class="inline-flex items-center justify-center bg-white text-gray-900 font-bold py-4 px-12 text-sm tracking-[0.2em] transition-transform hover:-translate-y-1 shadow-2xl uppercase mx-auto md:mx-0">Discover More</a>
+            </div>
+                        <div class="lg:col-span-8 flex justify-end relative">
+                <!-- Using webp format, below 100kb -->
+                <div class="clip-path-reveal visible h-64 md:h-[500px] w-full lg:w-4/5" style="clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);">
+                    <img src="assets/hidden-gems.webp" alt="Hidden Gems" class="w-full h-full object-cover rounded-xl shadow-2xl border-4 border-gray-800">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Travel Stories / Inspiration -->
+    <section class="py-24 px-8 lg:px-24">
+        <h2 class="serif-font text-4xl font-bold mb-16 text-center reveal">Travel Stories</h2>
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-8">
+            <!-- Large Story -->
+            <div class="lg:col-span-2 group cursor-pointer reveal">
+                <div class="overflow-hidden rounded-xl h-[450px] mb-6 shadow-lg visible"><img src="assets/travel-story-1.webp" class="w-full h-full object-cover img-zoom">
+                </div>
+                <p class="text-sm text-[#f16f5c] font-bold uppercase tracking-widest mb-3">Inspiration</p>
+                <h3 class="serif-font text-3xl font-bold mb-4 group-hover:text-[#f16f5c] transition-colors">The Ultimate Guide to Chasing the Northern Lights</h3>
+                <p class="text-gray-600 text-lg">A personal journey through the Arctic circle chasing the aurora borealis, featuring tips on where to go, what to pack, and how to photograph this natural wonder.</p>
+            </div>
+            <!-- Small Stories -->
+            <div class="flex flex-col space-y-10 reveal" style="transition-delay: 0.2s;">
+                <div class="group cursor-pointer flex flex-col sm:flex-row lg:flex-col xl:flex-row gap-6 items-start">
+                    <div class="w-full sm:w-40 lg:w-full xl:w-40 h-40 overflow-hidden rounded flex-shrink-0 shadow visible"><img src="assets/travel-story-2.webp" class="w-full h-full object-cover img-zoom">
+                    </div>
+                    <div>
+                        <p class="text-xs text-gray-500 uppercase tracking-wider mb-2 font-semibold">Culinary</p>
+                        <h4 class="font-bold text-xl mb-2 group-hover:text-[#f16f5c] transition-colors leading-tight">Top 10 Street Food Markets in Asia</h4>
+                        <p class="text-gray-500 text-sm line-clamp-2">Taste the vibrant flavors from Bangkok to Taipei.</p>
+                    </div>
+                </div>
+                <div class="group cursor-pointer flex flex-col sm:flex-row lg:flex-col xl:flex-row gap-6 items-start">
+                    <div class="w-full sm:w-40 lg:w-full xl:w-40 h-40 overflow-hidden rounded flex-shrink-0 shadow visible"><img src="assets/travel-story-3.webp" class="w-full h-full object-cover img-zoom">
+                    </div>
+                    <div>
+                        <p class="text-xs text-gray-500 uppercase tracking-wider mb-2 font-semibold">Guides</p>
+                        <h4 class="font-bold text-xl mb-2 group-hover:text-[#f16f5c] transition-colors leading-tight">Minimalist Packing for Backpackers</h4>
+                        <p class="text-gray-500 text-sm line-clamp-2">How to travel light without sacrificing necessities.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Plan Your Journey -->
+    <section class="py-24 px-8 lg:px-24 bg-gray-50 relative">
+        <h2 class="serif-font text-4xl font-bold mb-20 text-center reveal">Plan Your Journey</h2>
+        <div class="flex flex-col md:flex-row justify-between relative gap-12 md:gap-0 max-w-5xl mx-auto reveal">
+            
+            <div class="step-item step-line relative z-10 flex flex-col items-center text-center">
+                <div class="w-20 h-20 bg-white border-4 border-[#f16f5c] rounded-full flex items-center justify-center text-2xl text-[#f16f5c] mb-6 shadow-lg transform transition-transform hover:scale-110 hover:bg-[#f16f5c] hover:text-white">
+                    <i class="fas fa-map-marker-alt"></i>
+                </div>
+                <h3 class="font-bold text-lg mb-2">1. Choose Destination</h3>
+                <p class="text-sm text-gray-500">Pick from our wide range of locales.</p>
+            </div>
+            
+            <div class="step-item step-line relative z-10 flex flex-col items-center text-center">
+                <div class="w-20 h-20 bg-white border-4 border-[#f16f5c] rounded-full flex items-center justify-center text-2xl text-[#f16f5c] mb-6 shadow-lg transform transition-transform hover:scale-110 hover:bg-[#f16f5c] hover:text-white" style="transition-delay: 0.1s;">
+                    <i class="fas fa-sliders-h"></i>
+                </div>
+                <h3 class="font-bold text-lg mb-2">2. Customize Trip</h3>
+                <p class="text-sm text-gray-500">Tailor the itinerary to your needs.</p>
+            </div>
+            
+            <div class="step-item step-line relative z-10 flex flex-col items-center text-center">
+                <div class="w-20 h-20 bg-white border-4 border-[#f16f5c] rounded-full flex items-center justify-center text-2xl text-[#f16f5c] mb-6 shadow-lg transform transition-transform hover:scale-110 hover:bg-[#f16f5c] hover:text-white" style="transition-delay: 0.2s;">
+                    <i class="fas fa-check-double"></i>
+                </div>
+                <h3 class="font-bold text-lg mb-2">3. Confirm</h3>
+                <p class="text-sm text-gray-500">Secure your booking easily.</p>
+            </div>
+
+            <div class="step-item relative z-10 flex flex-col items-center text-center">
+                <div class="w-20 h-20 bg-white border-4 border-[#f16f5c] rounded-full flex items-center justify-center text-2xl text-[#f16f5c] mb-6 shadow-lg transform transition-transform hover:scale-110 hover:bg-[#f16f5c] hover:text-white" style="transition-delay: 0.3s;">
+                    <i class="fas fa-plane-departure"></i>
+                </div>
+                <h3 class="font-bold text-lg mb-2">4. Travel</h3>
+                <p class="text-sm text-gray-500">Pack your bags and enjoy the ride.</p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Travel Statistics -->
+    <section class="py-20 px-8 lg:px-24 bg-gradient-to-r from-[#e05a48] to-[#f16f5c] text-white">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center divide-x divide-white/20">
+            <div class="reveal">
+                <div class="text-5xl md:text-6xl font-bold mb-3 counter" data-target="150">0</div>
+                <p class="text-xs md:text-sm uppercase tracking-widest opacity-90 font-medium">Destinations</p>
+            </div>
+            <div class="reveal" style="transition-delay: 0.1s;">
+                <div class="text-5xl md:text-6xl font-bold mb-3 counter" data-target="50000">0</div>
+                <p class="text-xs md:text-sm uppercase tracking-widest opacity-90 font-medium">Travelers</p>
+            </div>
+            <div class="reveal" style="transition-delay: 0.2s;">
+                <div class="text-5xl md:text-6xl font-bold mb-3 counter" data-target="300">0</div>
+                <p class="text-xs md:text-sm uppercase tracking-widest opacity-90 font-medium">Experiences</p>
+            </div>
+            <div class="reveal" style="transition-delay: 0.3s;">
+                <div class="text-5xl md:text-6xl font-bold mb-3 counter" data-target="120">0</div>
+                <p class="text-xs md:text-sm uppercase tracking-widest opacity-90 font-medium">Travel Partners</p>
+            </div>
+        </div>
+    </section>
+
+        <!-- Traveler Testimonials -->
+    <section class="py-24 px-8 lg:px-24 relative bg-fixed bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&w=2000&q=80');">
+        <div class="absolute inset-0 bg-gray-50/90 backdrop-blur-sm"></div>
+        <div class="max-w-7xl mx-auto relative z-10">
+            <div class="text-center mb-16 reveal">
+                <h2 class="serif-font text-4xl md:text-5xl font-bold mb-4 text-gray-900">Traveler Testimonials</h2>
+                <p class="text-gray-500 text-lg">Don't just take our word for it?read what our explorers have to say.</p>
+            </div>
+
+                        <div class="marquee-wrapper reveal">
+                <div class="marquee-content">
+
+                <!-- Testimonial 1 -->
+                <div class="testimonial-card bg-white p-8 md:p-10 rounded-2xl shadow-sm border border-gray-100 hover:shadow-xl transition-shadow flex flex-col h-full">
+                    <div class="flex text-yellow-400 text-sm mb-6"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p class="text-gray-600 mb-8 italic text-lg leading-relaxed flex-grow">"Absolutely breathtaking experience. The itinerary was perfectly balanced between stackly and relaxation. I couldn't have asked for a better guide."</p>
+                    <div class="flex items-center gap-4 border-t pt-6 border-gray-100 mt-auto">
+                        <img src="https://randomuser.me/api/portraits/women/44.jpg" class="w-14 h-14 rounded-full object-cover shadow-sm">
+                        <div>
+                            <h4 class="font-bold text-gray-900 text-base">Sarah Jenkins</h4>
+                            <p class="text-sm text-[#f16f5c] font-medium">Traveled to Bali</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 2 -->
+                <div class="testimonial-card bg-white p-8 md:p-10 rounded-2xl shadow-sm border border-gray-100 hover:shadow-xl transition-shadow flex flex-col h-full relative transform md:-translate-y-4">
+                    <div class="flex text-yellow-400 text-sm mb-6"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p class="text-gray-600 mb-8 italic text-lg leading-relaxed flex-grow">"Every detail was taken care of. We got to see hidden gems we would have never found on our own. Truly a 5-star service!"</p>
+                    <div class="flex items-center gap-4 border-t pt-6 border-gray-100 mt-auto">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" class="w-14 h-14 rounded-full object-cover shadow-sm">
+                        <div>
+                            <h4 class="font-bold text-gray-900 text-base">Michael Chen</h4>
+                            <p class="text-sm text-[#f16f5c] font-medium">Traveled to Japan</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 3 -->
+                <div class="testimonial-card bg-white p-8 md:p-10 rounded-2xl shadow-sm border border-gray-100 hover:shadow-xl transition-shadow flex flex-col h-full">
+                    <div class="flex text-yellow-400 text-sm mb-6"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div>
+                    <p class="text-gray-600 mb-8 italic text-lg leading-relaxed flex-grow">"A seamless booking process and fantastic support throughout the trip. The views in the Alps were stunning and the hotels top-notch."</p>
+                    <div class="flex items-center gap-4 border-t pt-6 border-gray-100 mt-auto">
+                        <img src="https://randomuser.me/api/portraits/women/68.jpg" class="w-14 h-14 rounded-full object-cover shadow-sm">
+                        <div>
+                            <h4 class="font-bold text-gray-900 text-base">Emily Roberts</h4>
+                            <p class="text-sm text-[#f16f5c] font-medium">Traveled to Switzerland</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Testimonial 4 -->
+                <div class="testimonial-card bg-white p-8 md:p-10 rounded-2xl shadow-sm border border-gray-100 hover:shadow-xl transition-shadow flex flex-col h-full relative transform md:-translate-y-4">
+                    <div class="flex text-yellow-400 text-sm mb-6"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p class="text-gray-600 mb-8 italic text-lg leading-relaxed flex-grow">"The most incredible culinary and cultural tour I have ever experienced. Everything was planned perfectly, allowing us to just relax and enjoy."</p>
+                    <div class="flex items-center gap-4 border-t pt-6 border-gray-100 mt-auto">
+                        <img src="https://randomuser.me/api/portraits/men/45.jpg" class="w-14 h-14 rounded-full object-cover shadow-sm">
+                        <div>
+                            <h4 class="font-bold text-gray-900 text-base">David Smith</h4>
+                            <p class="text-sm text-[#f16f5c] font-medium">Traveled to Italy</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 5 -->
+                <div class="testimonial-card bg-white p-8 md:p-10 rounded-2xl shadow-sm border border-gray-100 hover:shadow-xl transition-shadow flex flex-col h-full">
+                    <div class="flex text-yellow-400 text-sm mb-6"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div>
+                    <p class="text-gray-600 mb-8 italic text-lg leading-relaxed flex-grow">"From the flights to the private tours, Stackly handled everything flawlessly. It was truly a trip of a lifetime and worth every penny."</p>
+                    <div class="flex items-center gap-4 border-t pt-6 border-gray-100 mt-auto">
+                        <img src="https://randomuser.me/api/portraits/women/22.jpg" class="w-14 h-14 rounded-full object-cover shadow-sm">
+                        <div>
+                            <h4 class="font-bold text-gray-900 text-base">Anna Williams</h4>
+                            <p class="text-sm text-[#f16f5c] font-medium">Traveled to Maldives</p>
+                        </div>
+                    </div>
+                </div>
+            
+
+                <!-- Testimonial 1 -->
+                <div class="testimonial-card bg-white p-8 md:p-10 rounded-2xl shadow-sm border border-gray-100 hover:shadow-xl transition-shadow flex flex-col h-full">
+                    <div class="flex text-yellow-400 text-sm mb-6"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p class="text-gray-600 mb-8 italic text-lg leading-relaxed flex-grow">"Absolutely breathtaking experience. The itinerary was perfectly balanced between stackly and relaxation. I couldn't have asked for a better guide."</p>
+                    <div class="flex items-center gap-4 border-t pt-6 border-gray-100 mt-auto">
+                        <img src="https://randomuser.me/api/portraits/women/44.jpg" class="w-14 h-14 rounded-full object-cover shadow-sm">
+                        <div>
+                            <h4 class="font-bold text-gray-900 text-base">Sarah Jenkins</h4>
+                            <p class="text-sm text-[#f16f5c] font-medium">Traveled to Bali</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 2 -->
+                <div class="testimonial-card bg-white p-8 md:p-10 rounded-2xl shadow-sm border border-gray-100 hover:shadow-xl transition-shadow flex flex-col h-full relative transform md:-translate-y-4">
+                    <div class="flex text-yellow-400 text-sm mb-6"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p class="text-gray-600 mb-8 italic text-lg leading-relaxed flex-grow">"Every detail was taken care of. We got to see hidden gems we would have never found on our own. Truly a 5-star service!"</p>
+                    <div class="flex items-center gap-4 border-t pt-6 border-gray-100 mt-auto">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" class="w-14 h-14 rounded-full object-cover shadow-sm">
+                        <div>
+                            <h4 class="font-bold text-gray-900 text-base">Michael Chen</h4>
+                            <p class="text-sm text-[#f16f5c] font-medium">Traveled to Japan</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 3 -->
+                <div class="testimonial-card bg-white p-8 md:p-10 rounded-2xl shadow-sm border border-gray-100 hover:shadow-xl transition-shadow flex flex-col h-full">
+                    <div class="flex text-yellow-400 text-sm mb-6"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div>
+                    <p class="text-gray-600 mb-8 italic text-lg leading-relaxed flex-grow">"A seamless booking process and fantastic support throughout the trip. The views in the Alps were stunning and the hotels top-notch."</p>
+                    <div class="flex items-center gap-4 border-t pt-6 border-gray-100 mt-auto">
+                        <img src="https://randomuser.me/api/portraits/women/68.jpg" class="w-14 h-14 rounded-full object-cover shadow-sm">
+                        <div>
+                            <h4 class="font-bold text-gray-900 text-base">Emily Roberts</h4>
+                            <p class="text-sm text-[#f16f5c] font-medium">Traveled to Switzerland</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Testimonial 4 -->
+                <div class="testimonial-card bg-white p-8 md:p-10 rounded-2xl shadow-sm border border-gray-100 hover:shadow-xl transition-shadow flex flex-col h-full relative transform md:-translate-y-4">
+                    <div class="flex text-yellow-400 text-sm mb-6"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p class="text-gray-600 mb-8 italic text-lg leading-relaxed flex-grow">"The most incredible culinary and cultural tour I have ever experienced. Everything was planned perfectly, allowing us to just relax and enjoy."</p>
+                    <div class="flex items-center gap-4 border-t pt-6 border-gray-100 mt-auto">
+                        <img src="https://randomuser.me/api/portraits/men/45.jpg" class="w-14 h-14 rounded-full object-cover shadow-sm">
+                        <div>
+                            <h4 class="font-bold text-gray-900 text-base">David Smith</h4>
+                            <p class="text-sm text-[#f16f5c] font-medium">Traveled to Italy</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 5 -->
+                <div class="testimonial-card bg-white p-8 md:p-10 rounded-2xl shadow-sm border border-gray-100 hover:shadow-xl transition-shadow flex flex-col h-full">
+                    <div class="flex text-yellow-400 text-sm mb-6"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div>
+                    <p class="text-gray-600 mb-8 italic text-lg leading-relaxed flex-grow">"From the flights to the private tours, Stackly handled everything flawlessly. It was truly a trip of a lifetime and worth every penny."</p>
+                    <div class="flex items-center gap-4 border-t pt-6 border-gray-100 mt-auto">
+                        <img src="https://randomuser.me/api/portraits/women/22.jpg" class="w-14 h-14 rounded-full object-cover shadow-sm">
+                        <div>
+                            <h4 class="font-bold text-gray-900 text-base">Anna Williams</h4>
+                            <p class="text-sm text-[#f16f5c] font-medium">Traveled to Maldives</p>
+                        </div>
+                    </div>
+                </div>
+            
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Travel Gallery -->
+    <section class="py-24 px-8 lg:px-24">
+        <div class="text-center mb-16 reveal">
+            <h2 class="serif-font text-4xl font-bold mb-4">Travel Gallery</h2>
+            <p class="text-gray-500">A glimpse into the magical places we visit</p>
+        </div>
+        <div class="masonry reveal">
+            <div class="masonry-item relative group overflow-hidden rounded-xl cursor-pointer shadow-md">
+                <img src="https://images.unsplash.com/photo-1493246507139-91e8fad9978e?auto=format&fit=crop&w=600&q=80" class="w-full object-cover img-zoom">
+                <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                    <span class="text-white font-bold text-xl tracking-wider uppercase transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">Swiss Alps</span>
+                </div>
+            </div>
+            <div class="masonry-item relative group overflow-hidden rounded-xl cursor-pointer shadow-md">
+                <img src="https://images.unsplash.com/photo-1506929562872-bb421503ef21?auto=format&fit=crop&w=600&q=80" class="w-full object-cover img-zoom">
+                <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                    <span class="text-white font-bold text-xl tracking-wider uppercase transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">Maldives</span>
+                </div>
+            </div>
+            <div class="masonry-item relative group overflow-hidden rounded-xl cursor-pointer shadow-md">
+                <img src="assets/rome.webp" class="w-full object-cover img-zoom">
+                <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                    <span class="text-white font-bold text-xl tracking-wider uppercase transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">Rome</span>
+                </div>
+            </div>
+            <div class="masonry-item relative group overflow-hidden rounded-xl cursor-pointer shadow-md">
+                <img src="assets/santorini.webp" class="w-full object-cover img-zoom">
+                <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                    <span class="text-white font-bold text-xl tracking-wider uppercase transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">Santorini</span>
+                </div>
+            </div>
+            <div class="masonry-item relative group overflow-hidden rounded-xl cursor-pointer shadow-md">
+                <img src="assets/new-york.webp" class="w-full object-cover img-zoom">
+                <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                    <span class="text-white font-bold text-xl tracking-wider uppercase transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">New York</span>
+                </div>
+            </div>
+            <div class="masonry-item relative group overflow-hidden rounded-xl cursor-pointer shadow-md">
+                <img src="assets/cuisine.webp" class="w-full object-cover img-zoom">
+                <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                    <span class="text-white font-bold text-xl tracking-wider uppercase transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">Cuisine</span>
+                </div>
+            </div>
+            <div class="masonry-item relative group overflow-hidden rounded-xl cursor-pointer shadow-md">
+                <img src="assets/sydney.webp" class="w-full object-cover img-zoom">
+                <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                    <span class="text-white font-bold text-xl tracking-wider uppercase transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">Sydney</span>
+                </div>
+            </div>
+            <div class="masonry-item relative group overflow-hidden rounded-xl cursor-pointer shadow-md">
+                <img src="https://images.unsplash.com/photo-1518684079-3c830dcef090?auto=format&fit=crop&w=600&q=80" class="w-full object-cover img-zoom">
+                <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                    <span class="text-white font-bold text-xl tracking-wider uppercase transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">Dubai</span>
+                </div>
+            </div>
+            <div class="masonry-item relative group overflow-hidden rounded-xl cursor-pointer shadow-md">
+                <img src="assets/kyoto.webp" class="w-full object-cover img-zoom">
+                <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                    <span class="text-white font-bold text-xl tracking-wider uppercase transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">Kyoto</span>
+                </div>
+            </div>
+            <div class="masonry-item relative group overflow-hidden rounded-xl cursor-pointer shadow-md">
+                <img src="assets/petra.webp" class="w-full object-cover img-zoom">
+                <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                    <span class="text-white font-bold text-xl tracking-wider uppercase transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">Petra</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seasonal / Special Offers -->
+    <section class="py-24 px-8 lg:px-24 relative bg-fixed bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&w=2000&q=80');">
+        <div class="absolute inset-0 bg-gray-50/90 backdrop-blur-sm"></div>
+        <h2 class="serif-font text-4xl font-bold mb-16 text-center reveal">Seasonal Offers</h2>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 reveal">
+            <!-- Offer 1 -->
+            <div class="flex flex-col sm:flex-row bg-white rounded-xl overflow-hidden shadow group hover:shadow-xl transition-shadow">
+                <div class="w-full sm:w-2/5 h-56 sm:h-auto relative overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1473496169904-658ba7c44d8a?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover img-zoom">
+                    <div class="absolute top-4 left-4 bg-[#f16f5c] text-white text-xs font-bold px-3 py-1.5 rounded tracking-wider shadow">20% OFF</div>
+                </div>
+                <div class="w-full sm:w-3/5 p-8 flex flex-col justify-center">
+                    <h3 class="serif-font text-2xl font-bold mb-3 group-hover:text-[#f16f5c] transition-colors">Summer Escapes</h3>
+                    <p class="text-gray-500 mb-6 text-sm leading-relaxed">Book early and save big on our tropical beachfront destinations. Valid until June.</p>
+                    <a href="#" class="bg-[#f16f5c] text-white font-bold text-sm uppercase tracking-wide px-6 py-3 rounded hover:bg-[#e05a48] transition-colors shadow-md inline-block self-start">Claim Offer <i class="fas fa-arrow-right ml-1"></i></a>
+                </div>
+            </div>
+            <!-- Offer 2 -->
+            <div class="flex flex-col sm:flex-row bg-white rounded-xl overflow-hidden shadow group hover:shadow-xl transition-shadow" style="transition-delay: 0.1s;">
+                <div class="w-full sm:w-2/5 h-56 sm:h-auto relative overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover img-zoom">
+                    <div class="absolute top-4 left-4 bg-gray-900 text-white text-xs font-bold px-3 py-1.5 rounded tracking-wider shadow">LIMITED</div>
+                </div>
+                <div class="w-full sm:w-3/5 p-8 flex flex-col justify-center">
+                    <h3 class="serif-font text-2xl font-bold mb-3 group-hover:text-[#f16f5c] transition-colors">Weekend Getaways</h3>
+                    <p class="text-gray-500 mb-6 text-sm leading-relaxed">Short city breaks perfect for recharging. Includes 2 nights stay and city tours.</p>
+                    <a href="#" class="bg-[#f16f5c] text-white font-bold text-sm uppercase tracking-wide px-6 py-3 rounded hover:bg-[#e05a48] transition-colors shadow-md inline-block self-start">View Deals <i class="fas fa-arrow-right ml-1"></i></a>
+                </div>
+            </div>
+            <!-- Offer 3 -->
+            <div class="flex flex-col sm:flex-row bg-white rounded-xl overflow-hidden shadow group hover:shadow-xl transition-shadow" style="transition-delay: 0.2s;">
+                <div class="w-full sm:w-2/5 h-56 sm:h-auto relative overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover img-zoom">
+                    <div class="absolute top-4 left-4 bg-[#f16f5c] text-white text-xs font-bold px-3 py-1.5 rounded tracking-wider shadow">FAMILY</div>
+                </div>
+                <div class="w-full sm:w-3/5 p-8 flex flex-col justify-center">
+                    <h3 class="serif-font text-2xl font-bold mb-3 group-hover:text-[#f16f5c] transition-colors">Family Holidays</h3>
+                    <p class="text-gray-500 mb-6 text-sm leading-relaxed">Kids stay free on select packages! Create unforgettable memories together.</p>
+                    <a href="#" class="bg-[#f16f5c] text-white font-bold text-sm uppercase tracking-wide px-6 py-3 rounded hover:bg-[#e05a48] transition-colors shadow-md inline-block self-start">View Deals <i class="fas fa-arrow-right ml-1"></i></a>
+                </div>
+            </div>
+            <!-- Offer 4 -->
+            <div class="flex flex-col sm:flex-row bg-white rounded-xl overflow-hidden shadow group hover:shadow-xl transition-shadow" style="transition-delay: 0.3s;">
+                <div class="w-full sm:w-2/5 h-56 sm:h-auto relative overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1501504905252-473c47e087f8?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover img-zoom">
+                    <div class="absolute top-4 left-4 bg-gray-900 text-white text-xs font-bold px-3 py-1.5 rounded tracking-wider shadow">EARLY BIRD</div>
+                </div>
+                <div class="w-full sm:w-3/5 p-8 flex flex-col justify-center">
+                    <h3 class="serif-font text-2xl font-bold mb-3 group-hover:text-[#f16f5c] transition-colors">Stackly Trips</h3>
+                    <p class="text-gray-500 mb-6 text-sm leading-relaxed">Hiking, kayaking, and wild safaris. Book now for next season's thrills.</p>
+                    <a href="#" class="bg-[#f16f5c] text-white font-bold text-sm uppercase tracking-wide px-6 py-3 rounded hover:bg-[#e05a48] transition-colors shadow-md inline-block self-start">Claim Offer <i class="fas fa-arrow-right ml-1"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="py-32 px-8 lg:px-24 bg-gray-950 text-white text-center reveal">
+        <div class="max-w-3xl mx-auto">
+            <i class="far fa-paper-plane text-5xl text-[#f16f5c] mb-8"></i>
+            <h2 class="serif-font text-4xl md:text-5xl font-bold mb-6">Get Travel Inspiration in your Inbox</h2>
+            <p class="text-gray-400 mb-10 text-lg">Sign up for exclusive premium offers, inspirational stories, and insider travel tips.</p>
+            <form class="flex flex-col sm:flex-row gap-4 justify-center" onsubmit="event.preventDefault(); window.location.href='404.html';">
+                <input type="email" placeholder="Your Email Address" required class="px-6 py-4 rounded text-gray-900 w-full sm:w-[400px] focus:outline-none focus:ring-2 focus:ring-[#f16f5c]">
+                <button type="submit" class="bg-[#f16f5c] hover:bg-[#e05a48] px-12 py-6 rounded font-bold uppercase tracking-widest text-sm transition-colors shadow-lg">Subscribe</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="h-[75vh] relative flex items-center justify-center overflow-hidden reveal">
+        <div class="absolute inset-0 z-0 ken-burns">
+            <img src="https://images.unsplash.com/photo-1454496522488-7a8e488e8606?auto=format&fit=crop&w=2000&q=80" class="w-full h-full object-cover">
+        </div>
+        <div class="absolute inset-0 bg-black/40 z-0"></div>
+        <div class="relative z-10 text-center text-white px-4">
+            <h2 class="serif-font text-5xl md:text-7xl font-bold mb-12 drop-shadow-lg">Your Next Journey Starts Here</h2>
+            <div class="flex flex-col sm:flex-row gap-6 justify-center">
+                <button class="bg-[#f16f5c] hover:bg-[#e05a48] px-12 py-6 rounded font-bold uppercase tracking-widest text-sm transition-colors shadow-xl">Explore Destinations</button>
+                <button class="bg-transparent border-2 border-white hover:bg-white hover:text-gray-900 px-12 py-6 rounded font-bold uppercase tracking-widest text-sm transition-colors shadow-xl backdrop-blur-sm">Plan Your Trip</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Scripts for Animations -->
+    <script>
+        // Intersection Observer for reveals & counters
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: "0px 0px -50px 0px"
+        };
+
+        const observer = new IntersectionObserver((entries, obs) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    
+                    if (entry.target.classList.contains('counter')) {
+                        startCounter(entry.target);
+                    }
+                    if (entry.target.classList.contains('clip-path-reveal')) {
+                        obs.unobserve(entry.target); // only reveal once
+                    }
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal, .clip-path-reveal, .counter').forEach(el => observer.observe(el));
+
+        // Number Counter Logic
+        function startCounter(el) {
+            if (el.dataset.counted === 'true') return;
+            el.dataset.counted = 'true';
+            
+            const target = +el.dataset.target;
+            const duration = 2000; // 2 seconds
+            const startTime = performance.now();
+            
+            function updateCounter(currentTime) {
+                const elapsedTime = currentTime - startTime;
+                const progress = Math.min(elapsedTime / duration, 1);
+                
+                // easeOutQuart
+                const easeProgress = 1 - Math.pow(1 - progress, 4);
+                
+                const currentVal = Math.floor(easeProgress * target);
+                
+                // Format with commas if large enough, append +
+                el.innerText = currentVal.toLocaleString() + (progress === 1 ? "+" : "");
+                
+                if (progress < 1) {
+                    requestAnimationFrame(updateCounter);
+                }
+            }
+            requestAnimationFrame(updateCounter);
+        }
+
+        // Carousel Active Card Scaling Logic
+        const carousel = document.querySelector('.carousel');
+        const items = document.querySelectorAll('.carousel-item');
+        
+        if (carousel && items.length) {
+            const updateActiveItem = () => {
+                const carouselRect = carousel.getBoundingClientRect();
+                const carouselCenter = carouselRect.left + carouselRect.width / 2;
+                
+                let closestItem = null;
+                let minDistance = Infinity;
+                
+                items.forEach(item => {
+                    const rect = item.getBoundingClientRect();
+                    const itemCenter = rect.left + rect.width / 2;
+                    const distance = Math.abs(carouselCenter - itemCenter);
+                    
+                    if (distance < minDistance) {
+                        minDistance = distance;
+                        closestItem = item;
+                    }
+                });
+                
+                items.forEach(item => {
+                    if (item === closestItem) {
+                        item.classList.add('active');
+                    } else {
+                        item.classList.remove('active');
+                    }
+                });
+            };
+
+            // Listen to scroll events
+            carousel.addEventListener('scroll', updateActiveItem);
+            // Listen to resize events
+            window.addEventListener('resize', updateActiveItem);
+            
+            // Initial call
+            setTimeout(updateActiveItem, 100);
+            
+            // Also enable click to center on item
+            items.forEach(item => {
+                item.addEventListener('click', () => {
+                    item.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+                });
+            });
+        }
+    </script>
+        <!-- Footer -->
+    <footer class="bg-gray-950 text-white pt-20 pb-10 mt-auto">
+        <div class="px-8 lg:px-24 mx-auto max-w-7xl">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+                <!-- Brand -->
+                <div class="lg:col-span-1 text-left">
+                    <div class="text-2xl font-bold tracking-widest uppercase mb-6 text-white flex items-start justify-start"><a href="index.html"><img src="assets/logo_0050.webp" alt="Stackly Logo" class="h-10 object-contain object-left inline-block"></a></div>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-6 text-left">We create unforgettable travel experiences tailored to your dreams. Explore the world with premium luxury and comfort.</p>
+                    <div class="flex space-x-3 justify-start">
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-gray-400 hover:text-white hover:bg-[#f16f5c] transition-colors"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-gray-400 hover:text-white hover:bg-[#f16f5c] transition-colors"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-gray-400 hover:text-white hover:bg-[#f16f5c] transition-colors"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-gray-400 hover:text-white hover:bg-[#f16f5c] transition-colors"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                
+                <!-- Links -->
+                <div>
+                    <h4 class="font-bold text-white tracking-wide text-base mb-6">Quick Links</h4>
+                    <ul class="space-y-4 text-gray-400 text-sm">
+                        <li><a href="index.html" class="hover:text-[#f16f5c] transition-colors">Home</a></li>
+                        <li><a href="about.html" class="hover:text-[#f16f5c] transition-colors">About</a></li>
+                        <li><a href="blog.html" class="hover:text-[#f16f5c] transition-colors">Blog</a></li>
+                        <li><a href="service.html" class="hover:text-[#f16f5c] transition-colors">Service</a></li>
+                        <li><a href="contact.html" class="hover:text-[#f16f5c] transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Explore -->
+                <div>
+                    <h4 class="font-bold text-white tracking-wide text-base mb-6">Top Destinations</h4>
+                    <ul class="space-y-4 text-gray-400 text-sm">
+                        <li><a href="#" class="hover:text-[#f16f5c] transition-colors">Maldives Islands</a></li>
+                        <li><a href="#" class="hover:text-[#f16f5c] transition-colors">Paris, France</a></li>
+                        <li><a href="#" class="hover:text-[#f16f5c] transition-colors">Swiss Alps</a></li>
+                        <li><a href="#" class="hover:text-[#f16f5c] transition-colors">Dubai, UAE</a></li>
+                        <li><a href="#" class="hover:text-[#f16f5c] transition-colors">Bali, Indonesia</a></li>
+                    </ul>
+                </div>
+
+                <!-- Newsletter -->
+                <div>
+                    <h4 class="font-bold text-white tracking-wide text-base mb-6">Newsletter</h4>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-6">Subscribe to our newsletter for exclusive offers and travel inspiration.</p>
+                    <form class="flex mb-8" onsubmit="event.preventDefault(); window.location.href='404.html';">
+                        <input type="email" required placeholder="Email Address" class="bg-white/5 border border-white/10 rounded-l-md px-4 py-3 w-full text-sm focus:outline-none focus:border-[#f16f5c] text-white" oninvalid="this.setCustomValidity('Please enter a valid email address')" oninput="this.setCustomValidity('')">
+                        <button type="submit" class="bg-[#f16f5c] px-5 py-3 rounded-r-md hover:bg-[#d95c4a] transition-colors"><i class="fas fa-paper-plane text-white"></i></button>
+                    </form>
+                    
+                    <div class="space-y-3 text-sm text-gray-400">
+                        <div class="flex items-center space-x-3 hover:text-white transition-colors cursor-pointer">
+                            <i class="fas fa-phone-alt text-[#f16f5c]"></i>
+                            <span>(980) 123-4567</span>
+                        </div>
+                        <div class="flex items-center space-x-3 hover:text-white transition-colors cursor-pointer">
+                            <i class="fas fa-envelope text-[#f16f5c]"></i>
+                            <span>hello@stackly.com</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-gray-500 font-medium">
+                <p>&copy; 2026 Stackly Tourism. All Rights Reserved.</p>
+                <div class="flex space-x-6 mt-4 md:mt-0">
+                    <a href="#" class="hover:text-white transition-colors">Privacy Policy</a>
+                    <a href="#" class="hover:text-white transition-colors">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        let idx = 0;
+        const total = 4;
+        setInterval(() => {
+            document.getElementById('slider-bg-' + idx).classList.remove('opacity-100');
+            document.getElementById('slider-bg-' + idx).classList.add('opacity-0');
+            idx = (idx + 1) % total;
+            document.getElementById('slider-bg-' + idx).classList.remove('opacity-0');
+            document.getElementById('slider-bg-' + idx).classList.add('opacity-100');
+        }, 2000);
+    });
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
