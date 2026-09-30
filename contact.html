@@ -7,9 +7,9 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
+    <style>html, body { overflow-x: hidden; width: 100%; max-width: 100vw; } 
         .serif-font { font-family: 'Playfair Display', serif; }
-        body { font-family: 'Inter', sans-serif; background-color: #ffffff; color: #111827; overflow-x: hidden; }
+        body { font-family: 'Inter', sans-serif; background-color: #ffffff; color: #111827; overflow-x: hidden; max-w-[100vw]; }
         
         /* Navbar */
         .nav-link { position: relative; color: #111827; transition: color 0.3s ease; } .nav-link:hover, .nav-link.active { color: #f16f5c; }
@@ -98,7 +98,7 @@
     transform-origin: right;
 }
 </style>
-<style>
+<style>html, body { overflow-x: hidden; width: 100%; max-width: 100vw; } 
 @keyframes btnGradient {
     0% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
@@ -141,7 +141,7 @@ a.bg-\[\#f16f5c\]:hover {
     transform-origin: right;
 }
 </style>
-<style>
+<style>html, body { overflow-x: hidden; width: 100%; max-width: 100vw; } 
 @keyframes btnGradientAnim {
     0% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
@@ -218,7 +218,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 
             </ul>
             <div class="hidden md:flex justify-end flex-1"><a href="login.html" class="bg-[#f16f5c] text-white px-6 py-2.5 rounded hover:bg-[#d95c4a] transition-colors font-bold shadow-md">Login</a></div>
-            <div class="md:hidden flex flex-col space-y-1.5 cursor-pointer">
+            <div id="hamburger-btn" class="md:hidden flex flex-col space-y-1.5 cursor-pointer">
                 <span class="w-6 h-0.5 bg-white"></span>
                 <span class="w-6 h-0.5 bg-white"></span>
                 <span class="w-6 h-0.5 bg-white"></span>
@@ -236,7 +236,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         <!-- Animated Tourism SVG Background -->
         <div class="absolute inset-0 opacity-40 pointer-events-none flex items-center justify-center z-10">
-            <svg class="w-full h-full min-w-[800px]" viewBox="0 0 1000 300" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+            <svg class="w-full h-full min-w-0 md:min-w-[800px]" viewBox="0 0 1000 300" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
                 <!-- Dashed flight path -->
                 <path id="flightPath" d="M -100 250 C 200 50, 600 350, 1200 100" fill="none" stroke="#f16f5c" stroke-width="2" stroke-dasharray="8 8" />
                 
@@ -691,8 +691,61 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 </script>
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu" class="fixed inset-0 bg-black/95 z-[60] hidden flex-col items-center justify-center space-y-8 text-xl text-white opacity-0 transition-opacity duration-300">
+        <button id="mobile-menu-close" class="absolute top-8 right-8 text-4xl text-gray-400 hover:text-white">&times;</button>
+        <a href="index.html" class="hover:text-[#f16f5c] transition-colors">Home</a>
+        <a href="about.html" class="hover:text-[#f16f5c] transition-colors">About</a>
+        <a href="service.html" class="hover:text-[#f16f5c] transition-colors">Service</a>
+        <a href="blog.html" class="hover:text-[#f16f5c] transition-colors">Blog</a>
+        <a href="contact.html" class="hover:text-[#f16f5c] transition-colors">Contact</a>
+        <a href="login.html" class="bg-[#f16f5c] px-8 py-3 rounded hover:bg-[#d95c4a] transition-colors mt-4">Login</a>
+    </div>
+
+        <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const hamburgerBtn = document.getElementById('hamburger-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const closeBtn = document.getElementById('mobile-menu-close');
+
+            if (hamburgerBtn && mobileMenu && closeBtn) {
+                hamburgerBtn.addEventListener('click', () => {
+                    mobileMenu.classList.remove('hidden');
+                    mobileMenu.classList.add('flex');
+                    setTimeout(() => {
+                        mobileMenu.classList.remove('opacity-0');
+                        mobileMenu.classList.add('opacity-100');
+                    }, 10);
+                    document.body.style.overflow = 'hidden';
+                });
+
+                const closeMenu = () => {
+                    mobileMenu.classList.remove('opacity-100');
+                    mobileMenu.classList.add('opacity-0');
+                    setTimeout(() => {
+                        mobileMenu.classList.add('hidden');
+                        mobileMenu.classList.remove('flex');
+                        document.body.style.overflow = '';
+                    }, 300);
+                };
+
+                closeBtn.addEventListener('click', closeMenu);
+                
+                // Prevent background scrolling on touch devices
+                mobileMenu.addEventListener('touchmove', (e) => {
+                    e.preventDefault();
+                }, { passive: false });
+                mobileMenu.addEventListener('wheel', (e) => {
+                    e.preventDefault();
+                }, { passive: false });
+            }
+        });
+    </script>
 </body>
 </html>
+
+
+
 
 
 

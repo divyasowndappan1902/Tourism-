@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -7,9 +7,9 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
+    <style>html, body { overflow-x: hidden; width: 100%; max-width: 100vw; } 
         .serif-font { font-family: 'Playfair Display', serif; }
-        body { font-family: 'Inter', sans-serif; background-color: #ffffff; color: #111827; overflow-x: hidden; }
+        body { font-family: 'Inter', sans-serif; background-color: #ffffff; color: #111827; overflow-x: hidden; max-w-[100vw]; }
         
         /* Nav */
         .nav-link { position: relative; transition: color 0.3s ease; } .nav-link:hover, .nav-link.active { color: #f16f5c; }
@@ -106,8 +106,13 @@
               animation-play-state: paused;
           }
           .testimonial-card {
-              width: 380px;
+              width: 280px;
               flex-shrink: 0;
+          }
+          @media (min-width: 640px) {
+              .testimonial-card {
+                  width: 380px;
+              }
           }
             @keyframes revealUp {
             0% { transform: translateY(120%); opacity: 0; }
@@ -159,7 +164,7 @@
     transform-origin: right;
 }
 </style>
-<style>
+<style>html, body { overflow-x: hidden; width: 100%; max-width: 100vw; } 
 @keyframes btnGradient {
     0% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
@@ -202,7 +207,7 @@ a.bg-\[\#f16f5c\]:hover {
     transform-origin: right;
 }
 </style>
-<style>
+<style>html, body { overflow-x: hidden; width: 100%; max-width: 100vw; } 
 @keyframes btnGradientAnim {
     0% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
@@ -286,7 +291,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 
             </ul>
             <div class="hidden md:flex justify-end flex-1"><a href="login.html" class="bg-[#f16f5c] text-white px-6 py-2.5 rounded hover:bg-[#d95c4a] transition-colors font-bold shadow-md">Login</a></div>
-            <div class="md:hidden flex flex-col space-y-1.5 cursor-pointer">
+            <div id="hamburger-btn" class="md:hidden flex flex-col space-y-1.5 cursor-pointer">
                 <span class="w-6 h-0.5 bg-white"></span>
                 <span class="w-6 h-0.5 bg-white"></span>
                 <span class="w-6 h-0.5 bg-white"></span>
@@ -296,7 +301,7 @@ document.addEventListener("DOMContentLoaded", () => {
         <!-- Hero Content -->
         <div class="flex-grow flex items-center justify-center relative w-full h-full z-10">
             <div class="text-center max-w-4xl mx-auto px-4 mt-10">
-                <h1 class="serif-font text-5xl md:text-6xl lg:text-[5.5rem] font-bold mb-6 leading-tight drop-shadow-lg">
+                <h1 class="serif-font text-3xl sm:text-4xl md:text-5xl lg:text-6xl lg:text-[5.5rem] font-bold mb-6 leading-tight drop-shadow-lg">
     <div class="overflow-hidden inline-block w-full">
         <div class="animate-reveal inline-block" style="animation-delay: 0.1s;"><span class="inline-block transition-all duration-300 hover:translate-x-4 cursor-pointer gradient-text-anim">Your Stackly Travel</span></div>
     </div>
@@ -305,10 +310,9 @@ document.addEventListener("DOMContentLoaded", () => {
     </div>
 </h1>
                 <p class="text-base md:text-lg mb-10 text-gray-100 max-w-xl mx-auto font-light drop-shadow-md animate-reveal" style="animation-delay: 0.5s;">Discover the world's most breathtaking destinations with personalized itineraries and premium luxury experiences tailored to your dreams.</p>
-                <div class="flex items-center justify-center gap-8 mt-6">
-    <a href="#" class="inline-block bg-[#f16f5c] hover:bg-[#e05a48] text-white font-semibold py-3.5 px-10 text-sm tracking-widest transition-colors shadow-lg uppercase animate-reveal" style="animation-delay: 0.7s;">Book Now</a>
-    <a href="#" class="inline-flex items-center justify-center bg-white text-gray-900 font-bold py-4 px-12 text-sm tracking-[0.2em] transition-transform hover:-translate-y-1 shadow-2xl uppercase animate-reveal" style="animation-delay: 0.9s;">Discover More</a>
-</div>
+                <div class="flex items-center justify-center mt-6">
+                    <a href="#" class="inline-flex items-center justify-center bg-white text-gray-900 font-bold py-4 px-12 text-sm tracking-[0.2em] transition-transform hover:-translate-y-1 shadow-2xl uppercase animate-reveal" style="animation-delay: 0.9s;">Discover More</a>
+                </div>
             </div></div>
     </div>
 
@@ -617,21 +621,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
     <!-- Travel Statistics -->
     <section class="py-20 px-8 lg:px-24 bg-gradient-to-r from-[#e05a48] to-[#f16f5c] text-white">
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center divide-x divide-white/20">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 text-center divide-x divide-white/20">
             <div class="reveal">
-                <div class="text-5xl md:text-6xl font-bold mb-3 counter" data-target="150">0</div>
+                <div class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-3 counter" data-target="150">0</div>
                 <p class="text-xs md:text-sm uppercase tracking-widest opacity-90 font-medium">Destinations</p>
             </div>
             <div class="reveal" style="transition-delay: 0.1s;">
-                <div class="text-5xl md:text-6xl font-bold mb-3 counter" data-target="50000">0</div>
+                <div class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-3 counter" data-target="50000">0</div>
                 <p class="text-xs md:text-sm uppercase tracking-widest opacity-90 font-medium">Travelers</p>
             </div>
             <div class="reveal" style="transition-delay: 0.2s;">
-                <div class="text-5xl md:text-6xl font-bold mb-3 counter" data-target="300">0</div>
+                <div class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-3 counter" data-target="300">0</div>
                 <p class="text-xs md:text-sm uppercase tracking-widest opacity-90 font-medium">Experiences</p>
             </div>
             <div class="reveal" style="transition-delay: 0.3s;">
-                <div class="text-5xl md:text-6xl font-bold mb-3 counter" data-target="120">0</div>
+                <div class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-3 counter" data-target="120">0</div>
                 <p class="text-xs md:text-sm uppercase tracking-widest opacity-90 font-medium">Travel Partners</p>
             </div>
         </div>
@@ -1123,8 +1127,62 @@ document.addEventListener("DOMContentLoaded", () => {
         }, 2000);
     });
 </script>
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu" class="fixed inset-0 bg-black/95 z-[60] hidden flex-col items-center justify-center space-y-8 text-xl text-white opacity-0 transition-opacity duration-300">
+        <button id="mobile-menu-close" class="absolute top-8 right-8 text-4xl text-gray-400 hover:text-white">&times;</button>
+        <a href="index.html" class="hover:text-[#f16f5c] transition-colors">Home</a>
+        <a href="about.html" class="hover:text-[#f16f5c] transition-colors">About</a>
+        <a href="service.html" class="hover:text-[#f16f5c] transition-colors">Service</a>
+        <a href="blog.html" class="hover:text-[#f16f5c] transition-colors">Blog</a>
+        <a href="contact.html" class="hover:text-[#f16f5c] transition-colors">Contact</a>
+        <a href="login.html" class="bg-[#f16f5c] px-8 py-3 rounded hover:bg-[#d95c4a] transition-colors mt-4">Login</a>
+    </div>
+
+        <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const hamburgerBtn = document.getElementById('hamburger-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const closeBtn = document.getElementById('mobile-menu-close');
+
+            if (hamburgerBtn && mobileMenu && closeBtn) {
+                hamburgerBtn.addEventListener('click', () => {
+                    mobileMenu.classList.remove('hidden');
+                    mobileMenu.classList.add('flex');
+                    setTimeout(() => {
+                        mobileMenu.classList.remove('opacity-0');
+                        mobileMenu.classList.add('opacity-100');
+                    }, 10);
+                    document.body.style.overflow = 'hidden';
+                });
+
+                const closeMenu = () => {
+                    mobileMenu.classList.remove('opacity-100');
+                    mobileMenu.classList.add('opacity-0');
+                    setTimeout(() => {
+                        mobileMenu.classList.add('hidden');
+                        mobileMenu.classList.remove('flex');
+                        document.body.style.overflow = '';
+                    }, 300);
+                };
+
+                closeBtn.addEventListener('click', closeMenu);
+                
+                // Prevent background scrolling on touch devices
+                mobileMenu.addEventListener('touchmove', (e) => {
+                    e.preventDefault();
+                }, { passive: false });
+                mobileMenu.addEventListener('wheel', (e) => {
+                    e.preventDefault();
+                }, { passive: false });
+            }
+        });
+    </script>
 </body>
 </html>
+
+
+
+
 
 
 

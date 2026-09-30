@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -7,9 +7,9 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
+    <style>html, body { overflow-x: hidden; width: 100%; max-width: 100vw; } 
         .serif-font { font-family: 'Playfair Display', serif; }
-        body { font-family: 'Inter', sans-serif; background-color: #ffffff; color: #111827; overflow-x: hidden; }
+        body { font-family: 'Inter', sans-serif; background-color: #ffffff; color: #111827; overflow-x: hidden; max-w-[100vw]; }
         
         /* Nav */
         .nav-link { position: relative; transition: color 0.3s ease; } .nav-link:hover, .nav-link.active { color: #f16f5c; }
@@ -106,8 +106,13 @@
               animation-play-state: paused;
           }
           .testimonial-card {
-              width: 380px;
+              width: 280px;
               flex-shrink: 0;
+          }
+          @media (min-width: 640px) {
+              .testimonial-card {
+                  width: 380px;
+              }
           }
             @keyframes revealUp {
             0% { transform: translateY(120%); opacity: 0; }
@@ -159,7 +164,7 @@
     transform-origin: right;
 }
 </style>
-<style>
+<style>html, body { overflow-x: hidden; width: 100%; max-width: 100vw; } 
 @keyframes btnGradient {
     0% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
@@ -202,7 +207,7 @@ a.bg-\[\#f16f5c\]:hover {
     transform-origin: right;
 }
 </style>
-<style>
+<style>html, body { overflow-x: hidden; width: 100%; max-width: 100vw; } 
 @keyframes btnGradientAnim {
     0% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
