@@ -12,7 +12,7 @@
         body { font-family: 'Inter', sans-serif; background-color: #ffffff; color: #111827; overflow-x: hidden; max-w-[100vw]; }
         
         /* Navbar */
-        .nav-link { position: relative; color: #111827; transition: color 0.3s ease; } .nav-link:hover, .nav-link.active { color: #f16f5c; }
+        .nav-link { position: relative; transition: color 0.3s ease; color: white; } .nav-link:hover, .nav-link.active { color: #f16f5c; }
         .nav-link::after { content: ''; position: absolute; width: 0; height: 2px; bottom: -4px; left: 0; background-color: #f16f5c; transition: width 0.3s ease; }
         .nav-link:hover::after, .nav-link.active::after { width: 100%; }
 
@@ -217,7 +217,7 @@ document.addEventListener("DOMContentLoaded", () => {
     </script>
 
     <!-- Navigation Bar (Light Theme) -->
-    <nav class="flex justify-between items-center py-5 px-8 md:px-16 w-full fixed top-0 left-0 z-50 bg-black/40 backdrop-blur-md border-b border-white/10 transition-all duration-300">
+    <nav class="flex justify-between items-center py-5 px-8 md:px-16 w-full fixed top-0 left-0 z-50 bg-[#1a1f24] shadow-md border-b border-white/5 transition-all duration-300">
             <div class="flex-1 text-2xl font-bold tracking-widest uppercase cursor-pointer text-white"><a href="index.html"><img src="assets/logo_0050.webp" alt="Stackly Logo" class="h-8 inline-block"></a></div>
             <ul class="hidden md:flex justify-center flex-1 space-x-10 text-sm font-medium">
                 <li><a href="index.html" class="nav-link">Home</a></li>
@@ -240,7 +240,7 @@ document.addEventListener("DOMContentLoaded", () => {
         
         <!-- Background Image with Overlay -->
         <div class="absolute inset-0 z-0">
-            <img src="https://images.unsplash.com/photo-1540206351-d6465b3ac5c1?auto=format&fit=crop&w=2000&q=80" alt="Service Background" class="w-full h-full object-cover opacity-80">
+            <img src="https://images.unsplash.com/photo-1540206351-d6465b3ac5c1?fm=webp&fit=crop&w=1080&q=40" alt="Service Background" class="w-full h-full object-cover opacity-80">
             <div class="absolute inset-0 bg-gray-50/90 backdrop-blur-[2px]"></div>
         </div>
 
@@ -302,6 +302,9 @@ document.addEventListener("DOMContentLoaded", () => {
                     <li class="flex items-center"><i class="fas fa-check text-green-500 mr-3 text-xs"></i>Trip duration planning</li>
                     <li class="flex items-center"><i class="fas fa-check text-green-500 mr-3 text-xs"></i>Budget-based planning</li>
                 </ul>
+                <div class="mt-8">
+                    <a href="#" class="inline-flex items-center justify-center bg-gray-50 text-gray-900 border border-gray-100 px-8 py-3 rounded-lg font-bold text-xs tracking-widest uppercase hover:bg-[#f16f5c] hover:text-white hover:border-[#f16f5c] transition-all duration-300 gap-2 group shadow-sm mt-4 w-fit">Read More <i class="fas fa-arrow-right transition-transform group-hover:translate-x-1"></i></a>
+                </div>
             </div>
 
             <!-- 2. Destination Discovery -->
@@ -316,6 +319,9 @@ document.addEventListener("DOMContentLoaded", () => {
                     <li class="flex items-center"><i class="fas fa-check text-green-500 mr-3 text-xs"></i>Local attractions</li>
                     <li class="flex items-center"><i class="fas fa-check text-green-500 mr-3 text-xs"></i>Best places to visit</li>
                 </ul>
+                <div class="mt-8">
+                    <a href="#" class="inline-flex items-center justify-center bg-gray-50 text-gray-900 border border-gray-100 px-8 py-3 rounded-lg font-bold text-xs tracking-widest uppercase hover:bg-[#f16f5c] hover:text-white hover:border-[#f16f5c] transition-all duration-300 gap-2 group shadow-sm mt-4 w-fit">Read More <i class="fas fa-arrow-right transition-transform group-hover:translate-x-1"></i></a>
+                </div>
             </div>
 
             <!-- 3. Tour Packages -->
@@ -330,6 +336,9 @@ document.addEventListener("DOMContentLoaded", () => {
                     <li class="flex items-center"><i class="fas fa-check text-green-500 mr-3 text-xs"></i>Weekend getaways</li>
                     <li class="flex items-center"><i class="fas fa-check text-green-500 mr-3 text-xs"></i>Cultural tours</li>
                 </ul>
+                <div class="mt-8">
+                    <a href="#" class="inline-flex items-center justify-center bg-gray-50 text-gray-900 border border-gray-100 px-8 py-3 rounded-lg font-bold text-xs tracking-widest uppercase hover:bg-[#f16f5c] hover:text-white hover:border-[#f16f5c] transition-all duration-300 gap-2 group shadow-sm mt-4 w-fit">Read More <i class="fas fa-arrow-right transition-transform group-hover:translate-x-1"></i></a>
+                </div>
             </div>
 
             <!-- 4. Accommodation Assistance -->
@@ -344,6 +353,9 @@ document.addEventListener("DOMContentLoaded", () => {
                     <li class="flex items-center"><i class="fas fa-check text-green-500 mr-3 text-xs"></i>Authentic Homestays</li>
                     <li class="flex items-center"><i class="fas fa-check text-green-500 mr-3 text-xs"></i>Family-friendly stays</li>
                 </ul>
+                <div class="mt-8">
+                    <a href="#" class="inline-flex items-center justify-center bg-gray-50 text-gray-900 border border-gray-100 px-8 py-3 rounded-lg font-bold text-xs tracking-widest uppercase hover:bg-[#f16f5c] hover:text-white hover:border-[#f16f5c] transition-all duration-300 gap-2 group shadow-sm mt-4 w-fit">Read More <i class="fas fa-arrow-right transition-transform group-hover:translate-x-1"></i></a>
+                </div>
             </div>
 
             <!-- 5. Transportation Services -->
@@ -358,6 +370,9 @@ document.addEventListener("DOMContentLoaded", () => {
                     <li class="flex items-center"><i class="fas fa-check text-green-500 mr-3 text-xs"></i>Rental vehicles</li>
                     <li class="flex items-center"><i class="fas fa-check text-green-500 mr-3 text-xs"></i>Intercity travel</li>
                 </ul>
+                <div class="mt-8">
+                    <a href="#" class="inline-flex items-center justify-center bg-gray-50 text-gray-900 border border-gray-100 px-8 py-3 rounded-lg font-bold text-xs tracking-widest uppercase hover:bg-[#f16f5c] hover:text-white hover:border-[#f16f5c] transition-all duration-300 gap-2 group shadow-sm mt-4 w-fit">Read More <i class="fas fa-arrow-right transition-transform group-hover:translate-x-1"></i></a>
+                </div>
             </div>
 
             <!-- 6. Local Experiences -->
@@ -372,6 +387,9 @@ document.addEventListener("DOMContentLoaded", () => {
                     <li class="flex items-center"><i class="fas fa-check text-green-500 mr-3 text-xs"></i>Traditional arts</li>
                     <li class="flex items-center"><i class="fas fa-check text-green-500 mr-3 text-xs"></i>Local guide experiences</li>
                 </ul>
+                <div class="mt-8">
+                    <a href="#" class="inline-flex items-center justify-center bg-gray-50 text-gray-900 border border-gray-100 px-8 py-3 rounded-lg font-bold text-xs tracking-widest uppercase hover:bg-[#f16f5c] hover:text-white hover:border-[#f16f5c] transition-all duration-300 gap-2 group shadow-sm mt-4 w-fit">Read More <i class="fas fa-arrow-right transition-transform group-hover:translate-x-1"></i></a>
+                </div>
             </div>
 
             <!-- 7. Stackly & Outdoor Activities -->
@@ -386,6 +404,9 @@ document.addEventListener("DOMContentLoaded", () => {
                     <li class="flex items-center"><i class="fas fa-check text-green-500 mr-3 text-xs"></i>Wildlife tours</li>
                     <li class="flex items-center"><i class="fas fa-check text-green-500 mr-3 text-xs"></i>Nature exploration</li>
                 </ul>
+                <div class="mt-8">
+                    <a href="#" class="inline-flex items-center justify-center bg-gray-50 text-gray-900 border border-gray-100 px-8 py-3 rounded-lg font-bold text-xs tracking-widest uppercase hover:bg-[#f16f5c] hover:text-white hover:border-[#f16f5c] transition-all duration-300 gap-2 group shadow-sm mt-4 w-fit">Read More <i class="fas fa-arrow-right transition-transform group-hover:translate-x-1"></i></a>
+                </div>
             </div>
 
             <!-- 8. Travel Guide & Information -->
@@ -400,6 +421,9 @@ document.addEventListener("DOMContentLoaded", () => {
                     <li class="flex items-center"><i class="fas fa-check text-green-500 mr-3 text-xs"></i>Travel tips</li>
                     <li class="flex items-center"><i class="fas fa-check text-green-500 mr-3 text-xs"></i>Essential information</li>
                 </ul>
+                <div class="mt-8">
+                    <a href="#" class="inline-flex items-center justify-center bg-gray-50 text-gray-900 border border-gray-100 px-8 py-3 rounded-lg font-bold text-xs tracking-widest uppercase hover:bg-[#f16f5c] hover:text-white hover:border-[#f16f5c] transition-all duration-300 gap-2 group shadow-sm mt-4 w-fit">Read More <i class="fas fa-arrow-right transition-transform group-hover:translate-x-1"></i></a>
+                </div>
             </div>
 
             <!-- 9. Travel Support -->
@@ -414,6 +438,9 @@ document.addEventListener("DOMContentLoaded", () => {
                     <li class="flex items-center"><i class="fas fa-check text-green-500 mr-3 text-xs"></i>Emergency support</li>
                     <li class="flex items-center"><i class="fas fa-check text-green-500 mr-3 text-xs"></i>Customer assistance</li>
                 </ul>
+                <div class="mt-8">
+                    <a href="#" class="inline-flex items-center justify-center bg-gray-50 text-gray-900 border border-gray-100 px-8 py-3 rounded-lg font-bold text-xs tracking-widest uppercase hover:bg-[#f16f5c] hover:text-white hover:border-[#f16f5c] transition-all duration-300 gap-2 group shadow-sm mt-4 w-fit">Read More <i class="fas fa-arrow-right transition-transform group-hover:translate-x-1"></i></a>
+                </div>
             </div>
         </div>
     </section>
@@ -486,7 +513,7 @@ document.addEventListener("DOMContentLoaded", () => {
         <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
             <div class=" -up relative" data-aos="fade-up">
                 <div class="absolute inset-0 bg-[#f16f5c] transform translate-x-4 translate-y-4 rounded-3xl"></div>
-                <img src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=1000&q=80" class="rounded-3xl shadow-2xl w-full h-[550px] object-cover relative z-10">
+                <img src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?fm=webp&fit=crop&w=1000&q=40" class="rounded-3xl shadow-2xl w-full h-[550px] object-cover relative z-10">
             </div>
             <div class=" -up" data-aos="fade-up" style="transition-delay: 0.2s;">
                 <p class="text-[#f16f5c] font-bold tracking-widest uppercase text-xs mb-4">Our Promise</p>
@@ -609,7 +636,7 @@ document.addEventListener("DOMContentLoaded", () => {
     <!-- Final Travel CTA -->
     <section class="h-[65vh] relative flex items-center justify-center overflow-hidden  -up" data-aos="fade-up">
         <div class="absolute inset-0 z-0 ken-burns">
-            <img src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&w=2000&q=80" class="w-full h-full object-cover">
+            <img src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?fm=webp&fit=crop&w=1080&q=40" class="w-full h-full object-cover">
         </div>
         <div class="absolute inset-0 bg-black/40 z-0 transition-colors duration-500 hover:bg-black/50"></div>
         <div class="relative z-10 text-center text-white px-4  -up" data-aos="fade-up" style="transition-delay: 0.2s;">
@@ -764,6 +791,13 @@ document.addEventListener("DOMContentLoaded", () => {
 <script>document.addEventListener('DOMContentLoaded', function() { AOS.init({ duration: 800, once: true, offset: 100 }); });</script>
 </body>
 </html>
+
+
+
+
+
+
+
 
 
 
