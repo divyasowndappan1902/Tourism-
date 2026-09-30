@@ -182,8 +182,33 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 </script>
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 </head>
 <body class="m-0 p-0 text-gray-800">
+    <!-- Preloader -->
+    <div id="stackly-preloader" class="fixed inset-0 z-[9999] bg-[#0a0f16] flex flex-col items-center justify-center transition-opacity duration-700">
+        <div class="relative flex items-center justify-center w-24 h-24 mb-4">
+            <div class="absolute inset-0 border-4 border-t-[#f16f5c] border-r-transparent border-b-[#f16f5c] border-l-transparent rounded-full animate-[spin_1.5s_linear_infinite] opacity-70"></div>
+            <i class="fas fa-plane-departure text-3xl text-white animate-pulse"></i>
+        </div>
+        <h2 class="text-2xl font-bold tracking-[0.2em] text-white flex items-center gap-2">
+            STACK<span class="text-[#f16f5c]">LY</span>
+        </h2>
+        <p class="text-[#f16f5c] text-sm tracking-widest mt-2 uppercase text-xs font-semibold animate-pulse">Loading Journey...</p>
+    </div>
+    <script>
+        window.addEventListener('load', function() {
+            const preloader = document.getElementById('stackly-preloader');
+            if(preloader) {
+                setTimeout(() => {
+                    preloader.style.opacity = '0';
+                    setTimeout(() => {
+                        preloader.remove();
+                    }, 700);
+                }, 500);
+            }
+        });
+    </script>
 
     <!-- Navigation Bar (Light Theme) -->
     <nav class="flex justify-between items-center py-5 px-8 md:px-16 w-full fixed top-0 left-0 z-50 bg-black/40 backdrop-blur-md border-b border-white/10 transition-all duration-300">
@@ -243,7 +268,7 @@ document.addEventListener("DOMContentLoaded", () => {
             </svg>
         </div>
 
-        <div class="reveal-up relative z-10">
+        <div class=" -up relative z-10" data-aos="fade-up">
             <h1 class="serif-font text-5xl md:text-6xl font-bold mb-4">Travel Blog</h1>
             <p class="text-gray-500 uppercase tracking-widest text-sm">Stories & Inspiration</p>
         </div>
@@ -251,7 +276,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         <!-- 1. Featured Travel Story -->
     <section class="py-24 px-8 lg:px-24 bg-white">
-        <div class="max-w-7xl mx-auto reveal-up">
+        <div class="max-w-7xl mx-auto  -up" data-aos="fade-up">
             <div class="relative w-full h-[500px] md:h-[600px] rounded-3xl overflow-hidden shadow-2xl group cursor-pointer">
                 <img src="assets/travel-story-1.webp" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-1000 ease-in-out">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
@@ -266,46 +291,46 @@ document.addEventListener("DOMContentLoaded", () => {
     </section>
     <!-- 2. Explore Travel Stories -->
     <section class="py-24 px-8 lg:px-24 bg-gray-50 border-b border-gray-100">
-        <div class="text-center mb-16 reveal-up">
+        <div class="text-center mb-16  -up" data-aos="fade-up">
             <h2 class="serif-font text-4xl font-bold mb-4">Explore Travel Stories</h2>
         </div>
         <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
-            <div class="group cursor-pointer reveal-up">
+            <div class="group cursor-pointer  -up" data-aos="fade-up">
                 <div class="rounded-xl overflow-hidden h-36 relative mb-4 shadow-sm">
                     <img src="assets/new-york.webp" class="w-full h-full object-cover img-zoom">
                     <div class="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors"></div>
                 </div>
                 <h4 class="font-bold text-center text-sm group-hover:text-[#f16f5c] transition-colors"><i class="fas fa-umbrella-beach mr-2 text-[#f16f5c]"></i>Destinations</h4>
             </div>
-            <div class="group cursor-pointer reveal-up" style="transition-delay: 0.1s;">
+            <div class="group cursor-pointer  -up" data-aos="fade-up" style="transition-delay: 0.1s;">
                 <div class="rounded-xl overflow-hidden h-36 relative mb-4 shadow-sm">
                     <img src="assets/new-york.webp" class="w-full h-full object-cover img-zoom">
                     <div class="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors"></div>
                 </div>
                 <h4 class="font-bold text-center text-sm group-hover:text-[#f16f5c] transition-colors"><i class="fas fa-mountain mr-2 text-[#f16f5c]"></i>Adventure</h4>
             </div>
-            <div class="group cursor-pointer reveal-up" style="transition-delay: 0.2s;">
+            <div class="group cursor-pointer  -up" data-aos="fade-up" style="transition-delay: 0.2s;">
                 <div class="rounded-xl overflow-hidden h-36 relative mb-4 shadow-sm">
                     <img src="assets/diwali.webp" class="w-full h-full object-cover img-zoom">
                     <div class="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors"></div>
                 </div>
                 <h4 class="font-bold text-center text-sm group-hover:text-[#f16f5c] transition-colors"><i class="fas fa-landmark mr-2 text-[#f16f5c]"></i>Culture &amp; Heritage</h4>
             </div>
-            <div class="group cursor-pointer reveal-up" style="transition-delay: 0.3s;">
+            <div class="group cursor-pointer  -up" data-aos="fade-up" style="transition-delay: 0.3s;">
                 <div class="rounded-xl overflow-hidden h-36 relative mb-4 shadow-sm">
                     <img src="assets/survival.webp" class="w-full h-full object-cover img-zoom">
                     <div class="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors"></div>
                 </div>
                 <h4 class="font-bold text-center text-sm group-hover:text-[#f16f5c] transition-colors"><i class="fas fa-leaf mr-2 text-[#f16f5c]"></i>Nature</h4>
             </div>
-            <div class="group cursor-pointer reveal-up" style="transition-delay: 0.4s;">
+            <div class="group cursor-pointer  -up" data-aos="fade-up" style="transition-delay: 0.4s;">
                 <div class="rounded-xl overflow-hidden h-36 relative mb-4 shadow-sm">
                     <img src="assets/hill-station.webp" class="w-full h-full object-cover img-zoom">
                     <div class="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors"></div>
                 </div>
                 <h4 class="font-bold text-center text-sm group-hover:text-[#f16f5c] transition-colors"><i class="fas fa-utensils mr-2 text-[#f16f5c]"></i>Food & Travel</h4>
             </div>
-            <div class="group cursor-pointer reveal-up" style="transition-delay: 0.5s;">
+            <div class="group cursor-pointer  -up" data-aos="fade-up" style="transition-delay: 0.5s;">
                 <div class="rounded-xl overflow-hidden h-36 relative mb-4 shadow-sm">
                     <img src="assets/secret-beach.webp" class="w-full h-full object-cover img-zoom">
                     <div class="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors"></div>
@@ -317,12 +342,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     <!-- 3. Popular Destinations -->
     <section class="py-24 px-8 lg:px-24">
-        <div class="flex justify-between items-end mb-16 reveal-up">
+        <div class="flex justify-between items-end mb-16  -up" data-aos="fade-up">
             <h2 class="serif-font text-4xl font-bold">Popular Destinations</h2>
             <a href="#" class="text-[#f16f5c] font-bold text-sm uppercase tracking-wider hidden sm:block border-b-2 border-[#f16f5c] pb-1 hover:text-gray-900 transition-colors">View All</a>
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            <div class="group relative overflow-hidden rounded-2xl h-[450px] shadow-lg reveal-up cursor-pointer">
+            <div class="group relative overflow-hidden rounded-2xl h-[450px] shadow-lg  -up cursor-pointer" data-aos="fade-up">
                 <img src="assets/kyoto-tea.webp" class="w-full h-full object-cover img-zoom">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
                 <div class="absolute bottom-0 left-0 right-0 p-8 text-white transform translate-y-8 group-hover:translate-y-0 transition-transform duration-500">
@@ -330,7 +355,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     <p class="text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100 text-gray-300">Venice: A complete guide to the romantic canals.</p>
                 </div>
             </div>
-            <div class="group relative overflow-hidden rounded-2xl h-[450px] shadow-lg reveal-up cursor-pointer" style="transition-delay: 0.1s;">
+            <div class="group relative overflow-hidden rounded-2xl h-[450px] shadow-lg  -up cursor-pointer" data-aos="fade-up" style="transition-delay: 0.1s;">
                 <img src="assets/kyoto.webp" class="w-full h-full object-cover img-zoom">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
                 <div class="absolute bottom-0 left-0 right-0 p-8 text-white transform translate-y-8 group-hover:translate-y-0 transition-transform duration-500">
@@ -338,7 +363,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     <p class="text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100 text-gray-300">Discover secret coastal towns away from crowds.</p>
                 </div>
             </div>
-            <div class="group relative overflow-hidden rounded-2xl h-[450px] shadow-lg reveal-up cursor-pointer" style="transition-delay: 0.2s;">
+            <div class="group relative overflow-hidden rounded-2xl h-[450px] shadow-lg  -up cursor-pointer" data-aos="fade-up" style="transition-delay: 0.2s;">
                 <img src="assets/travel-story-2.webp" class="w-full h-full object-cover img-zoom">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
                 <div class="absolute bottom-0 left-0 right-0 p-8 text-white transform translate-y-8 group-hover:translate-y-0 transition-transform duration-500">
@@ -346,7 +371,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     <p class="text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100 text-gray-300">Short escapes to recharge your mind and soul.</p>
                 </div>
             </div>
-            <div class="group relative overflow-hidden rounded-2xl h-[450px] shadow-lg reveal-up cursor-pointer" style="transition-delay: 0.3s;">
+            <div class="group relative overflow-hidden rounded-2xl h-[450px] shadow-lg  -up cursor-pointer" data-aos="fade-up" style="transition-delay: 0.3s;">
                 <img src="assets/hidden-gems.webp" class="w-full h-full object-cover img-zoom">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
                 <div class="absolute bottom-0 left-0 right-0 p-8 text-white transform translate-y-8 group-hover:translate-y-0 transition-transform duration-500">
@@ -359,12 +384,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     <!-- 4. Travel Guides -->
     <section class="py-24 px-8 lg:px-24 bg-gray-50 border-y border-gray-100">
-        <div class="text-center mb-16 reveal-up">
+        <div class="text-center mb-16  -up" data-aos="fade-up">
             <h2 class="serif-font text-4xl font-bold mb-4">Travel Guides</h2>
             <p class="text-gray-500">Essential information for your next trip</p>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <div class="bg-white p-6 border border-gray-100 rounded-xl shadow-sm hover:shadow-md transition-shadow reveal-up flex gap-5 group cursor-pointer">
+            <div class="bg-white p-6 border border-gray-100 rounded-xl shadow-sm hover:shadow-md transition-shadow  -up flex gap-5 group cursor-pointer" data-aos="fade-up">
                 <div class="w-14 h-14 bg-indigo-50 text-indigo-500 rounded-lg flex items-center justify-center text-xl shrink-0 group-hover:bg-indigo-500 group-hover:text-white transition-colors"><i class="far fa-calendar-check"></i></div>
                 <div>
                     <span class="text-[10px] text-gray-400 uppercase tracking-widest mb-1 block font-bold">Planning</span>
@@ -372,7 +397,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     <p class="text-sm text-gray-500 line-clamp-2">Seasonal guides for the best weather and smallest crowds.</p>
                 </div>
             </div>
-            <div class="bg-white p-6 border border-gray-100 rounded-xl shadow-sm hover:shadow-md transition-shadow reveal-up flex gap-5 group cursor-pointer" style="transition-delay: 0.1s;">
+            <div class="bg-white p-6 border border-gray-100 rounded-xl shadow-sm hover:shadow-md transition-shadow  -up flex gap-5 group cursor-pointer" data-aos="fade-up" style="transition-delay: 0.1s;">
                 <div class="w-14 h-14 bg-teal-50 text-teal-500 rounded-lg flex items-center justify-center text-xl shrink-0 group-hover:bg-teal-500 group-hover:text-white transition-colors"><i class="fas fa-walking"></i></div>
                 <div>
                     <span class="text-[10px] text-gray-400 uppercase tracking-widest mb-1 block font-bold">Activities</span>
@@ -380,7 +405,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     <p class="text-sm text-gray-500 line-clamp-2">Top activities, tours, and experiences in major cities.</p>
                 </div>
             </div>
-            <div class="bg-white p-6 border border-gray-100 rounded-xl shadow-sm hover:shadow-md transition-shadow reveal-up flex gap-5 group cursor-pointer" style="transition-delay: 0.2s;">
+            <div class="bg-white p-6 border border-gray-100 rounded-xl shadow-sm hover:shadow-md transition-shadow  -up flex gap-5 group cursor-pointer" data-aos="fade-up" style="transition-delay: 0.2s;">
                 <div class="w-14 h-14 bg-rose-50 text-rose-500 rounded-lg flex items-center justify-center text-xl shrink-0 group-hover:bg-rose-500 group-hover:text-white transition-colors"><i class="fas fa-bed"></i></div>
                 <div>
                     <span class="text-[10px] text-gray-400 uppercase tracking-widest mb-1 block font-bold">Accommodation</span>
@@ -388,7 +413,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     <p class="text-sm text-gray-500 line-clamp-2">Neighborhood breakdowns and hotel recommendations.</p>
                 </div>
             </div>
-            <div class="bg-white p-6 border border-gray-100 rounded-xl shadow-sm hover:shadow-md transition-shadow reveal-up flex gap-5 group cursor-pointer">
+            <div class="bg-white p-6 border border-gray-100 rounded-xl shadow-sm hover:shadow-md transition-shadow  -up flex gap-5 group cursor-pointer" data-aos="fade-up">
                 <div class="w-14 h-14 bg-orange-50 text-orange-500 rounded-lg flex items-center justify-center text-xl shrink-0 group-hover:bg-orange-500 group-hover:text-white transition-colors"><i class="fas fa-utensils"></i></div>
                 <div>
                     <span class="text-[10px] text-gray-400 uppercase tracking-widest mb-1 block font-bold">Culinary</span>
@@ -396,7 +421,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     <p class="text-sm text-gray-500 line-clamp-2">Must-try local dishes and the best restaurants.</p>
                 </div>
             </div>
-            <div class="bg-white p-6 border border-gray-100 rounded-xl shadow-sm hover:shadow-md transition-shadow reveal-up flex gap-5 group cursor-pointer" style="transition-delay: 0.1s;">
+            <div class="bg-white p-6 border border-gray-100 rounded-xl shadow-sm hover:shadow-md transition-shadow  -up flex gap-5 group cursor-pointer" data-aos="fade-up" style="transition-delay: 0.1s;">
                 <div class="w-14 h-14 bg-green-50 text-green-600 rounded-lg flex items-center justify-center text-xl shrink-0 group-hover:bg-green-600 group-hover:text-white transition-colors"><i class="fas fa-wallet"></i></div>
                 <div>
                     <span class="text-[10px] text-gray-400 uppercase tracking-widest mb-1 block font-bold">Finance</span>
@@ -404,7 +429,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     <p class="text-sm text-gray-500 line-clamp-2">Cost breakdowns to help you plan your expenses.</p>
                 </div>
             </div>
-            <div class="bg-white p-6 border border-gray-100 rounded-xl shadow-sm hover:shadow-md transition-shadow reveal-up flex gap-5 group cursor-pointer" style="transition-delay: 0.2s;">
+            <div class="bg-white p-6 border border-gray-100 rounded-xl shadow-sm hover:shadow-md transition-shadow  -up flex gap-5 group cursor-pointer" data-aos="fade-up" style="transition-delay: 0.2s;">
                 <div class="w-14 h-14 bg-purple-50 text-purple-500 rounded-lg flex items-center justify-center text-xl shrink-0 group-hover:bg-purple-500 group-hover:text-white transition-colors"><i class="fas fa-info-circle"></i></div>
                 <div>
                     <span class="text-[10px] text-gray-400 uppercase tracking-widest mb-1 block font-bold">Basics</span>
@@ -417,10 +442,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     <!-- 5. Adventure Stories -->
     <section class="py-24 px-8 lg:px-24 bg-gray-950 text-white overflow-hidden">
-        <h2 class="serif-font text-4xl font-bold mb-16 text-center reveal-up">Adventure Stories</h2>
+        <h2 class="serif-font text-4xl font-bold mb-16 text-center  -up" data-aos="fade-up">Adventure Stories</h2>
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 max-w-7xl mx-auto">
             <!-- Large Main Tilt Card -->
-            <div class="tilt-card relative rounded-3xl overflow-hidden h-[500px] lg:h-[600px] group cursor-pointer reveal-left">
+            <div class="tilt-card relative rounded-3xl overflow-hidden h-[500px] lg:h-[600px] group cursor-pointer  -left" data-aos="fade-up">
                 <img src="assets/secret-beach.webp" class="w-full h-full object-cover img-zoom opacity-80 group-hover:opacity-100 transition-opacity">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
                 <div class="absolute top-8 left-8 bg-[#f16f5c] px-4 py-1.5 rounded text-xs font-bold uppercase tracking-widest shadow-lg transform group-hover:scale-110 transition-transform">Trekking</div>
@@ -430,7 +455,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 </div>
             </div>
             <!-- Smaller Grid -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 reveal-right">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6  -right" data-aos="fade-up">
                 <div class="tilt-card relative rounded-2xl overflow-hidden h-72 group cursor-pointer">
                     <img src="assets/survival.webp" class="w-full h-full object-cover img-zoom opacity-80 group-hover:opacity-100">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
@@ -461,11 +486,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     <!-- 6. Culture & Heritage -->
     <section class="py-24 px-8 lg:px-24">
-        <h2 class="serif-font text-4xl font-bold mb-16 text-center reveal-up">Culture & Heritage</h2>
+        <h2 class="serif-font text-4xl font-bold mb-16 text-center  -up" data-aos="fade-up">Culture & Heritage</h2>
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 max-w-7xl mx-auto">
             <!-- Large Editorial Card -->
-            <div class="group cursor-pointer reveal-up">
-                <div class="clip-path-reveal h-[450px] mb-8 overflow-hidden rounded-2xl shadow-lg">
+            <div class="group cursor-pointer  -up" data-aos="fade-up">
+                <div class="clip-path-  h-[450px] mb-8 overflow-hidden rounded-2xl shadow-lg" data-aos="fade-up">
                     <img src="assets/petra.webp" class="w-full h-full object-cover img-zoom">
                 </div>
                 <p class="text-xs text-[#f16f5c] font-bold uppercase tracking-widest mb-3">Historical Places</p>
@@ -475,8 +500,8 @@ document.addEventListener("DOMContentLoaded", () => {
             
             <!-- List of Editorial Cards -->
             <div class="flex flex-col justify-between space-y-10">
-                <div class="flex gap-6 items-center group cursor-pointer reveal-right" style="transition-delay: 0.3s;">
-                    <div class="w-32 h-32 md:w-40 md:h-40 shrink-0 overflow-hidden rounded-xl clip-path-reveal shadow-md">
+                <div class="flex gap-6 items-center group cursor-pointer  -right" data-aos="fade-up" style="transition-delay: 0.3s;">
+                    <div class="w-32 h-32 md:w-40 md:h-40 shrink-0 overflow-hidden rounded-xl clip-path-  shadow-md" data-aos="fade-up">
                         <img src="assets/cuisine.webp" class="w-full h-full object-cover img-zoom">
                     </div>
                     <div>
@@ -485,8 +510,8 @@ document.addEventListener("DOMContentLoaded", () => {
                         <p class="text-gray-500 text-sm line-clamp-2">Authentic local dishes passed down through generations.</p>
                     </div>
                 </div>
-                <div class="flex gap-6 items-center group cursor-pointer reveal-right">
-                    <div class="w-32 h-32 md:w-40 md:h-40 shrink-0 overflow-hidden rounded-xl clip-path-reveal shadow-md">
+                <div class="flex gap-6 items-center group cursor-pointer  -right" data-aos="fade-up">
+                    <div class="w-32 h-32 md:w-40 md:h-40 shrink-0 overflow-hidden rounded-xl clip-path-  shadow-md" data-aos="fade-up">
                         <img src="assets/kyoto-tea.webp" class="w-full h-full object-cover img-zoom">
                     </div>
                     <div>
@@ -495,8 +520,8 @@ document.addEventListener("DOMContentLoaded", () => {
                         <p class="text-gray-500 text-sm line-clamp-2">Understanding the deep cultural significance of matcha.</p>
                     </div>
                 </div>
-                <div class="flex gap-6 items-center group cursor-pointer reveal-right" style="transition-delay: 0.1s;">
-                    <div class="w-32 h-32 md:w-40 md:h-40 shrink-0 overflow-hidden rounded-xl clip-path-reveal shadow-md">
+                <div class="flex gap-6 items-center group cursor-pointer  -right" data-aos="fade-up" style="transition-delay: 0.1s;">
+                    <div class="w-32 h-32 md:w-40 md:h-40 shrink-0 overflow-hidden rounded-xl clip-path-  shadow-md" data-aos="fade-up">
                         <img src="assets/diwali.webp" class="w-full h-full object-cover img-zoom">
                     </div>
                     <div>
@@ -505,8 +530,8 @@ document.addEventListener("DOMContentLoaded", () => {
                         <p class="text-gray-500 text-sm line-clamp-2">Experiencing the brightest festival across India.</p>
                     </div>
                 </div>
-                <div class="flex gap-6 items-center group cursor-pointer reveal-right" style="transition-delay: 0.2s;">
-                    <div class="w-32 h-32 md:w-40 md:h-40 shrink-0 overflow-hidden rounded-xl clip-path-reveal shadow-md">
+                <div class="flex gap-6 items-center group cursor-pointer  -right" data-aos="fade-up" style="transition-delay: 0.2s;">
+                    <div class="w-32 h-32 md:w-40 md:h-40 shrink-0 overflow-hidden rounded-xl clip-path-  shadow-md" data-aos="fade-up">
                         <img src="assets/hill-station.webp" class="w-full h-full object-cover img-zoom">
                     </div>
                     <div>
@@ -521,9 +546,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     <!-- 7. Food & Travel -->
     <section class="py-24 px-8 lg:px-24 bg-orange-50">
-        <h2 class="serif-font text-4xl font-bold mb-16 text-center reveal-up">Food & Travel</h2>
+        <h2 class="serif-font text-4xl font-bold mb-16 text-center  -up" data-aos="fade-up">Food & Travel</h2>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            <div class="group cursor-pointer reveal-up relative rounded-2xl overflow-hidden h-96 shadow-lg">
+            <div class="group cursor-pointer  -up relative rounded-2xl overflow-hidden h-96 shadow-lg" data-aos="fade-up">
                 <img src="assets/cuisine.webp" class="w-full h-full object-cover img-zoom">
                 <div class="absolute inset-0 bg-black/40 group-hover:bg-black/50 transition-colors"></div>
                 <div class="absolute inset-0 flex flex-col items-center justify-center p-6 text-center text-white transform group-hover:scale-110 transition-transform duration-500">
@@ -531,7 +556,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     <span class="text-xs font-bold uppercase tracking-widest border border-white px-4 py-1.5 mt-2 rounded">Taste</span>
                 </div>
             </div>
-            <div class="group cursor-pointer reveal-up relative rounded-2xl overflow-hidden h-96 shadow-lg" style="transition-delay: 0.1s;">
+            <div class="group cursor-pointer  -up relative rounded-2xl overflow-hidden h-96 shadow-lg" data-aos="fade-up" style="transition-delay: 0.1s;">
                 <img src="assets/gothic.webp" class="w-full h-full object-cover img-zoom">
                 <div class="absolute inset-0 bg-black/40 group-hover:bg-black/50 transition-colors"></div>
                 <div class="absolute inset-0 flex flex-col items-center justify-center p-6 text-center text-white transform group-hover:scale-110 transition-transform duration-500">
@@ -539,7 +564,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     <span class="text-xs font-bold uppercase tracking-widest border border-white px-4 py-1.5 mt-2 rounded">Dine</span>
                 </div>
             </div>
-            <div class="group cursor-pointer reveal-up relative rounded-2xl overflow-hidden h-96 shadow-lg" style="transition-delay: 0.2s;">
+            <div class="group cursor-pointer  -up relative rounded-2xl overflow-hidden h-96 shadow-lg" data-aos="fade-up" style="transition-delay: 0.2s;">
                 <img src="assets/survival.webp" class="w-full h-full object-cover img-zoom">
                 <div class="absolute inset-0 bg-black/40 group-hover:bg-black/50 transition-colors"></div>
                 <div class="absolute inset-0 flex flex-col items-center justify-center p-6 text-center text-white transform group-hover:scale-110 transition-transform duration-500">
@@ -547,7 +572,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     <span class="text-xs font-bold uppercase tracking-widest border border-white px-4 py-1.5 mt-2 rounded">Savor</span>
                 </div>
             </div>
-            <div class="group cursor-pointer reveal-up relative rounded-2xl overflow-hidden h-96 shadow-lg" style="transition-delay: 0.3s;">
+            <div class="group cursor-pointer  -up relative rounded-2xl overflow-hidden h-96 shadow-lg" data-aos="fade-up" style="transition-delay: 0.3s;">
                 <img src="assets/travel-story-3.webp" class="w-full h-full object-cover img-zoom">
                 <div class="absolute inset-0 bg-black/40 group-hover:bg-black/50 transition-colors"></div>
                 <div class="absolute inset-0 flex flex-col items-center justify-center p-6 text-center text-white transform group-hover:scale-110 transition-transform duration-500">
@@ -561,38 +586,38 @@ document.addEventListener("DOMContentLoaded", () => {
         <!-- 8. Travel Tips & Inspiration -->
     <section class="py-24 px-8 lg:px-24 bg-white">
         <div class="max-w-7xl mx-auto">
-            <h2 class="serif-font text-4xl font-bold mb-16 text-center reveal-up">Travel Tips & Inspiration</h2>
+            <h2 class="serif-font text-4xl font-bold mb-16 text-center  -up" data-aos="fade-up">Travel Tips & Inspiration</h2>
             <div class="grid grid-cols-2 md:grid-cols-5 gap-6">
                 <!-- Tip 1 -->
-                <div class="bg-white border border-gray-100 rounded-2xl p-8 flex flex-col items-center text-center shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 cursor-pointer reveal-up">
+                <div class="bg-white border border-gray-100 rounded-2xl p-8 flex flex-col items-center text-center shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 cursor-pointer  -up" data-aos="fade-up">
                     <div class="w-16 h-16 bg-red-50 text-[#f16f5c] rounded-full flex items-center justify-center text-2xl mb-4">
                         <i class="fas fa-suitcase-rolling"></i>
                     </div>
                     <h4 class="font-bold text-xs uppercase tracking-widest text-gray-900">Packing Tips</h4>
                 </div>
                 <!-- Tip 2 -->
-                <div class="bg-white border border-gray-100 rounded-2xl p-8 flex flex-col items-center text-center shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 cursor-pointer reveal-up" style="transition-delay: 0.1s;">
+                <div class="bg-white border border-gray-100 rounded-2xl p-8 flex flex-col items-center text-center shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 cursor-pointer  -up" data-aos="fade-up" style="transition-delay: 0.1s;">
                     <div class="w-16 h-16 bg-red-50 text-[#f16f5c] rounded-full flex items-center justify-center text-2xl mb-4">
                         <i class="fas fa-wallet"></i>
                     </div>
                     <h4 class="font-bold text-xs uppercase tracking-widest text-gray-900">Budget Travel</h4>
                 </div>
                 <!-- Tip 3 -->
-                <div class="bg-white border border-gray-100 rounded-2xl p-8 flex flex-col items-center text-center shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 cursor-pointer reveal-up" style="transition-delay: 0.2s;">
+                <div class="bg-white border border-gray-100 rounded-2xl p-8 flex flex-col items-center text-center shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 cursor-pointer  -up" data-aos="fade-up" style="transition-delay: 0.2s;">
                     <div class="w-16 h-16 bg-red-50 text-[#f16f5c] rounded-full flex items-center justify-center text-2xl mb-4">
                         <i class="fas fa-user-astronaut"></i>
                     </div>
                     <h4 class="font-bold text-xs uppercase tracking-widest text-gray-900">Solo Travel</h4>
                 </div>
                 <!-- Tip 4 -->
-                <div class="bg-white border border-gray-100 rounded-2xl p-8 flex flex-col items-center text-center shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 cursor-pointer reveal-up" style="transition-delay: 0.3s;">
+                <div class="bg-white border border-gray-100 rounded-2xl p-8 flex flex-col items-center text-center shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 cursor-pointer  -up" data-aos="fade-up" style="transition-delay: 0.3s;">
                     <div class="w-16 h-16 bg-red-50 text-[#f16f5c] rounded-full flex items-center justify-center text-2xl mb-4">
                         <i class="fas fa-users"></i>
                     </div>
                     <h4 class="font-bold text-xs uppercase tracking-widest text-gray-900">Family Travel</h4>
                 </div>
                 <!-- Tip 5 -->
-                <div class="bg-white border border-gray-100 rounded-2xl p-8 flex flex-col items-center text-center shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 cursor-pointer reveal-up" style="transition-delay: 0.4s;">
+                <div class="bg-white border border-gray-100 rounded-2xl p-8 flex flex-col items-center text-center shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 cursor-pointer  -up" data-aos="fade-up" style="transition-delay: 0.4s;">
                     <div class="w-16 h-16 bg-red-50 text-[#f16f5c] rounded-full flex items-center justify-center text-2xl mb-4">
                         <i class="fas fa-camera"></i>
                     </div>
@@ -604,20 +629,20 @@ document.addEventListener("DOMContentLoaded", () => {
     <!-- 9. Hidden Gems (Asymmetrical) -->
     <section class="py-32 px-8 lg:px-24 bg-gray-950 text-white overflow-hidden">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center max-w-7xl mx-auto">
-            <div class="lg:col-span-5 reveal-left z-10">
+            <div class="lg:col-span-5  -left z-10" data-aos="fade-up">
                 <p class="text-[#f16f5c] font-bold tracking-widest uppercase text-xs mb-4">Off the Beaten Path</p>
                 <h2 class="serif-font text-5xl md:text-6xl font-bold mb-8 leading-tight">Hidden Gems</h2>
                 <p class="text-gray-400 mb-10 text-lg leading-relaxed">Discover lesser-known destinations, secret beaches, quiet hill stations, and truly offbeat locations away from the tourist trails. This is travel for the curious soul.</p>
                 <a href="#" class="inline-flex items-center justify-center bg-white text-gray-900 font-bold py-4 px-12 text-sm tracking-[0.2em] transition-transform hover:-translate-y-1 shadow-2xl uppercase mx-auto md:mx-0">Explore Offbeat Places</a>
             </div>
-            <div class="lg:col-span-7 grid grid-cols-2 gap-6 relative reveal-right">
-                <div class="clip-path-reveal h-[350px] md:h-[450px] w-full transform md:translate-y-16 group cursor-pointer overflow-hidden rounded-2xl shadow-2xl">
+            <div class="lg:col-span-7 grid grid-cols-2 gap-6 relative  -right" data-aos="fade-up">
+                <div class="clip-path-  h-[350px] md:h-[450px] w-full transform md:translate-y-16 group cursor-pointer overflow-hidden rounded-2xl shadow-2xl" data-aos="fade-up">
                     <img src="assets/secret-beach.webp" class="w-full h-full object-cover img-zoom">
                     <div class="absolute inset-0 flex items-end p-8 bg-gradient-to-t from-black/90 via-black/20 to-transparent">
                         <h3 class="serif-font text-2xl font-bold group-hover:text-[#f16f5c] transition-colors">Secret Beaches</h3>
                     </div>
                 </div>
-                <div class="clip-path-reveal h-[400px] md:h-[550px] w-full group cursor-pointer overflow-hidden rounded-2xl shadow-2xl" style="transition-delay: 0.2s;">
+                <div class="clip-path-  h-[400px] md:h-[550px] w-full group cursor-pointer overflow-hidden rounded-2xl shadow-2xl" data-aos="fade-up" style="transition-delay: 0.2s;">
                     <img src="assets/hill-station.webp" class="w-full h-full object-cover img-zoom">
                     <div class="absolute inset-0 flex items-end p-8 bg-gradient-to-t from-black/90 via-black/20 to-transparent">
                         <h3 class="serif-font text-2xl font-bold group-hover:text-[#f16f5c] transition-colors">Quiet Hill Stations</h3>
@@ -629,10 +654,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     <!-- 10. Latest Travel Stories -->
     <section class="py-24 px-8 lg:px-24 bg-gray-50">
-        <h2 class="serif-font text-4xl font-bold mb-16 text-center reveal-up">Latest Travel Stories</h2>
+        <h2 class="serif-font text-4xl font-bold mb-16 text-center  -up" data-aos="fade-up">Latest Travel Stories</h2>
         <div class="flex flex-col space-y-8 max-w-5xl mx-auto">
             <!-- Article 1 -->
-            <div class="flex flex-col md:flex-row gap-8 items-center group cursor-pointer reveal-left bg-white p-5 rounded-2xl shadow-sm hover:shadow-lg transition-all border border-gray-100">
+            <div class="flex flex-col md:flex-row gap-8 items-center group cursor-pointer  -left bg-white p-5 rounded-2xl shadow-sm hover:shadow-lg transition-all border border-gray-100" data-aos="fade-up">
                 <div class="w-full md:w-5/12 h-64 rounded-xl overflow-hidden shrink-0">
                     <img src="assets/secret-beach.webp" class="w-full h-full object-cover img-zoom">
                 </div>
@@ -651,7 +676,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 </div>
             </div>
             <!-- Article 2 -->
-            <div class="flex flex-col md:flex-row gap-8 items-center group cursor-pointer reveal-right bg-white p-5 rounded-2xl shadow-sm hover:shadow-lg transition-all border border-gray-100">
+            <div class="flex flex-col md:flex-row gap-8 items-center group cursor-pointer  -right bg-white p-5 rounded-2xl shadow-sm hover:shadow-lg transition-all border border-gray-100" data-aos="fade-up">
                 <div class="w-full md:w-5/12 h-64 rounded-xl overflow-hidden shrink-0 md:order-2">
                     <img src="assets/diwali.webp" class="w-full h-full object-cover img-zoom">
                 </div>
@@ -674,8 +699,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     <!-- 11. Travel Photo Stories -->
     <section class="py-24 px-8 lg:px-24">
-        <h2 class="serif-font text-4xl font-bold mb-16 text-center reveal-up">Travel Photo Stories</h2>
-        <div class="masonry reveal-up max-w-7xl mx-auto">
+        <h2 class="serif-font text-4xl font-bold mb-16 text-center  -up" data-aos="fade-up">Travel Photo Stories</h2>
+        <div class="masonry  -up max-w-7xl mx-auto" data-aos="fade-up">
             <div class="masonry-item relative group overflow-hidden rounded-2xl cursor-pointer shadow-md">
                 <img src="assets/new-york.webp" class="w-full object-cover img-zoom">
                 <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
@@ -716,7 +741,7 @@ document.addEventListener("DOMContentLoaded", () => {
     </section>
 
     <!-- 12. Newsletter CTA -->
-    <section class="py-32 px-8 lg:px-24 bg-white text-center reveal-up border-t border-gray-100">
+    <section class="py-32 px-8 lg:px-24 bg-white text-center  -up border-t border-gray-100" data-aos="fade-up">
         <div class="max-w-3xl mx-auto">
             <h2 class="serif-font text-4xl md:text-5xl font-bold mb-6 text-gray-900">Get Inspired for Your Next Journey.</h2>
             <p class="text-gray-500 mb-10 text-lg">Join our newsletter for the latest travel stories, guides, and tips directly in your inbox.</p>
@@ -866,8 +891,14 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     </script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>document.addEventListener('DOMContentLoaded', function() { AOS.init({ duration: 800, once: true, offset: 100 }); });</script>
 </body>
 </html>
+
+
+
+
 
 
 

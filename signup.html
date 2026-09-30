@@ -172,8 +172,33 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 </script>
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 </head>
 <body class="m-0 p-0 text-gray-800 flex min-h-screen flex-row-reverse">
+    <!-- Preloader -->
+    <div id="stackly-preloader" class="fixed inset-0 z-[9999] bg-[#0a0f16] flex flex-col items-center justify-center transition-opacity duration-700">
+        <div class="relative flex items-center justify-center w-24 h-24 mb-4">
+            <div class="absolute inset-0 border-4 border-t-[#f16f5c] border-r-transparent border-b-[#f16f5c] border-l-transparent rounded-full animate-[spin_1.5s_linear_infinite] opacity-70"></div>
+            <i class="fas fa-plane-departure text-3xl text-white animate-pulse"></i>
+        </div>
+        <h2 class="text-2xl font-bold tracking-[0.2em] text-white flex items-center gap-2">
+            STACK<span class="text-[#f16f5c]">LY</span>
+        </h2>
+        <p class="text-[#f16f5c] text-sm tracking-widest mt-2 uppercase text-xs font-semibold animate-pulse">Loading Journey...</p>
+    </div>
+    <script>
+        window.addEventListener('load', function() {
+            const preloader = document.getElementById('stackly-preloader');
+            if(preloader) {
+                setTimeout(() => {
+                    preloader.style.opacity = '0';
+                    setTimeout(() => {
+                        preloader.remove();
+                    }, 700);
+                }, 500);
+            }
+        });
+    </script>
 
     <!-- Right Side: Visual / Inspiration (Flipped for Signup) -->
     <div class="hidden lg:flex lg:w-1/2 relative overflow-hidden bg-gray-900 flex-col justify-between p-12">
@@ -190,7 +215,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         <!-- Content -->
         <div class="relative z-10 mb-12 flex justify-end text-right">
-            <div class="bg-white/10 backdrop-blur-md border border-white/20 p-8 rounded-2xl max-w-md reveal-up text-left">
+            <div class="bg-white/10 backdrop-blur-md border border-white/20 p-8 rounded-2xl max-w-md  -up text-left" data-aos="fade-up">
                 <i class="fas fa-globe-americas text-[#f16f5c] text-2xl mb-4"></i>
                 <h3 class="text-white text-xl font-bold mb-2">Join Our Community</h3>
                 <p class="text-gray-300 text-sm leading-relaxed mb-6">Unlock exclusive travel deals, personalized itineraries, and insider guides. Start your journey with us today.</p>
@@ -217,13 +242,13 @@ document.addEventListener("DOMContentLoaded", () => {
         </a>
 
         <div class="w-full max-w-md mt-16 sm:mt-24 lg:mt-0">
-            <div class="reveal-left">
+            <div class=" -left" data-aos="fade-up">
                 <h1 class="serif-font text-4xl font-bold mb-2 text-gray-900">Create an Account</h1>
                 <p class="text-gray-500 mb-6">Select your role and create your account.</p>
             </div>
 
             <!-- Role Selection Slot (Unique & Excellent) -->
-            <div class="grid grid-cols-2 gap-4 mb-6 reveal-left delay-1">
+            <div class="grid grid-cols-2 gap-4 mb-6  -left delay-1" data-aos="fade-up">
                 <label class="cursor-pointer group relative">
                     <input type="radio" name="role" value="traveller" class="peer sr-only" checked >
                     <div class="border-2 border-gray-100 rounded-xl p-4 flex flex-col items-center justify-center transition-all duration-300 peer-checked:border-[#f16f5c] peer-checked:bg-[#f16f5c]/5 peer-checked:shadow-md hover:border-gray-200">
@@ -252,7 +277,7 @@ document.addEventListener("DOMContentLoaded", () => {
             </div>
 
             <!-- Form -->
-            <form id="signupForm" action="login.html" method="GET" class="space-y-4 reveal-left delay-3">
+            <form id="signupForm" action="login.html" method="GET" class="space-y-4  -left delay-3" data-aos="fade-up">
                 <div class="mb-4">
                     <input type="text" id="fullname" placeholder="Full Name" required class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:border-[#f16f5c] focus:ring-4 focus:ring-[#f16f5c]/10 text-sm text-gray-700 transition-all">
                 </div>
@@ -281,14 +306,14 @@ document.addEventListener("DOMContentLoaded", () => {
                 </button>
             </form>
 
-            <div class="flex items-center my-6 reveal-left delay-3">
+            <div class="flex items-center my-6  -left delay-3" data-aos="fade-up">
                 <hr class="flex-grow border-gray-200">
                 <span class="px-4 text-xs text-gray-400 font-medium uppercase tracking-widest">Or sign up with</span>
                 <hr class="flex-grow border-gray-200">
             </div>
 
             <!-- Social Signup -->
-            <div class="grid grid-cols-2 gap-4 mb-6 reveal-left delay-3">
+            <div class="grid grid-cols-2 gap-4 mb-6  -left delay-3" data-aos="fade-up">
                 <button class="flex items-center justify-center py-2.5 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors font-medium text-sm text-gray-700 shadow-sm">
                     <i class="fab fa-google text-lg mr-2 text-red-500"></i> Google
                 </button>
@@ -297,7 +322,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 </button>
             </div>
 
-            <p class="mt-8 text-center text-sm text-gray-500 reveal-left delay-3">
+            <p class="mt-8 text-center text-sm text-gray-500  -left delay-3" data-aos="fade-up">
                 Already have an account? <a href="login.html" class="font-bold text-gray-900 hover:text-[#f16f5c] transition-colors">Sign in here</a>
             </p>
         </div>
@@ -311,8 +336,14 @@ document.addEventListener("DOMContentLoaded", () => {
         localStorage.setItem('stacklyUserEmail', email);
     });
 </script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>document.addEventListener('DOMContentLoaded', function() { AOS.init({ duration: 800, once: true, offset: 100 }); });</script>
 </body>
 </html>
+
+
+
+
 
 
 

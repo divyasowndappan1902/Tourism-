@@ -269,8 +269,33 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 </script>
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 </head>
 <body class="m-0 p-0 text-gray-800">
+    <!-- Preloader -->
+    <div id="stackly-preloader" class="fixed inset-0 z-[9999] bg-[#0a0f16] flex flex-col items-center justify-center transition-opacity duration-700">
+        <div class="relative flex items-center justify-center w-24 h-24 mb-4">
+            <div class="absolute inset-0 border-4 border-t-[#f16f5c] border-r-transparent border-b-[#f16f5c] border-l-transparent rounded-full animate-[spin_1.5s_linear_infinite] opacity-70"></div>
+            <i class="fas fa-plane-departure text-3xl text-white animate-pulse"></i>
+        </div>
+        <h2 class="text-2xl font-bold tracking-[0.2em] text-white flex items-center gap-2">
+            STACK<span class="text-[#f16f5c]">LY</span>
+        </h2>
+        <p class="text-[#f16f5c] text-sm tracking-widest mt-2 uppercase text-xs font-semibold animate-pulse">Loading Journey...</p>
+    </div>
+    <script>
+        window.addEventListener('load', function() {
+            const preloader = document.getElementById('stackly-preloader');
+            if(preloader) {
+                setTimeout(() => {
+                    preloader.style.opacity = '0';
+                    setTimeout(() => {
+                        preloader.remove();
+                    }, 700);
+                }, 500);
+            }
+        });
+    </script>
 
     <!-- Hero Section -->
     <div class="h-screen w-full relative flex flex-col text-white overflow-hidden" id="hero-container">
@@ -303,15 +328,15 @@ document.addEventListener("DOMContentLoaded", () => {
             <div class="text-center max-w-4xl mx-auto px-4 mt-10">
                 <h1 class="serif-font text-3xl sm:text-4xl md:text-5xl lg:text-6xl lg:text-[5.5rem] font-bold mb-6 leading-tight drop-shadow-lg">
     <div class="overflow-hidden inline-block w-full">
-        <div class="animate-reveal inline-block" style="animation-delay: 0.1s;"><span class="inline-block transition-all duration-300 hover:translate-x-4 cursor-pointer gradient-text-anim">Your Stackly Travel</span></div>
+        <div class="animate-  inline-block" data-aos="fade-up" style="animation-delay: 0.1s;"><span class="inline-block transition-all duration-300 hover:translate-x-4 cursor-pointer gradient-text-anim">Your Stackly Travel</span></div>
     </div>
     <div class="overflow-hidden inline-block w-full mt-2">
-        <div class="animate-reveal inline-block" style="animation-delay: 0.3s;"><span class="inline-block transition-all duration-300 hover:translate-x-4 cursor-pointer gradient-text-anim">Expert in Paris</span></div>
+        <div class="animate-  inline-block" data-aos="fade-up" style="animation-delay: 0.3s;"><span class="inline-block transition-all duration-300 hover:translate-x-4 cursor-pointer gradient-text-anim">Expert in Paris</span></div>
     </div>
 </h1>
-                <p class="text-base md:text-lg mb-10 text-gray-100 max-w-xl mx-auto font-light drop-shadow-md animate-reveal" style="animation-delay: 0.5s;">Discover the world's most breathtaking destinations with personalized itineraries and premium luxury experiences tailored to your dreams.</p>
+                <p class="text-base md:text-lg mb-10 text-gray-100 max-w-xl mx-auto font-light drop-shadow-md animate- " data-aos="fade-up" style="animation-delay: 0.5s;">Discover the world's most breathtaking destinations with personalized itineraries and premium luxury experiences tailored to your dreams.</p>
                 <div class="flex items-center justify-center mt-6">
-                    <a href="#" class="inline-flex items-center justify-center bg-white text-gray-900 font-bold py-4 px-12 text-sm tracking-[0.2em] transition-transform hover:-translate-y-1 shadow-2xl uppercase animate-reveal" style="animation-delay: 0.9s;">Discover More</a>
+                    <a href="#" class="inline-flex items-center justify-center bg-white text-gray-900 font-bold py-4 px-12 text-sm tracking-[0.2em] transition-transform hover:-translate-y-1 shadow-2xl uppercase animate- " data-aos="fade-up" style="animation-delay: 0.9s;">Discover More</a>
                 </div>
             </div></div>
     </div>
@@ -319,13 +344,13 @@ document.addEventListener("DOMContentLoaded", () => {
     <!-- Trending Destinations -->
     <section class="py-24 px-8 lg:px-24 relative bg-fixed bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&w=2000&q=80');">
         <div class="absolute inset-0 bg-gray-50/90 backdrop-blur-sm"></div>
-        <div class="text-center mb-16 reveal">
+        <div class="text-center mb-16  " data-aos="fade-up">
             <h2 class="serif-font text-4xl font-bold mb-4">Trending Destinations</h2>
             <p class="text-gray-500">Discover the world's most sought-after locations</p>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <!-- Cards -->
-            <div class="group relative overflow-hidden rounded-xl h-96 reveal shadow-lg" style="transition-delay: 0.1s;">
+            <div class="group relative overflow-hidden rounded-xl h-96   shadow-lg" data-aos="fade-up" style="transition-delay: 0.1s;">
                 <img src="https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=800&q=80" alt="Rome" class="w-full h-full object-cover img-zoom">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
                 <div class="absolute bottom-6 left-6 right-6 text-white">
@@ -334,7 +359,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     <p class="text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform translate-y-4 group-hover:translate-y-0 line-clamp-2">Explore ancient ruins and rich history.</p>
                 </div>
             </div>
-            <div class="group relative overflow-hidden rounded-xl h-96 reveal shadow-lg" style="transition-delay: 0.2s;">
+            <div class="group relative overflow-hidden rounded-xl h-96   shadow-lg" data-aos="fade-up" style="transition-delay: 0.2s;">
                 <img src="https://images.unsplash.com/photo-1499856871958-5b9627545d1a?auto=format&fit=crop&w=800&q=80" alt="Paris" class="w-full h-full object-cover img-zoom">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
                 <div class="absolute bottom-6 left-6 right-6 text-white">
@@ -343,7 +368,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     <p class="text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform translate-y-4 group-hover:translate-y-0 line-clamp-2">The city of light, love, and endless culture.</p>
                 </div>
             </div>
-            <div class="group relative overflow-hidden rounded-xl h-96 reveal shadow-lg" style="transition-delay: 0.3s;">
+            <div class="group relative overflow-hidden rounded-xl h-96   shadow-lg" data-aos="fade-up" style="transition-delay: 0.3s;">
                 <img src="https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?auto=format&fit=crop&w=800&q=80" alt="Bali" class="w-full h-full object-cover img-zoom">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
                 <div class="absolute bottom-6 left-6 right-6 text-white">
@@ -352,7 +377,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     <p class="text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform translate-y-4 group-hover:translate-y-0 line-clamp-2">Lush jungles, ancient temples, and beautiful beaches.</p>
                 </div>
             </div>
-            <div class="group relative overflow-hidden rounded-xl h-96 reveal shadow-lg" style="transition-delay: 0.4s;">
+            <div class="group relative overflow-hidden rounded-xl h-96   shadow-lg" data-aos="fade-up" style="transition-delay: 0.4s;">
                 <img src="https://images.unsplash.com/photo-1534008897995-27a23e859048?auto=format&fit=crop&w=800&q=80" alt="Machu Picchu" class="w-full h-full object-cover img-zoom">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
                 <div class="absolute bottom-6 left-6 right-6 text-white">
@@ -361,7 +386,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     <p class="text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform translate-y-4 group-hover:translate-y-0 line-clamp-2">The lost city of the Incas high in the Andes.</p>
                 </div>
             </div>
-            <div class="group relative overflow-hidden rounded-xl h-96 reveal shadow-lg" style="transition-delay: 0.5s;">
+            <div class="group relative overflow-hidden rounded-xl h-96   shadow-lg" data-aos="fade-up" style="transition-delay: 0.5s;">
                 <img src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=800&q=80" alt="Tokyo" class="w-full h-full object-cover img-zoom">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
                 <div class="absolute bottom-6 left-6 right-6 text-white">
@@ -370,7 +395,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     <p class="text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform translate-y-4 group-hover:translate-y-0 line-clamp-2">Neon lights, rich traditions, and endless food.</p>
                 </div>
             </div>
-            <div class="group relative overflow-hidden rounded-xl h-96 reveal shadow-lg" style="transition-delay: 0.6s;">
+            <div class="group relative overflow-hidden rounded-xl h-96   shadow-lg" data-aos="fade-up" style="transition-delay: 0.6s;">
                 <img src="https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?auto=format&fit=crop&w=800&q=80" alt="Venice" class="w-full h-full object-cover img-zoom">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
                 <div class="absolute bottom-6 left-6 right-6 text-white">
@@ -384,8 +409,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     <!-- Explore by Experience -->
     <section class="py-24 px-8 lg:px-24">
-        <h2 class="serif-font text-4xl font-bold mb-12 text-center reveal">Explore by Experience</h2>
-        <div class="expand-container hidden md:flex reveal">
+        <h2 class="serif-font text-4xl font-bold mb-12 text-center  " data-aos="fade-up">Explore by Experience</h2>
+        <div class="expand-container hidden md:flex  " data-aos="fade-up">
             <div class="expand-card">
                 <img src="https://images.unsplash.com/photo-1533240332313-0db49b459ad6?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover" alt="Stackly">
                 <div class="absolute inset-0 bg-black/40 transition-opacity duration-500 hover:bg-black/20"></div>
@@ -418,7 +443,7 @@ document.addEventListener("DOMContentLoaded", () => {
             </div>
         </div>
         <!-- Mobile grid fallback -->
-        <div class="grid grid-cols-2 gap-4 md:hidden reveal">
+        <div class="grid grid-cols-2 gap-4 md:hidden  " data-aos="fade-up">
             <div class="h-40 rounded-xl overflow-hidden relative"><img src="https://images.unsplash.com/photo-1533240332313-0db49b459ad6?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover"><div class="absolute inset-0 bg-black/40 flex items-center justify-center text-white font-bold">Stackly</div></div>
             <div class="h-40 rounded-xl overflow-hidden relative"><img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover"><div class="absolute inset-0 bg-black/40 flex items-center justify-center text-white font-bold">Beach</div></div>
             <div class="h-40 rounded-xl overflow-hidden relative"><img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover"><div class="absolute inset-0 bg-black/40 flex items-center justify-center text-white font-bold">Nature</div></div>
@@ -429,13 +454,13 @@ document.addEventListener("DOMContentLoaded", () => {
     <!-- Featured Tour Packages -->
     <section class="py-24 px-8 lg:px-24 relative bg-fixed bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&w=2000&q=80');">
         <div class="absolute inset-0 bg-gray-50/90 backdrop-blur-sm"></div>
-        <div class="text-center mb-16 reveal">
+        <div class="text-center mb-16  " data-aos="fade-up">
             <h2 class="serif-font text-4xl font-bold mb-4">Featured Tour Packages</h2>
             <p class="text-gray-500">Curated itineraries for the perfect getaway</p>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             <!-- Package 1 -->
-            <div class="tilt-card bg-white rounded-xl overflow-hidden shadow-md group reveal" style="transition-delay: 0.1s;">
+            <div class="tilt-card bg-white rounded-xl overflow-hidden shadow-md group  " data-aos="fade-up" style="transition-delay: 0.1s;">
                 <div class="relative h-64 overflow-hidden">
                     <img src="https://images.unsplash.com/photo-1502680390469-be75c86b636f?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover img-zoom">
                     <div class="absolute top-4 right-4 bg-white/95 px-3 py-1 rounded text-sm font-bold text-gray-900 shadow">
@@ -453,7 +478,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 </div>
             </div>
             <!-- Package 2 -->
-            <div class="tilt-card bg-white rounded-xl overflow-hidden shadow-md group reveal" style="transition-delay: 0.2s;">
+            <div class="tilt-card bg-white rounded-xl overflow-hidden shadow-md group  " data-aos="fade-up" style="transition-delay: 0.2s;">
                 <div class="relative h-64 overflow-hidden">
                     <img src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover img-zoom">
                     <div class="absolute top-4 right-4 bg-white/95 px-3 py-1 rounded text-sm font-bold text-gray-900 shadow">
@@ -471,7 +496,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 </div>
             </div>
             <!-- Package 3 -->
-            <div class="tilt-card bg-white rounded-xl overflow-hidden shadow-md group reveal" style="transition-delay: 0.3s;">
+            <div class="tilt-card bg-white rounded-xl overflow-hidden shadow-md group  " data-aos="fade-up" style="transition-delay: 0.3s;">
                 <div class="relative h-64 overflow-hidden">
                     <img src="https://images.unsplash.com/photo-1527631746610-bca00a040d60?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover img-zoom">
                     <div class="absolute top-4 right-4 bg-white/95 px-3 py-1 rounded text-sm font-bold text-gray-900 shadow">
@@ -493,30 +518,30 @@ document.addEventListener("DOMContentLoaded", () => {
 
     <!-- Why Travel With Us -->
     <section class="py-24 px-8 lg:px-24">
-        <h2 class="serif-font text-4xl font-bold mb-20 text-center reveal">Why Travel With Us</h2>
+        <h2 class="serif-font text-4xl font-bold mb-20 text-center  " data-aos="fade-up">Why Travel With Us</h2>
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-12 md:gap-8 text-center">
-            <div class="float-card reveal">
+            <div class="float-card  " data-aos="fade-up">
                 <div class="w-24 h-24 mx-auto bg-gray-50 rounded-full flex items-center justify-center mb-6 shadow-md text-[#f16f5c] text-4xl">
                     <i class="fas fa-map-marked-alt"></i>
                 </div>
                 <h3 class="font-bold text-lg mb-2">Verified Destinations</h3>
                 <p class="text-sm text-gray-500 px-4">Hand-picked and thoroughly vetted locations ensuring safety and quality.</p>
             </div>
-            <div class="float-card float-delay-1 reveal" style="transition-delay: 0.1s;">
+            <div class="float-card float-delay-1  " data-aos="fade-up" style="transition-delay: 0.1s;">
                 <div class="w-24 h-24 mx-auto bg-gray-50 rounded-full flex items-center justify-center mb-6 shadow-md text-[#f16f5c] text-4xl">
                     <i class="fas fa-user-tie"></i>
                 </div>
                 <h3 class="font-bold text-lg mb-2">Local Experts</h3>
                 <p class="text-sm text-gray-500 px-4">Authentic experiences guided by locals who know the hidden secrets.</p>
             </div>
-            <div class="float-card float-delay-2 reveal" style="transition-delay: 0.2s;">
+            <div class="float-card float-delay-2  " data-aos="fade-up" style="transition-delay: 0.2s;">
                 <div class="w-24 h-24 mx-auto bg-gray-50 rounded-full flex items-center justify-center mb-6 shadow-md text-[#f16f5c] text-4xl">
                     <i class="fas fa-compass"></i>
                 </div>
                 <h3 class="font-bold text-lg mb-2">Personalized Trips</h3>
                 <p class="text-sm text-gray-500 px-4">Custom itineraries designed specifically to match your unique travel style.</p>
             </div>
-            <div class="float-card float-delay-3 reveal" style="transition-delay: 0.3s;">
+            <div class="float-card float-delay-3  " data-aos="fade-up" style="transition-delay: 0.3s;">
                 <div class="w-24 h-24 mx-auto bg-gray-50 rounded-full flex items-center justify-center mb-6 shadow-md text-[#f16f5c] text-4xl">
                     <i class="fas fa-headset"></i>
                 </div>
@@ -529,14 +554,14 @@ document.addEventListener("DOMContentLoaded", () => {
     <!-- Hidden Gems -->
     <section class="py-24 px-8 lg:px-24 bg-gray-900 text-white overflow-hidden">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            <div class="lg:col-span-4 reveal z-10">
+            <div class="lg:col-span-4   z-10" data-aos="fade-up">
                 <h2 class="serif-font text-4xl md:text-5xl font-bold mb-6">Hidden Gems</h2>
                 <p class="text-gray-400 mb-10 text-lg leading-relaxed">Escape the crowds and explore our collection of lesser-known, beautifully preserved destinations that offer truly authentic experiences.</p>
                 <a href="#" class="inline-flex items-center justify-center bg-white text-gray-900 font-bold py-4 px-12 text-sm tracking-[0.2em] transition-transform hover:-translate-y-1 shadow-2xl uppercase mx-auto md:mx-0">Discover More</a>
             </div>
                         <div class="lg:col-span-8 flex justify-end relative">
                 <!-- Using webp format, below 100kb -->
-                <div class="clip-path-reveal visible h-64 md:h-[500px] w-full lg:w-4/5" style="clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);">
+                <div class="clip-path-  visible h-64 md:h-[500px] w-full lg:w-4/5" data-aos="fade-up" style="clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);">
                     <img src="assets/hidden-gems.webp" alt="Hidden Gems" class="w-full h-full object-cover rounded-xl shadow-2xl border-4 border-gray-800">
                 </div>
             </div>
@@ -545,10 +570,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     <!-- Travel Stories / Inspiration -->
     <section class="py-24 px-8 lg:px-24">
-        <h2 class="serif-font text-4xl font-bold mb-16 text-center reveal">Travel Stories</h2>
+        <h2 class="serif-font text-4xl font-bold mb-16 text-center  " data-aos="fade-up">Travel Stories</h2>
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-8">
             <!-- Large Story -->
-            <div class="lg:col-span-2 group cursor-pointer reveal">
+            <div class="lg:col-span-2 group cursor-pointer  " data-aos="fade-up">
                 <div class="overflow-hidden rounded-xl h-[450px] mb-6 shadow-lg visible"><img src="assets/travel-story-1.webp" class="w-full h-full object-cover img-zoom">
                 </div>
                 <p class="text-sm text-[#f16f5c] font-bold uppercase tracking-widest mb-3">Inspiration</p>
@@ -556,7 +581,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 <p class="text-gray-600 text-lg">A personal journey through the Arctic circle chasing the aurora borealis, featuring tips on where to go, what to pack, and how to photograph this natural wonder.</p>
             </div>
             <!-- Small Stories -->
-            <div class="flex flex-col space-y-10 reveal" style="transition-delay: 0.2s;">
+            <div class="flex flex-col space-y-10  " data-aos="fade-up" style="transition-delay: 0.2s;">
                 <div class="group cursor-pointer flex flex-col sm:flex-row lg:flex-col xl:flex-row gap-6 items-start">
                     <div class="w-full sm:w-40 lg:w-full xl:w-40 h-40 overflow-hidden rounded flex-shrink-0 shadow visible"><img src="assets/travel-story-2.webp" class="w-full h-full object-cover img-zoom">
                     </div>
@@ -581,8 +606,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     <!-- Plan Your Journey -->
     <section class="py-24 px-8 lg:px-24 bg-gray-50 relative">
-        <h2 class="serif-font text-4xl font-bold mb-20 text-center reveal">Plan Your Journey</h2>
-        <div class="flex flex-col md:flex-row justify-between relative gap-12 md:gap-0 max-w-5xl mx-auto reveal">
+        <h2 class="serif-font text-4xl font-bold mb-20 text-center  " data-aos="fade-up">Plan Your Journey</h2>
+        <div class="flex flex-col md:flex-row justify-between relative gap-12 md:gap-0 max-w-5xl mx-auto  " data-aos="fade-up">
             
             <div class="step-item step-line relative z-10 flex flex-col items-center text-center">
                 <div class="w-20 h-20 bg-white border-4 border-[#f16f5c] rounded-full flex items-center justify-center text-2xl text-[#f16f5c] mb-6 shadow-lg transform transition-transform hover:scale-110 hover:bg-[#f16f5c] hover:text-white">
@@ -622,19 +647,19 @@ document.addEventListener("DOMContentLoaded", () => {
     <!-- Travel Statistics -->
     <section class="py-20 px-8 lg:px-24 bg-gradient-to-r from-[#e05a48] to-[#f16f5c] text-white">
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 text-center divide-x divide-white/20">
-            <div class="reveal">
+            <div class=" " data-aos="fade-up">
                 <div class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-3 counter" data-target="150">0</div>
                 <p class="text-xs md:text-sm uppercase tracking-widest opacity-90 font-medium">Destinations</p>
             </div>
-            <div class="reveal" style="transition-delay: 0.1s;">
+            <div class=" " data-aos="fade-up" style="transition-delay: 0.1s;">
                 <div class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-3 counter" data-target="50000">0</div>
                 <p class="text-xs md:text-sm uppercase tracking-widest opacity-90 font-medium">Travelers</p>
             </div>
-            <div class="reveal" style="transition-delay: 0.2s;">
+            <div class=" " data-aos="fade-up" style="transition-delay: 0.2s;">
                 <div class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-3 counter" data-target="300">0</div>
                 <p class="text-xs md:text-sm uppercase tracking-widest opacity-90 font-medium">Experiences</p>
             </div>
-            <div class="reveal" style="transition-delay: 0.3s;">
+            <div class=" " data-aos="fade-up" style="transition-delay: 0.3s;">
                 <div class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-3 counter" data-target="120">0</div>
                 <p class="text-xs md:text-sm uppercase tracking-widest opacity-90 font-medium">Travel Partners</p>
             </div>
@@ -645,12 +670,12 @@ document.addEventListener("DOMContentLoaded", () => {
     <section class="py-24 px-8 lg:px-24 relative bg-fixed bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&w=2000&q=80');">
         <div class="absolute inset-0 bg-gray-50/90 backdrop-blur-sm"></div>
         <div class="max-w-7xl mx-auto relative z-10">
-            <div class="text-center mb-16 reveal">
+            <div class="text-center mb-16  " data-aos="fade-up">
                 <h2 class="serif-font text-4xl md:text-5xl font-bold mb-4 text-gray-900">Traveler Testimonials</h2>
                 <p class="text-gray-500 text-lg">Don't just take our word for it?read what our explorers have to say.</p>
             </div>
 
-                        <div class="marquee-wrapper reveal">
+                        <div class="marquee-wrapper  " data-aos="fade-up">
                 <div class="marquee-content">
 
                 <!-- Testimonial 1 -->
@@ -789,11 +814,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     <!-- Travel Gallery -->
     <section class="py-24 px-8 lg:px-24">
-        <div class="text-center mb-16 reveal">
+        <div class="text-center mb-16  " data-aos="fade-up">
             <h2 class="serif-font text-4xl font-bold mb-4">Travel Gallery</h2>
             <p class="text-gray-500">A glimpse into the magical places we visit</p>
         </div>
-        <div class="masonry reveal">
+        <div class="masonry  " data-aos="fade-up">
             <div class="masonry-item relative group overflow-hidden rounded-xl cursor-pointer shadow-md">
                 <img src="https://images.unsplash.com/photo-1493246507139-91e8fad9978e?auto=format&fit=crop&w=600&q=80" class="w-full object-cover img-zoom">
                 <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
@@ -860,8 +885,8 @@ document.addEventListener("DOMContentLoaded", () => {
     <!-- Seasonal / Special Offers -->
     <section class="py-24 px-8 lg:px-24 relative bg-fixed bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&w=2000&q=80');">
         <div class="absolute inset-0 bg-gray-50/90 backdrop-blur-sm"></div>
-        <h2 class="serif-font text-4xl font-bold mb-16 text-center reveal">Seasonal Offers</h2>
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 reveal">
+        <h2 class="serif-font text-4xl font-bold mb-16 text-center  " data-aos="fade-up">Seasonal Offers</h2>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8  " data-aos="fade-up">
             <!-- Offer 1 -->
             <div class="flex flex-col sm:flex-row bg-white rounded-xl overflow-hidden shadow group hover:shadow-xl transition-shadow">
                 <div class="w-full sm:w-2/5 h-56 sm:h-auto relative overflow-hidden">
@@ -914,7 +939,7 @@ document.addEventListener("DOMContentLoaded", () => {
     </section>
 
     <!-- Newsletter -->
-    <section class="py-32 px-8 lg:px-24 bg-gray-950 text-white text-center reveal">
+    <section class="py-32 px-8 lg:px-24 bg-gray-950 text-white text-center  " data-aos="fade-up">
         <div class="max-w-3xl mx-auto">
             <i class="far fa-paper-plane text-5xl text-[#f16f5c] mb-8"></i>
             <h2 class="serif-font text-4xl md:text-5xl font-bold mb-6">Get Travel Inspiration in your Inbox</h2>
@@ -927,7 +952,7 @@ document.addEventListener("DOMContentLoaded", () => {
     </section>
 
     <!-- Final CTA -->
-    <section class="h-[75vh] relative flex items-center justify-center overflow-hidden reveal">
+    <section class="h-[75vh] relative flex items-center justify-center overflow-hidden  " data-aos="fade-up">
         <div class="absolute inset-0 z-0 ken-burns">
             <img src="https://images.unsplash.com/photo-1454496522488-7a8e488e8606?auto=format&fit=crop&w=2000&q=80" class="w-full h-full object-cover">
         </div>
@@ -1177,8 +1202,14 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     </script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>document.addEventListener('DOMContentLoaded', function() { AOS.init({ duration: 800, once: true, offset: 100 }); });</script>
 </body>
 </html>
+
+
+
+
 
 
 
